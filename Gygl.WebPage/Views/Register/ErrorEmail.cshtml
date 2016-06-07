@@ -1,0 +1,27 @@
+﻿@model string
+@{
+    ViewBag.Title = "邮件发送失败";
+}
+@section Css{
+    @Styles.Render("~/Content/registercss")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/reg")
+}
+@section Header{
+    @Html.Action("Header", "Home")
+}
+<div id="q_top05">
+    <div id="m_top05">
+        <div id="top05">
+            <div class="center_bjiaoti"></div>
+            <div class="center_zhuti">邮件发送失败</div>
+            <div class="line"></div>
+            <div>
+                邮件发送失败:@Model
+            </div>
+        </div>
+    </div>
+</div>
+
+

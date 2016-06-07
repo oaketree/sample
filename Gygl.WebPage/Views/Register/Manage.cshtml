@@ -1,0 +1,61 @@
+﻿@model Gygl.BLL.Register.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "资料修改";
+}
+@section Css{
+    @Styles.Render("~/Content/registercss")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/reg")
+}
+@section Header{
+    @Html.Action("Header", "Home")
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserID)
+    <div id="q_top05">
+        <div id="m_top05">
+            <div id="top05">
+                <div class="center_bjiaoti"></div>
+                <div class="center_zhuti">资料修改</div>
+                <div class="line"></div>
+                <div>
+                    <div class="zhuce">
+                        <div class="zczuo"><label for="login-name">E-Mail</label></div>
+                        <div class="zcyou">@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "E-Mail地址" } })</div>
+                        <div class="zcts"><span class="xing">*</span>&nbsp;@Html.ValidationMessageFor(model => model.Email)</div>
+                    </div>
+                    <div class="zhuce">
+                        <div class="zczuo"><label for="login-name">公司名称</label></div>
+                        <div class="zcyou">@Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control", placeholder = "公司名称" } })</div>
+                        <div class="zcts">&nbsp;@Html.ValidationMessageFor(model => model.CompanyName)</div>
+                    </div>
+                    <div class="zhuce">
+                        <div class="zczuo"><label for="login-name">真实姓名</label></div>
+                        <div class="zcyou">@Html.EditorFor(model => model.DisplayName, new { htmlAttributes = new { @class = "form-control", placeholder = "真实姓名" } })</div>
+                        <div class="zcts">&nbsp;@Html.ValidationMessageFor(model => model.DisplayName)</div>
+                    </div>
+                    <div class="zhuce">
+                        <div class="zczuo"><label for="login-name">联系电话</label></div>
+                        <div class="zcyou">@Html.EditorFor(model => model.Tel, new { htmlAttributes = new { @class = "form-control", placeholder = "联系电话" } })</div>
+                        <div class="zcts">&nbsp;@Html.ValidationMessageFor(model => model.Tel)</div>
+                    </div>
+                    <div class="zhuce">
+                        <div class="zczuo"><label for="login-name">联系地址</label></div>
+                        <div class="zcyou">@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "联系地址" } })</div>
+                        <div class="zcts">&nbsp;@Html.ValidationMessageFor(model => model.Address)</div>
+                    </div>
+                    <div class="zcbutton bottom">
+                        <button type="submit" class="btn btn-primary">保存修改</button>
+                    </div>
+                    <div>注：<span class="xing">*</span>为必填项，建议您填写真实的姓名、电话及联系地址，以便我们在举办活动前为您寄送相关资料。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+

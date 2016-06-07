@@ -1,0 +1,14 @@
+﻿.datagrid-mask {
+    background: #000;
+    filter: alpha(opacity=50); /* IE的透明度 */
+    opacity: 0.5;  /* 透明度 */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 100; /* 此处的图层要大于页面 */
+}
+.datagrid-mask-msg {
+    color:white;
+    position: absolute;
+    z-index: 101; /* 此处的图层要大于页面 */
+}

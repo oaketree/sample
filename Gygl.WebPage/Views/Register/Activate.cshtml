@@ -1,0 +1,27 @@
+﻿@model string
+@{
+    ViewBag.Title = "账户激活";
+}
+@section Css{
+    @Styles.Render("~/Content/registercss")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/reg")
+}
+
+@section Header{
+    @Html.Action("Header", "Home")
+}
+<div id="q_top05">
+    <div id="m_top05">
+        <div id="top05">
+            <div class="center_bjiaoti"></div>
+            <div class="center_zhuti">账户激活</div>
+            <div class="line"></div>
+            <div>
+                @Model
+            </div>
+        </div>
+    </div>
+</div>
+

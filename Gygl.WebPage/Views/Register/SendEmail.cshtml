@@ -1,0 +1,29 @@
+﻿@model Gygl.BLL.Register.ViewModels.RegViewModel
+@{
+    ViewBag.Title = "邮箱验证";
+}
+@section Css{
+    @Styles.Render("~/Content/registercss")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/reg")
+}
+@section Header{
+    @Html.Action("Header", "Home")
+}
+<div id="q_top05">
+    <div id="m_top05">
+        <div id="top05">
+            <div class="center_bjiaoti"></div>
+            <div class="center_zhuti">邮箱验证</div>
+            <div class="line"></div>
+            <div>
+                恭喜您注册成功，您的用户名为：<span class="xing">@Model.UserName</span>,密码为：<span class="xing">@Model.UserPassword</span>,请到您的注册邮箱<span class="xing">@Model.Email</span>激活您的账号。
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

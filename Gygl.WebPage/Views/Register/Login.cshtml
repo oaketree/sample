@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "登录";
+}
+@section Css{
+    @Styles.Render("~/Content/registercss")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/reg")
+}
+<div id="q_top05_login">
+    <div id="m_top05_login">
+        <div id="top05_login">
+            <div class="login_top"></div>
+            <div id="loginmain">
+                <div class="logintexttit logintexttit02">用&nbsp;户&nbsp;登&nbsp;录</div>
+                <div class="zcyou"><input type="text" name="login-name" class="form-control" id="username" placeholder="登录名称"></div>
+                <div class="zcyou"><input type="password" name="login-name" class="form-control" id="password" placeholder="登录密码"></div>
+                <div style="height:20px;"><input id="autologin" type="checkbox" />&nbsp; 自动登录</div>
+                <div><a href="#" class="button btn-green" id="login">登&nbsp; 录</a></div>
+                <div class="logintexttit bottomposition">
+                    <a href="@Url.Action("ForgetPassword")">忘记密码？</a>&nbsp; <a href="@Url.Action("Reg")">我要注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="q_top04">
+    <div id="m_top04">
+        <div id="top04">
+            <div><img src="/Content/images/magazine_top05.gif" width="15" height="15" /><a href="#">在线阅读（2016年第1期）</a></div>
+            <div><img src="/Content/images/magazine_top05.gif" width="15" height="15" /><a href="#">杂志订购</a></div>
+            <div><img src="/Content/images/magazine_top05.gif" width="15" height="15" /><a href="#">期刊下载（pdf版）</a></div>
+        </div>
+    </div>
+</div>
+
+

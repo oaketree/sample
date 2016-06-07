@@ -184,6 +184,16 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cms.BLL\Cms.BLL.csproj">
+      <Project>{291C07C4-6A72-48EE-9628-448791F8736F}</Project>
+      <Name>Cms.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.DAL\Core.DAL.csproj">
+      <Project>{aec754ad-3aff-403a-a5f4-287105b838b7}</Project>
+      <Name>Core.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
