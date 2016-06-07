@@ -28,9 +28,9 @@ namespace Core.DAL
         public virtual T1 Get(Expression<Func<T1, bool>> conditions = null)
         {
             if (conditions == null)
-                return MyDbSet.AsNoTracking().FirstOrDefault();
+                return MyDbSet.FirstOrDefault();
             else
-                return MyDbSet.AsNoTracking().FirstOrDefault(conditions);
+                return MyDbSet.FirstOrDefault(conditions);
         }
         public virtual bool IsExist(Expression<Func<T1, bool>> conditons)
         {
