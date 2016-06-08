@@ -65,7 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="System\" />
+    <Folder Include="System\Services\" />
+    <Folder Include="System\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

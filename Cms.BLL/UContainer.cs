@@ -10,7 +10,6 @@ namespace Cms.BLL
         {
             _unityContainer = new UnityContainer();
             AddBindings();
-            //new UnityDependencyResolver(_unityContainer);
         }
 
         private void AddBindings()
@@ -19,19 +18,12 @@ namespace Cms.BLL
             //.RegisterType<Contribute.IWebService, Contribute.WebService>(new ContainerControlledLifetimeManager());
             //_unityContainer.RegisterType<IWebRepository<Contract.Models.User.Users>, WebRepository<Contract.Models.User.Users, Contract.Models.User.WebDBContext>>(new ContainerControlledLifetimeManager());
         }
-        public IUnityContainer GetUnity
+        public UnityDependencyResolver GetUnity
         {
             get
             {
-                return _unityContainer;
+                return new UnityDependencyResolver(_unityContainer);
             }
-        }
-    }
-    public class UnityInject : UnityDependencyResolver
-    {
-        public UnityInject() : base(new UContainer().GetUnity)
-        {
-
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Cms.WebPage
     {
         protected void Application_Start()
         {
-            DependencyResolver.SetResolver(new UnityInject());
+            DependencyResolver.SetResolver(new UContainer().GetUnity);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
