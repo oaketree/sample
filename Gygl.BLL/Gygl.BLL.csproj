@@ -70,6 +70,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlHelpers\PagingHelper.cs" />
+    <Compile Include="Magazine\Service\ArticleService.cs" />
+    <Compile Include="Magazine\Service\GyglCategoryService.cs" />
+    <Compile Include="Magazine\Service\IArticleService.cs" />
+    <Compile Include="Magazine\Service\IGyglCategoryService.cs" />
+    <Compile Include="Magazine\Service\IImageService.cs" />
+    <Compile Include="Magazine\Service\ImageService.cs" />
+    <Compile Include="Magazine\ViewModels\CatalogViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\Manage\IRoleAuthoriseManage.cs" />
     <Compile Include="Register\Manage\IUserDetailManage.cs" />
@@ -108,10 +115,7 @@
       <Name>Gygl.Contract</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Magazine\Service\" />
-    <Folder Include="Magazine\ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,5 +1,6 @@
 ﻿using Core.Cache;
 using System.Data.Entity;
+
 namespace Gygl.Contract.Magazine
 {
     public class WebDBContext : DbContext

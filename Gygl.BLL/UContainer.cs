@@ -18,6 +18,10 @@ namespace Gygl.BLL
             _unityContainer.RegisterType<Register.Manage.IUserDetailManage, Register.Manage.UserDetailManage>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<Register.Manage.IRoleAuthoriseManage, Register.Manage.RoleAuthoriseManage>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<Register.Manage.IUserRoleManage, Register.Manage.UserRoleManage>(new ContainerControlledLifetimeManager());
+
+            _unityContainer.RegisterType<Magazine.Service.IArticleService, Magazine.Service.ArticleService>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<Magazine.Service.IGyglCategoryService, Magazine.Service.GyglCategoryService>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<Magazine.Service.IImageService, Magazine.Service.ImageService>(new ContainerControlledLifetimeManager());
         }
 
         public UnityDependencyResolver GetUnity
