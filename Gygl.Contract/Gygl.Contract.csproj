@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Magazine\Gygl.cs" />
+    <Compile Include="Magazine\Article.cs" />
+    <Compile Include="Magazine\Category.cs" />
+    <Compile Include="Magazine\GyglCategory.cs" />
+    <Compile Include="Magazine\Image.cs" />
+    <Compile Include="Magazine\WebDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\Authorise.cs" />
     <Compile Include="Register\Role.cs" />
@@ -68,6 +74,7 @@
       <Name>Core.Cache</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
