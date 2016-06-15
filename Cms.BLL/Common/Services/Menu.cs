@@ -6,25 +6,31 @@ using System.Threading.Tasks;
 
 namespace Cms.BLL.Common.Services
 {
-    public class Menu
+    public class MenuItem
     {
         public int MenuID { get; set; }
         public int PID { get; set; }
         public string MenuName { get; set; }// 菜单名称
         public string Url { get; set; }// URL地址
-        public List<Menu> Childs { get; set; }//子菜单
+        public List<MenuItem> Childs { get; set; }//子菜单
     }
-    public class HandleMenu
+    public static class HandleMenu
     {
-        public List<Menu> handleSubMenu(List<Menu> menuItem,int topid)
+        /// <summary>
+        /// 把列表转换为拍好的顺序
+        /// </summary>
+        /// <param name="menuItem"></param>
+        /// <param name="topid"></param>
+        /// <returns></returns>
+        public static List<MenuItem> handleSubMenu(List<MenuItem> menuItem,int topid)
         {
-            var lm = new List<Menu>();
+            var lm = new List<MenuItem>();
             foreach (var item in menuItem)
             {
 
                 if (item.PID == topid)
                 {
-                    var m = new Menu();
+                    var m = new MenuItem();
                     m.MenuID = item.MenuID;
                     m.PID = item.PID;
                     m.MenuName = item.MenuName;
@@ -35,14 +41,6 @@ namespace Cms.BLL.Common.Services
                     else
                         m.Childs = null;
                     lm.Add(m);
-                    //lm.Add(new Menu
-                    //{
-                    //    MenuID = item.MenuID,
-                    //    PID = item.PID,
-                    //    MenuName = item.MenuName,
-                    //    Url = item.Url,
-                    //    Childs = handleSubMenu(menuItem, item.MenuID)
-                    //});
                 }
             }
             return lm;

@@ -15,20 +15,20 @@ namespace Cms.BLL.Common.Services.Tests
         [TestMethod()]
         public void handleSubMenuTest()
         {
-            var a = new List<Menu>();
-            a.Add(new Menu { MenuID = 1, PID = 0, MenuName = "a", Url = "ua" });
-            a.Add(new Menu { MenuID = 2, PID = 0, MenuName = "b", Url = "ub" });
-            a.Add(new Menu { MenuID = 3, PID = 0, MenuName = "c", Url = "uc" });
-            a.Add(new Menu { MenuID = 4, PID = 1, MenuName = "d", Url = "ud" });
-            a.Add(new Menu { MenuID = 5, PID = 2, MenuName = "e", Url = "ue" });
-            a.Add(new Menu { MenuID = 6, PID = 3, MenuName = "f", Url = "uf" });
-            a.Add(new Menu { MenuID = 7, PID = 4, MenuName = "g", Url = "uf" });
-            a.Add(new Menu { MenuID = 8, PID = 5, MenuName = "h", Url = "uf" });
-            a.Add(new Menu { MenuID = 9, PID = 6, MenuName = "i", Url = "uf" });
-            a.Add(new Menu { MenuID = 10, PID = 9, MenuName = "j", Url = "uj" });
-            a.Add(new Menu { MenuID = 11, PID = 6, MenuName = "l", Url = "uk" });
+            var a = new List<MenuItem>();
+            a.Add(new MenuItem { MenuID = 1, PID = 0, MenuName = "a", Url = "ua" });
+            a.Add(new MenuItem { MenuID = 2, PID = 0, MenuName = "b", Url = "ub" });
+            a.Add(new MenuItem { MenuID = 3, PID = 0, MenuName = "c", Url = "uc" });
+            a.Add(new MenuItem { MenuID = 4, PID = 1, MenuName = "d", Url = "ud" });
+            a.Add(new MenuItem { MenuID = 5, PID = 2, MenuName = "e", Url = "ue" });
+            a.Add(new MenuItem { MenuID = 6, PID = 3, MenuName = "f", Url = "uf" });
+            a.Add(new MenuItem { MenuID = 7, PID = 4, MenuName = "g", Url = "uf" });
+            a.Add(new MenuItem { MenuID = 8, PID = 5, MenuName = "h", Url = "uf" });
+            a.Add(new MenuItem { MenuID = 9, PID = 6, MenuName = "i", Url = "uf" });
+            a.Add(new MenuItem { MenuID = 10, PID = 9, MenuName = "j", Url = "uj" });
+            a.Add(new MenuItem { MenuID = 11, PID = 6, MenuName = "l", Url = "uk" });
 
-            var b = new HandleMenu().handleSubMenu(a,0);
+            var b = HandleMenu.handleSubMenu(a,0);
             Console.Write(JsonConvert.SerializeObject(b));
 
         }
