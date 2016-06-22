@@ -20,8 +20,10 @@ namespace Gygl.BLL.Magazine.Service
             });
             return li.ToList();
         }
-
-       
-
+        public List<int> getArticleList(int gyglId)
+        {
+            var li = FindAll(n => n.GyglID == gyglId).Select(s => s.ID);
+            return li.ToList();
+        }
     }
 }

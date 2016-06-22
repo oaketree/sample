@@ -22,6 +22,7 @@ namespace Gygl.BLL
             _unityContainer.RegisterType<Magazine.Service.IArticleService, Magazine.Service.ArticleService>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<Magazine.Service.IGyglCategoryService, Magazine.Service.GyglCategoryService>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<Magazine.Service.IImageService, Magazine.Service.ImageService>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<Magazine.Service.IGyglService, Magazine.Service.GyglService>(new ContainerControlledLifetimeManager());
         }
 
         public UnityDependencyResolver GetUnity

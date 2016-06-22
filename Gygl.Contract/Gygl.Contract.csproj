@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Magazine\Gygl.cs" />
+    <Compile Include="Magazine\Periodical.cs" />
     <Compile Include="Magazine\Article.cs" />
     <Compile Include="Magazine\Category.cs" />
     <Compile Include="Magazine\GyglCategory.cs" />

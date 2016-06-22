@@ -13,7 +13,7 @@ namespace Gygl.Contract.Magazine
 
         public virtual DbSet<Article> Article { get; set; }
         public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Gygl> Gygl { get; set; }
+        public virtual DbSet<Periodical> Gygl { get; set; }
         public virtual DbSet<Image> GyglImage { get; set; }
         public virtual DbSet<GyglCategory> GyglCategory { get; set; }
     }

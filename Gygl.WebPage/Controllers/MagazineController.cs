@@ -12,17 +12,52 @@ namespace Gygl.WebPage.Controllers
     {
         [Dependency]
         public IGyglCategoryService GyglCategoryService { get; set; }
-        
 
-        public ActionResult Catalog(int id)
+        [Dependency]
+        public IGyglService GyglService { get; set; }
+
+        [Dependency]
+        public IImageService ImageService { get; set; }
+
+
+        [Dependency]
+        public IArticleService ArticleService { get; set; }
+
+
+        public PartialViewResult Catalog(int id)
         {
-            var a=GyglCategoryService.getCatalogByID(id);
-            return Json(a,JsonRequestBehavior.AllowGet);
+            return PartialView(GyglCategoryService.getCatalogByID(id));
         }
 
-        //public ActionResult Article(int id)
-        //{
+        public PartialViewResult RightNav()
+        {
+            return PartialView();
+        }
 
-        //}
+
+        public ActionResult Periodical(int id)
+        {
+            return View(GyglService.getPeriodicalById(id));
+        }
+
+        public ActionResult GetPages(int aid)
+        {
+            return Json(ImageService.getArticlePages(aid),JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetArticleList(int pid)
+        {
+            return Json(ArticleService.getArticleList(pid),JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetFirstPages(int pid)
+        {
+            return Json(ImageService.getFirstPages(pid), JsonRequestBehavior.AllowGet);
+        }
+        public PartialViewResult Search()
+        {
+            return PartialView();
+        }
+
     }
 }

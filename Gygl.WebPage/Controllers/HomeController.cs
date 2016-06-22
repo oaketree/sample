@@ -15,6 +15,12 @@ namespace Gygl.WebPage.Controllers
             return PartialView();
         }
 
+        public PartialViewResult PeriodicalTop()
+        {
+            return PartialView();
+        }
+
+
         public PartialViewResult Bottom()
         {
             return PartialView();

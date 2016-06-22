@@ -21,20 +21,35 @@ namespace Gygl.WebPage
                         "~/Content/Scripts/gygl.js",
                         "~/Content/Scripts/gygl.reg.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/contribute").Include(
+            //bundles.Add(new ScriptBundle("~/bundles/contribute").Include(
+            //            "~/Content/Scripts/common.js",
+            //            "~/Content/Scripts/gygl.js",
+            //            "~/Content/Scripts/gygl.co.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/mag").Include(
                         "~/Content/Scripts/common.js",
                         "~/Content/Scripts/gygl.js",
-                        "~/Content/Scripts/gygl.co.js"));
+                        "~/Content/Scripts/gygl.ma.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/catalog").Include(
+                        "~/Content/Scripts/jquery-ui.min.js",
+                        "~/Content/Scripts/jquery.simplesidebar.js"));
+
 
             bundles.Add(new StyleBundle("~/Content/registercss").Include(
                      "~/Content/Css/gygl.css",
                       "~/Content/Css/magazinenei.css",
                       "~/Content/Css/magazineneire.css"));
 
-            bundles.Add(new StyleBundle("~/Content/contributecss").Include(
+            bundles.Add(new StyleBundle("~/Content/magazinecss").Include(
                       "~/Content/Css/magazinenei.css",
-                      "~/Content/Css/magazineneire.css",
-                      "~/Content/Css/buttoncss.css"));
+                      "~/Content/Css/magazinereading.css",
+                      "~/Content/Css/font-awesome.min.css"));
+
+            //bundles.Add(new StyleBundle("~/Content/contributecss").Include(
+            //          "~/Content/Css/magazinenei.css",
+            //          "~/Content/Css/magazineneire.css",
+            //          "~/Content/Css/buttoncss.css"));
         }
     }
 }

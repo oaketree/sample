@@ -1,0 +1,26 @@
+﻿@model List<Gygl.BLL.Magazine.ViewModels.CatalogViewModel>
+<div id="q_topml">
+    <div class="readmulu">
+        <div id="open-sb"><a href="#">目&nbsp;录</a></div>
+    </div>
+    <section class="sidebar">
+        <div class="subNav readmulutit"><img src="/Content/images/readgygl.gif" width="122" height="26" /></div>
+        <hr />
+        <div class="blankbottom"></div>
+        @foreach (var item in Model)
+        {
+            <div class="subNav">
+                <h6><span class="icon-list">&nbsp;</span>&nbsp;@item.Category</h6>
+            </div>
+            <ul class="navContent">
+                @foreach (var subItem in item.Title)
+                {
+                    <li>
+                        <span class="icon-caret-right">&nbsp;</span>
+                        <a href="javascript:void(0)" ng-click="click(@subItem.Url)">@subItem.Title</a>
+                    </li>
+                }
+            </ul>
+        }
+    </section>
+</div>

@@ -6,6 +6,7 @@ namespace Gygl.BLL.Magazine.Service
 {
     public interface IImageService : IRepository<Image>
     {
-        List<string> getArticleImage(int aid);
+        object getArticlePages(int aid);
+        object getFirstPages(int pid);
     }
 }

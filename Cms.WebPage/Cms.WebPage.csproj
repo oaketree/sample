@@ -44,11 +44,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -121,19 +145,86 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\ComManage\ComManageAreaRegistration.cs" />
+    <Compile Include="Areas\ComManage\Controllers\HomeController.cs" />
+    <Compile Include="Areas\SysManage\Controllers\HomeController.cs" />
     <Compile Include="Areas\SysManage\SysManageAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\CSS\animate.min.css" />
     <Content Include="Content\CSS\bootstrap.min.css" />
     <Content Include="Content\CSS\bootstrap.min14ed.css" />
+    <Content Include="Content\CSS\demo\webuploader-demo.min.css" />
     <Content Include="Content\CSS\font-awesome.min93e3.css" />
     <Content Include="Content\CSS\login.min.css" />
+    <Content Include="Content\CSS\patterns\header-profile-skin-1.png" />
+    <Content Include="Content\CSS\patterns\header-profile-skin-3.png" />
+    <Content Include="Content\CSS\patterns\header-profile.png" />
+    <Content Include="Content\CSS\patterns\shattered.png" />
+    <Content Include="Content\CSS\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
+    <Content Include="Content\CSS\plugins\blueimp\css\blueimp-gallery.min.css" />
+    <Content Include="Content\CSS\plugins\blueimp\img\error.png" />
+    <Content Include="Content\CSS\plugins\blueimp\img\error.svg" />
+    <Content Include="Content\CSS\plugins\blueimp\img\loading.gif" />
+    <Content Include="Content\CSS\plugins\blueimp\img\play-pause.png" />
+    <Content Include="Content\CSS\plugins\blueimp\img\play-pause.svg" />
+    <Content Include="Content\CSS\plugins\blueimp\img\video-play.png" />
+    <Content Include="Content\CSS\plugins\blueimp\img\video-play.svg" />
+    <Content Include="Content\CSS\plugins\bootstrap-table\bootstrap-table.min.css" />
+    <Content Include="Content\CSS\plugins\chosen\chosen-sprite%402x.png" />
+    <Content Include="Content\CSS\plugins\chosen\chosen-sprite.png" />
+    <Content Include="Content\CSS\plugins\chosen\chosen.css" />
+    <Content Include="Content\CSS\plugins\clockpicker\clockpicker.css" />
+    <Content Include="Content\CSS\plugins\codemirror\ambiance.css" />
+    <Content Include="Content\CSS\plugins\codemirror\codemirror.css" />
+    <Content Include="Content\CSS\plugins\colorpicker\css\bootstrap-colorpicker.min.css" />
+    <Content Include="Content\CSS\plugins\colorpicker\img\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="Content\CSS\plugins\colorpicker\img\bootstrap-colorpicker\alpha.png" />
+    <Content Include="Content\CSS\plugins\colorpicker\img\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="Content\CSS\plugins\colorpicker\img\bootstrap-colorpicker\hue.png" />
+    <Content Include="Content\CSS\plugins\colorpicker\img\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Content\CSS\plugins\cropper\cropper.min.css" />
+    <Content Include="Content\CSS\plugins\datapicker\datepicker3.css" />
+    <Content Include="Content\CSS\plugins\dataTables\dataTables.bootstrap.css" />
+    <Content Include="Content\CSS\plugins\dropzone\basic.css" />
+    <Content Include="Content\CSS\plugins\dropzone\dropzone.css" />
+    <Content Include="Content\CSS\plugins\footable\fonts\footable.svg" />
+    <Content Include="Content\CSS\plugins\footable\footable.core.css" />
+    <Content Include="Content\CSS\plugins\fullcalendar\fullcalendar.css" />
+    <Content Include="Content\CSS\plugins\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Content\CSS\plugins\iCheck\custom.css" />
+    <Content Include="Content\CSS\plugins\iCheck\green%402x.png" />
+    <Content Include="Content\CSS\plugins\iCheck\green.png" />
+    <Content Include="Content\CSS\plugins\images\sort_asc.png" />
+    <Content Include="Content\CSS\plugins\images\sort_desc.png" />
+    <Content Include="Content\CSS\plugins\images\sprite-skin-flat.png" />
+    <Content Include="Content\CSS\plugins\images\spritemap%402x.png" />
+    <Content Include="Content\CSS\plugins\images\spritemap.png" />
+    <Content Include="Content\CSS\plugins\ionRangeSlider\ion.rangeSlider.css" />
+    <Content Include="Content\CSS\plugins\ionRangeSlider\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Content\CSS\plugins\jasny\jasny-bootstrap.min.css" />
+    <Content Include="Content\CSS\plugins\jqgrid\ui.jqgridffe4.css" />
+    <Content Include="Content\CSS\plugins\jsTree\style.min.css" />
+    <Content Include="Content\CSS\plugins\markdown\bootstrap-markdown.min.css" />
+    <Content Include="Content\CSS\plugins\morris\morris-0.4.3.min.css" />
+    <Content Include="Content\CSS\plugins\nouslider\jquery.nouislider.css" />
+    <Content Include="Content\CSS\plugins\plyr\plyr.css" />
+    <Content Include="Content\CSS\plugins\plyr\sprite.svg" />
+    <Content Include="Content\CSS\plugins\simditor\simditor.css" />
+    <Content Include="Content\CSS\plugins\steps\jquery.steps.css" />
+    <Content Include="Content\CSS\plugins\summernote\summernote-bs3.css" />
+    <Content Include="Content\CSS\plugins\summernote\summernote.css" />
+    <Content Include="Content\CSS\plugins\sweetalert\sweetalert.css" />
+    <Content Include="Content\CSS\plugins\switchery\switchery.css" />
+    <Content Include="Content\CSS\plugins\toastr\toastr.min.css" />
+    <Content Include="Content\CSS\plugins\treeview\bootstrap-treeview.css" />
+    <Content Include="Content\CSS\plugins\webuploader\webuploader.css" />
     <Content Include="Content\CSS\style.min.css" />
     <Content Include="Content\CSS\style.min862f.css" />
     <Content Include="Content\Fonts\fontawesome-webfont93e3.svg" />
@@ -191,6 +282,8 @@
     <Content Include="Content\Scripts\hplus.min.js" />
     <Content Include="Content\Scripts\jquery-ui-1.10.4.min.js" />
     <Content Include="Content\Scripts\jquery-ui.custom.min.js" />
+    <Content Include="Content\Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Content\Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Content\Scripts\plugins\beautifyhtml\beautifyhtml.js" />
     <Content Include="Content\Scripts\plugins\blueimp\jquery.blueimp-gallery.min.js" />
     <Content Include="Content\Scripts\plugins\bootstrap-table\bootstrap-table-mobile.min.js" />
@@ -304,6 +397,7 @@
     <Content Include="Content\Scripts\plugins\webuploader\index.html" />
     <Content Include="Content\Scripts\plugins\webuploader\webuploader.min.js" />
     <Content Include="Content\Scripts\welcome.min.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -316,6 +410,17 @@
     <Content Include="Content\Fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\Fonts\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="Areas\SysManage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SysManage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SysManage\Views\Home\Index.cshtml" />
+    <Content Include="Areas\ComManage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ComManage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ComManage\Views\Home\Index.cshtml" />
+    <Content Include="Content\CSS\plugins\footable\fonts\footable.eot" />
+    <Content Include="Content\CSS\plugins\footable\fonts\footable.ttf" />
+    <Content Include="Content\CSS\plugins\footable\fonts\footable.woff" />
+    <Content Include="Content\CSS\plugins\footable\fonts\footabled41d.eot" />
+    <Content Include="Content\Scripts\cms.chat.js" />
     <None Include="Content\Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\Scripts\jquery-1.10.2.js" />
     <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
@@ -336,22 +441,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Content\Scripts\plugins\layer\laydate-v1.1.zip" />
     <Content Include="Content\Scripts\plugins\layer\laydate-v1.1\layDate官网.url" />
     <None Include="Properties\PublishProfiles\cms2017.pubxml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\ComManage\Controllers\" />
-    <Folder Include="Areas\ComManage\Views\Shared\" />
-    <Folder Include="Areas\SysManage\Controllers\" />
-    <Folder Include="Areas\SysManage\Views\Shared\" />
-    <Folder Include="Content\CSS\demo\" />
-    <Folder Include="Content\CSS\patterns\" />
-    <Folder Include="Content\CSS\plugins\" />
+    <Folder Include="Content\Uploader\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff" />

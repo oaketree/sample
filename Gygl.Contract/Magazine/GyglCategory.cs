@@ -14,7 +14,7 @@ namespace Gygl.Contract.Magazine
         public int? CategoryID { get; set; }
 
         [ForeignKey("GyglID")]
-        public virtual Gygl Gygl { get; set; }
+        public virtual Periodical Periodical { get; set; }
 
         [ForeignKey("CategoryID")]
         public virtual Category Category { get; set; }

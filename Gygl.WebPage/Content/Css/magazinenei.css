@@ -10,7 +10,7 @@ xhtml,body {
 	height:100%;width:100%;font:14px "宋体",Verdana;
 	line-height:30px;}
 img {	border:0;	}
-ul {padding:0;margin:0
+ul {padding:0;margin:0;
 }
 
 
@@ -332,15 +332,17 @@ li {
 color:#ffba26;
 	
 
-		
-	
 	
 	
 	}
 
 
 
-
+.readfengzuo img {
+	
+	box-shadow:0 5px 10px #666;
+	
+	}
 
 
 #q_top02bg {

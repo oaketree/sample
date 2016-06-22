@@ -32,7 +32,7 @@ namespace Gygl.Contract.Magazine
         public DateTime? RegDate { get; set; }
 
         [ForeignKey("GyglID")]
-        public virtual Gygl Gygl { get; set; }
+        public virtual Periodical Gygl { get; set; }
 
         [ForeignKey("CategoryID")]
         public virtual Category Category { get; set; }

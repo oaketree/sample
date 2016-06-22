@@ -28,8 +28,25 @@ namespace Cms.BLL.Common.Services.Tests
             a.Add(new MenuItem { MenuID = 10, PID = 9, MenuName = "j", Url = "uj" });
             a.Add(new MenuItem { MenuID = 11, PID = 6, MenuName = "l", Url = "uk" });
 
-            var b = HandleMenu.handleSubMenu(a,0);
-            Console.Write(JsonConvert.SerializeObject(b));
+
+            var b = new List<MenuItem>();
+            b.Add(new MenuItem { MenuID = 6, PID = 3, MenuName = "f", Url = "uf" });
+            b.Add(new MenuItem { MenuID = 7, PID = 4, MenuName = "g", Url = "uf" });
+            b.Add(new MenuItem { MenuID = 8, PID = 5, MenuName = "h", Url = "uf" });
+            b.Add(new MenuItem { MenuID = 9, PID = 6, MenuName = "i", Url = "uf" });
+            b.Add(new MenuItem { MenuID = 10, PID = 9, MenuName = "j", Url = "uj" });
+
+
+            var cm = HandleMenu.CreateMenuItem(b, m =>
+            {
+                return a.FirstOrDefault(n => n.MenuID == m);
+            });
+
+            //Console.Write(JsonConvert.SerializeObject(cm));
+
+
+            var c = HandleMenu.handleSubMenu(cm, 0);
+            Console.Write(JsonConvert.SerializeObject(c));
 
         }
     }

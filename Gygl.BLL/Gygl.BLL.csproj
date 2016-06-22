@@ -72,11 +72,14 @@
     <Compile Include="HtmlHelpers\PagingHelper.cs" />
     <Compile Include="Magazine\Service\ArticleService.cs" />
     <Compile Include="Magazine\Service\GyglCategoryService.cs" />
+    <Compile Include="Magazine\Service\GyglService.cs" />
     <Compile Include="Magazine\Service\IArticleService.cs" />
     <Compile Include="Magazine\Service\IGyglCategoryService.cs" />
+    <Compile Include="Magazine\Service\IGyglService.cs" />
     <Compile Include="Magazine\Service\IImageService.cs" />
     <Compile Include="Magazine\Service\ImageService.cs" />
     <Compile Include="Magazine\ViewModels\CatalogViewModel.cs" />
+    <Compile Include="Magazine\ViewModels\GyglViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\Manage\IRoleAuthoriseManage.cs" />
     <Compile Include="Register\Manage\IUserDetailManage.cs" />

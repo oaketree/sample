@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Gygl.Contract.Magazine
 {
     [Table("Tbl_Gygl")]
-    public class Gygl
+    public class Periodical
     {
         [Key]
         public int ID { get; set; }
@@ -14,6 +14,8 @@ namespace Gygl.Contract.Magazine
         public int? Year { get; set; }
 
         public int? Period { get; set; }
+
+        public int? TotalPeriod { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; }
