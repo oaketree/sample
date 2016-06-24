@@ -10,6 +10,7 @@
 @section hscripts{
     @Scripts.Render("~/bundles/angular")
 }
+
 <div id="q_top004">
     <div id="m_top004">
         <div id="top004">
@@ -36,13 +37,216 @@
     </div>
 </div>
 <script>
-    var app = angular.module("GyglApp", []);
+    angular.module("GyglApp", ['GyglApp.services']).controller("pageCtrl", function ($scope, PageService, PositionService, SearchService, $location) {
+         PageService.getFirstPages()
+            .then(function (data) {
+                $scope.pages = data;
+            });
+         PageService.getArticleList()
+         .then(function (data) {
+             $scope.nav = {
+                 up: PositionService.getNavIndex(data,0).up(),
+                 down: PositionService.getNavIndex(data,0).down()
+             }
+         })
+
+        var currentaid = 0;
+        $scope.click = function (aid) {
+            if (currentaid != aid) {
+                PageService.getPages(aid)
+                .then(function (data) {
+                    $scope.pages = data;
+                })
+                $(document).scrollTop(0);
+                PageService.getArticleList().then(function (data) {
+                    $scope.nav = {
+                        up: PositionService.getNavAid(data,aid).up(),
+                        down: PositionService.getNavAid(data,aid).down()
+                    }
+                })
+
+            }
+            currentaid = aid;
+        }
+        $scope.years = SearchService.getYear();
+        $scope.periods = SearchService.getPeriod();
+
+        $scope.ySelect = function () {
+            if ($scope.yearOption != null && $scope.periodOption != null) {
+                PageService.getCategoryList($scope.yearOption, $scope.periodOption).then(function (data) {
+                    $scope.categorys = data;
+                    //console.log(data);
+                })
+            }
+        }
+        $scope.pSelect = function () {
+            if ($scope.yearOption !=null && $scope.periodOption !=null) {
+                PageService.getCategoryList($scope.yearOption, $scope.periodOption).then(function (data) {
+                    $scope.categorys = data;
+                    //console.log(data);
+                })
+            }
+        }
+        $scope.search = function () {
+            var y = $scope.yearOption;
+            var p = $scope.periodOption;
+            var c = $scope.categoryOption;
+            if (y == null)
+                alert("请选择年份!");
+            else {
+                if (p == null) {
+                    $location.path("/1").search({year:y});
+                } else {
+                    if (c == null) {
+                        $location.path("/2").search({year:y,period:p});
+                    } else {
+                        $location.path("/3").search({ year: y, period: p, category: c });
+                    }
+                }
+            }
+        }
+    })
+    angular.module("GyglApp.services", []).factory('PageService', function ($q, $http) {
+        var service = {
+            getFirstPages: function () {
+                var d = $q.defer();
+                $http.get('@Url.Action("GetFirstPages",new { pid=Model.ID})').success(function (data) {
+                    d.resolve(data);
+                }).error(function (data) {
+                    d.reject(data);
+                })
+                return d.promise;
+            }, getPages: function (aid) {
+                var d = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: '@Url.Action("GetPages")',
+                    params: {
+                        "aid": aid
+                    }
+                }).success(function (data) {
+                    d.resolve(data);
+                }).error(function (data) {
+                    d.reject(data);
+                });
+                return d.promise;
+            }, getArticleList: function (){
+                var d = $q.defer();
+                $http.get('@Url.Action("GetArticleList", new { pid=Model.ID})').success(function (data) {
+                    d.resolve(data);
+                }).error(function (data) {
+                    d.reject(data);
+                });
+                return d.promise;
+            }, getCategoryList: function (y,p) {
+                var d = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: '@Url.Action("GetCategoryList")',
+                    params: {
+                        "y": y,
+                        "p":p
+                    }
+                }).success(function (data) {
+                    d.resolve(data);
+                }).error(function (data) {
+                    d.reject(data);
+                });
+                return d.promise;
+            }
+        }
+        return service;
+    }).factory('PositionService', function () {
+        var getIndex = function (articlelist, index) {
+            var service = {
+                up: function () {
+                    if (index > 0)
+                        return articlelist[index - 1];
+                    else
+                        return articlelist[0];
+                }, down: function () {
+                    if (index = articlelist.length - 1)
+                        return articlelist[index];
+                    else
+                        return articlelist[index + 1];
+                }
+            }
+            return service;
+        }
+        var service = {
+            getNavIndex: function (data, index) {
+                var articlelist = [];
+                articlelist = eval(data);
+                return getIndex(articlelist, index);
+            }, getNavAid: function (data, aid) {
+                var articlelist = [];
+                articlelist = eval(data);
+                var p = articlelist.indexOf(aid);
+                return getIndex(articlelist, p)
+            }
+        }
+        return service;
+    }).factory('SearchService', function () {
+        var service = {
+            getYear: function () {
+                var year = new Date().getFullYear();
+                var yearArray = [];
+                var yearSelect = function (a, b) {
+                    this.id = a;
+                    this.value = b;
+                }
+                for (var i = 0; i < 6; i++) {
+                    yearArray.push(new yearSelect(year, year + '年'));
+                    year--;
+                }
+                return yearArray;
+            }, getPeriod: function () {
+                var periods = [
+                    {
+                        id: 1,
+                        value: "第一期"
+                    },
+                    {
+                        id: 2,
+                        value: "第二期"
+                    },
+                    {
+                        id: 3,
+                        value: "第三期"
+                    },
+                    {
+                        id: 4,
+                        value: "第四期"
+                    },
+                    {
+                        id: 5,
+                        value: "第五期"
+                    },
+                    {
+                        id: 6,
+                        value: "第六期"
+                    }
+                ];
+                return periods;
+            }
+        }
+        return service;
+    });
+
+
+    @*var app = angular.module("GyglApp", []);
     app.controller("pageCtrl", function ($scope, $http, PositionService) {
         $http.get('@Url.Action("GetFirstPages",new { pid=Model.ID})')
         .success(function (data) {
             $scope.pages = data;
-            $scope.up = PositionService.upindex(0);
-            $scope.down = PositionService.downindex(0);
+            $scope.nav = {
+                up: function () {
+                    PositionService.upindex(0);
+                },
+                down:function(){
+                    PositionService.downindex(0);
+                }
+            }
         });
         var currentaid=0;
         $scope.click = function (aid) {
@@ -57,8 +261,14 @@
                 }).success(function (data) {
                     $scope.pages = data;
                     $(document).scrollTop(0);
-                    $scope.up = PositionService.upaid(aid);
-                    $scope.down = PositionService.downaid(aid);
+                    $scope.nav = {
+                        up: function () {
+                            PositionService.upaid(aid);
+                        },
+                        down: function () {
+                            PositionService.downaid(aid);
+                        }
+                    }
                 });
                 currentaid = aid;
             }
@@ -102,5 +312,5 @@
                 return articlelist[p + 1];
             }
         }
-    })
+    })*@
 </script>

@@ -22,7 +22,6 @@
 			        gap: 64, //pixels
 			        closingLinks: 'a',
 			        style: {
-                        //top:$(document).scrollTop(),
 			            zIndex: 300000
 			        }
 			    },
@@ -93,6 +92,7 @@
             height: '100%',
             overflow: 'auto'
         });
+
         //Appending to 'body' the mask-div and adding its style
         $('body').append('<div data-' + dataName + '="mask"></div>');
 
@@ -100,7 +100,9 @@
             return $(this).data(dataName) === 'mask';
         });
 
-        maskDiv.css(maskStyle).hide();
+        maskDiv
+			.css(maskStyle)
+			.hide();
 
         //Animate $elements to the right
         var animateToRight = function () {
@@ -120,6 +122,7 @@
 			//animate $elements to the left
 			animateToLeft = function () {
 			    var nsbw = $sidebar.width();
+
 			    $elements.each(function () {
 			        $(this).animate({
 			            marginLeft: '-=' + nsbw,
@@ -136,6 +139,7 @@
 			    $('body, html').css({
 			        overflow: 'hidden'
 			    });
+
 			    $(maskDiv).fadeIn();
 			},
 			//adding overflow [callback(A/B)]
@@ -218,6 +222,7 @@
             //fixing $element position according to $sidebar new width (rsbw)
             if ('left' === align) {
                 sbMar = parseInt($sidebar.css('margin-left'));
+
                 if (0 > sbMar) {
                     $sidebar.css({
                         marginLeft: -rsbw
@@ -245,6 +250,7 @@
                 }
             }
         });
+
         return this;
     };
 })(jQuery);

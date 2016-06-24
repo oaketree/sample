@@ -306,6 +306,7 @@
     <Content Include="Content\Images\youdh05.gif" />
     <Content Include="Content\Images\youdh0502.gif" />
     <Content Include="Content\Images\zxly.gif" />
+    <Content Include="Content\Scripts\angular-route.min.js" />
     <Content Include="Content\Scripts\angular.min.js" />
     <Content Include="Content\Scripts\bootstrap.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />

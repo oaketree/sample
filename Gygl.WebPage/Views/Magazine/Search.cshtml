@@ -5,48 +5,28 @@
             <div><a href="#"><img src="/Content/images/readingdh04.png" width="79" height="26" /></a></div>
             <div>
                 <div class="readsele01">
-                    <select class="readingselect03">
-                        <option>请选择年份</option>
-                        <option>2016</option>
-                        <option>2015</option>
-                        <option>2014</option>
-                        <option>2013</option>
-                        <option>2012</option>
-                        <option>2011</option>
+                    <select ng-options="a.id as a.value for a in years" ng-model="yearOption" class="readingselect03" ng-change="ySelect()">
+                        <option value="">请选择年份</option>
                     </select>
 
                 </div>
             </div>
             <div>
                 <div class="readsele01">
-                    <select class="readingselect03">
-                        <option>请选择期数</option>
-                        <option>第1期</option>
-                        <option>第2期</option>
-                        <option>第3期</option>
-                        <option>第4期</option>
-                        <option>第5期</option>
-                        <option>第6期</option>
+                    <select class="readingselect03" ng-options="a.id as a.value for a in periods" ng-model="periodOption" ng-change="pSelect()">
+                        <option value="">请选择期数</option>
                     </select>
                 </div>
             </div>
             <div>
                 <div class="readsele01">
-                    <select class="readingselect03">
-                        <option>请选择栏目</option>
-                        <option>综述</option>
-                        <option>研究与开发</option>
-                        <option>探讨园地</option>
-                        <option>运行与管理</option>
-                        <option>事故与分析</option>
-                        <option>环保技术</option>
-                        <option>节能与改造</option>
-                        <option>其他</option>
+                    <select class="readingselect03" ng-options="a.CategoryID as a.Category for a in categorys" ng-model="categoryOption">
+                        <option value="">请选择栏目</option>
                     </select>
                 </div>
             </div>
             <div class="readingbtn">
-                <a href="#">
+                <a href="javascript:void(0)" ng-click="search()">
                     <i class="icon-repeat"></i>&nbsp;查找
                 </a>
             </div>

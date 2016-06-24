@@ -9,9 +9,8 @@
 </head>
 <body ng-app="GyglApp" ng-controller="pageCtrl">
     @RenderSection("hscripts", required: false)
-    
-    @Html.Action("PeriodicalTop", "Home")
     @Html.Action("Search", "Magazine")
+    @Html.Action("PeriodicalTop", "Home")
     @RenderBody()
     @Html.Action("Bottom", "Home")
 

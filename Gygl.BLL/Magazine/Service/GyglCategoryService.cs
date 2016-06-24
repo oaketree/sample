@@ -11,6 +11,11 @@ namespace Gygl.BLL.Magazine.Service
     {
         [Dependency]
         public IArticleService ArticleService { get; set; }
+
+        [Dependency]
+        public IGyglService GyglService { get; set; }
+
+
         public List<CatalogViewModel> getCatalogByID(int gyglid)
         {
             var cvm = new List<CatalogViewModel>();
@@ -29,6 +34,21 @@ namespace Gygl.BLL.Magazine.Service
                 });
             }
             return cvm;
+        }
+        //查询xx年x期的目录
+        public object getSearchCatalog(int year, int period)
+        {
+            var gygl = GyglService.Get(n => n.Year == year && n.Period == period);
+            if (gygl != null)
+            {
+                var list = FindAll(n => n.GyglID == gygl.ID).Select(s=>new {
+                    CategoryID=s.CategoryID,
+                    Category=s.Category.Name
+                });
+                return list;
+            }
+            else
+                return null;
         }
     }
 }

@@ -7,20 +7,22 @@
         <div class="subNav readmulutit"><img src="/Content/images/readgygl.gif" width="122" height="26" /></div>
         <hr />
         <div class="blankbottom"></div>
-        @foreach (var item in Model)
-        {
-            <div class="subNav">
-                <h6><span class="icon-list">&nbsp;</span>&nbsp;@item.Category</h6>
-            </div>
-            <ul class="navContent">
-                @foreach (var subItem in item.Title)
+        <div id="sidebar-wrapper" class="sidebar-wrapper">
+            @foreach (var item in Model)
+            {
+                <div class="subNav">
+                    <h6><span class="icon-list">&nbsp;</span>&nbsp;@item.Category</h6>
+                </div>
+                <ul class="navContent">
+                    @foreach (var subItem in item.Title)
                 {
-                    <li>
-                        <span class="icon-caret-right">&nbsp;</span>
-                        <a href="javascript:void(0)" ng-click="click(@subItem.Url)">@subItem.Title</a>
-                    </li>
-                }
-            </ul>
-        }
-    </section>
+                        <li>
+                            <span class="icon-caret-right">&nbsp;</span>
+                            <a href="javascript:void(0)" ng-click="click(@subItem.Url)">@subItem.Title</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+</section>
 </div>

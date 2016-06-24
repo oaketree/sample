@@ -54,6 +54,12 @@ namespace Gygl.WebPage.Controllers
         {
             return Json(ImageService.getFirstPages(pid), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult GetCategoryList(int y, int p)
+        {
+            return Json(GyglCategoryService.getSearchCatalog(y,p),JsonRequestBehavior.AllowGet);
+        }
+
         public PartialViewResult Search()
         {
             return PartialView();
