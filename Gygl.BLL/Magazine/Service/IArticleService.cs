@@ -8,6 +8,7 @@ namespace Gygl.BLL.Magazine.Service
     public interface IArticleService : IRepository<Article>
     {
         List<TilteViewModel> getTitle(int gyglid, int categoryid);
+        List<TilteViewModel> getTitle(int year, int period, int categoryid);
         List<int> getArticleList(int gyglId);
     }
 }

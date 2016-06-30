@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* CSS Document */
 
 body {
@@ -34,6 +34,43 @@ body {
 		
 
 
+#msgDiv {
+    z-index:1000;
+    width:220px;
+    height:100% ;
+
+	background-color:#382d2c;
+
+	position:fixed;
+	
+
+    left:-220px;
+    top:0;
+    font-size:14px;
+	overflow:auto;
+
+
+	
+}
+
+
+#muread {
+	z-index:1001;
+
+	position:fixed;
+
+	}
+.readmulutit img {
+	margin-left:15px;}
+
+
+.readmululine {
+	height:2px;
+
+	margin-bottom:30px;
+
+	background-color:#eee;
+	}
 
 .readyoubg02 {
 	background-color:#4467a7;
@@ -113,7 +150,6 @@ z-index:555;
 
 
 	}
-
 
 
 	
@@ -715,6 +751,7 @@ text-justify:inter-ideograp;
 
 
 
+
 .readingselect03 {
 	 width:132px; background:none; border:none;
 	 color:#b49f9f;
@@ -738,9 +775,11 @@ text-justify:inter-ideograp;
 /*滚动置顶*/
 #q_top004{
 
- z-index:999;
+ z-index:999!important;
  }
- 
+
+
+
  .nav-fixed{
  position:fixed;
  top:0;
@@ -830,7 +869,9 @@ text-justify:inter-ideograp;
 
 
 
-.readmulu>div {
+
+
+#muread {
 	height:40px;
 	line-height:40px;
 	width:80px;
@@ -839,30 +880,30 @@ text-justify:inter-ideograp;
 	font-weight:bold;
 	
 	text-align:center;
-	
-
-	
-	}
-
-
-
-
-.readmulu>div a {
 	color:#fff;
 	
+
+	
 	}
 
 
 
+
+
+#q_topml {
+	z-index:100002;
+
+	}
+
  
- .ml-fixed{
+.ml-fixed{
  position:fixed;
  top:-130px;
- opacity: 0.9;}
+}
  
  
  
- .readmulu {
+#muread {
 	position:absolute;
 	top:224px;
 
@@ -874,42 +915,76 @@ text-justify:inter-ideograp;
 /*左目录*/
 
 
+
 .readmulutit {
 	font-weight:bold;
-margin:0 .8em;
+
 color:#ff9000;
 height:80px;
 line-height:80px;
 	
-	font-size:22px;}
+	font-size:22px;
+}
 
 
-.sidebar{padding-top:1em;color:white;background-color:#382d2c; }
-.sidebar h6{margin:0 .8em;padding:0;font-weight:300;height:40px;
+#muludetail {padding-top:1em;color:white;background-color:#382d2c;
+width:100%;
+
+
+
+}
+#muludetail h6{font-weight:300;height:40px;
 line-height:40px;font-size:14px;}
-.sidebar li{margin:.5em 0;padding:0 1em;line-height:32px;
+#muludetail li{line-height:32px;
+width:190px;
+padding:0 15px;
+
 clear:both;}
-.sidebar li:hover{background-color:#504443;
-}
 
-.sidebar-wrapper {
-  position: relative;
-  height: 100%;
-  overflow: auto;
+#muludetail li:hover{background-color:#504443;
 }
 
 
-.sidebar li a{color:#bababa;}
-.sidebar li a:hover{color:#fff;}
+#muludetail li a{color:#bababa;
+
+}
+#muludetail li a:hover{color:#fff;}
 
 
-
+.readleftli {
+	padding-left:15px;}
 
 
 /*主要样式*/
 .subNav{cursor:pointer;}
-.navContent{display:none;color:#999;}
+.subNavtit ul{color:#999;
+width:180px;
 
+display:none;
+}
+
+
+
+.subNavtit li{
+	display:block;}
+
+
+.subNavtit a {
+	color:#fff;
+	font-size:14px;
+	
+	
+	
+	}
+	
+.subNavtit a:hover {
+	color:#ffdf4c;
+	font-size:14px;
+	
+	
+	
+	}
+	
 
 
 

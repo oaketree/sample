@@ -14,12 +14,13 @@ namespace Gygl.WebPage
                         "~/Content/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                        "~/Content/Scripts/angular.min.js"));
+                        "~/Content/Scripts/angular.min.js",
+                        "~/Content/Scripts/angular-route.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/reg").Include(
                         "~/Content/Scripts/common.js",
                         "~/Content/Scripts/gygl.js",
-                        "~/Content/Scripts/gygl.reg.js"));
+                        "~/Content/Scripts/Register/gygl.reg.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/contribute").Include(
             //            "~/Content/Scripts/common.js",
@@ -27,13 +28,19 @@ namespace Gygl.WebPage
             //            "~/Content/Scripts/gygl.co.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/mag").Include(
+                "~/Content/Scripts/Magazine/app.js",
+                "~/Content/Scripts/Magazine/routers.js",
+                "~/Content/Scripts/Magazine/services.js",
+                "~/Content/Scripts/Magazine/controllers.js",
+                "~/Content/Scripts/Magazine/directives.js",
                         "~/Content/Scripts/common.js",
-                        "~/Content/Scripts/gygl.js",
-                        "~/Content/Scripts/gygl.ma.js"));
+                        "~/Content/Scripts/gygl.js"
+                        ));
 
-            bundles.Add(new ScriptBundle("~/bundles/catalog").Include(
-                        "~/Content/Scripts/jquery-ui.min.js",
-                        "~/Content/Scripts/jquery.simplesidebar.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/catalog").Include(
+            //            "~/Content/Scripts/jquery-ui.min.js",
+            //            "~/Content/Scripts/jquery.simplesidebar.js"));
+
 
 
             bundles.Add(new StyleBundle("~/Content/registercss").Include(
@@ -42,6 +49,7 @@ namespace Gygl.WebPage
                       "~/Content/Css/magazineneire.css"));
 
             bundles.Add(new StyleBundle("~/Content/magazinecss").Include(
+                "~/Content/Css/gygl.css",
                       "~/Content/Css/magazinenei.css",
                       "~/Content/Css/magazinereading.css",
                       "~/Content/Css/font-awesome.min.css"));

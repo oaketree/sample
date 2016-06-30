@@ -22,7 +22,7 @@
             HeartBeatTimer = setInterval($.heartBeat, 1080000);
     },
     heartBeat: function () {
-        $.post("/PokePage", function () {
+        $.post("/Home/PokePage", function () {
             //console.log("heartbeat!")
         });
     },

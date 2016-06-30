@@ -1,0 +1,40 @@
+﻿@model Core.DAL.PageInfo<Gygl.Contract.Magazine.Periodical>
+<div id="q_top05">
+    <div id="m_top05">
+        <div id="top05">
+            <div class="top05_01" id="readbq">
+                <div class="blank30"></div>
+                <div id="readfeng" class="readfengnian">
+                    @foreach (var item in Model.Entity)
+                    {
+                        <div class="readfengzuonianfen textcenter">
+                            <div><img src="/Content/Upload/Magazine/Cover/@item.CoverImage" width="189" height="256" /></div>
+                            <div>
+                                <div class="textcenter">@item.Year 年第 @item.Period 期</div>
+                                <div class="readdg">
+                                    <div class="textcenter width100"><div class="readbtnnianfen readbtnxz"><a href="#/GetPeriod/@item.ID">阅读本期</a></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div style="clear:both"></div>
+                </div>
+                <div class="blank30"></div>
+                <div class="readlanmulieline"></div>
+                @*<div class="nextpagelie readlanyou"><img src="/Content/images/buttontemp2.gif" width="201" height="31" /></div>*@
+
+                <div class="pagination">
+                    <ul>
+                        @Html.PageLink(Model, x =>
+                   {
+                       var y = Request.Url.ToString() + "&page=" + x;
+                       return y;
+                   });
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

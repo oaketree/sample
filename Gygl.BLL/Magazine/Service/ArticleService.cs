@@ -1,6 +1,7 @@
 ﻿using Core.DAL;
 using Gygl.BLL.Magazine.ViewModels;
 using Gygl.Contract.Magazine;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace Gygl.BLL.Magazine.Service
 {
     public class ArticleService : RepositoryBase<Article, WebDBContext>, IArticleService
     {
+        [Dependency]
+        public IGyglService GyglService { get; set; }
         public List<TilteViewModel> getTitle(int gyglid,int categoryid)
         {
             var li = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid).Select(s=>new TilteViewModel
@@ -25,5 +28,20 @@ namespace Gygl.BLL.Magazine.Service
             var li = FindAll(n => n.GyglID == gyglId).Select(s => s.ID);
             return li.ToList();
         }
+
+
+        public List<TilteViewModel> getTitle(int year,int period, int categoryid)
+        {
+            var gyglid = GyglService.Get(g => g.Year == year && g.Period == period).ID;
+            var li = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid).Select(s => new TilteViewModel
+            {
+                Title = s.Title,
+                Url = s.ID.ToString(),
+                Year=year,
+                Period=period
+            });
+            return li.ToList();
+        }
+
     }
 }

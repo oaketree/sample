@@ -12,6 +12,8 @@ namespace Gygl.BLL.Magazine.ViewModels
         public int Year { get; set; }
         public int Period { get; set; }
         public int TotalPeriod { get; set; }
-
+        public string CoverImage { get; set; }
+        public int Up { get; set; }
+        public int Down { get; set; }
     }
 }

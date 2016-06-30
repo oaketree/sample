@@ -311,21 +311,19 @@
     <Content Include="Content\Scripts\bootstrap.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
     <Content Include="Content\Scripts\common.js" />
-    <Content Include="Content\Scripts\gygl.co.js" />
     <Content Include="Content\Scripts\gygl.js" />
-    <Content Include="Content\Scripts\gygl.ma.js" />
-    <Content Include="Content\Scripts\gygl.reg.js" />
+    <Content Include="Content\Scripts\Magazine\app.js" />
+    <Content Include="Content\Scripts\Magazine\controllers.js" />
+    <Content Include="Content\Scripts\Magazine\directives.js" />
+    <Content Include="Content\Scripts\Magazine\routers.js" />
+    <Content Include="Content\Scripts\Magazine\services.js" />
+    <Content Include="Content\Scripts\Register\gygl.reg.js" />
     <Content Include="Content\Scripts\jquery-1.10.2.js" />
     <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Content\Scripts\jquery-ui.min.js" />
-    <Content Include="Content\Scripts\jquery.simplesidebar.js" />
     <Content Include="Content\Scripts\jquery.validate.js" />
     <Content Include="Content\Scripts\jquery.validate.min.js" />
     <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Content\Scripts\modernizr-2.6.2.js" />
-    <Content Include="Content\Scripts\respond.js" />
-    <Content Include="Content\Scripts\respond.min.js" />
     <Content Include="Content\Fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\Fonts\fontawesome-webfont.woff" />
@@ -365,6 +363,11 @@
     <Content Include="Views\Magazine\Search.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Magazine\RightNav.cshtml" />
+    <Content Include="Views\Magazine\Index.cshtml" />
+    <Content Include="Views\Magazine\SelectYear.cshtml" />
+    <Content Include="Views\Magazine\GetPeriod.cshtml" />
+    <Content Include="Views\Magazine\GetPeriod2.cshtml" />
+    <Content Include="Views\Magazine\SelectArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -384,6 +387,10 @@
     <ProjectReference Include="..\Gygl.BLL\Gygl.BLL.csproj">
       <Project>{1572EB37-06AA-442E-81F6-49EFE6DB7497}</Project>
       <Name>Gygl.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gygl.Contract\Gygl.Contract.csproj">
+      <Project>{fb74dde3-ee02-4784-976f-67a841e587df}</Project>
+      <Name>Gygl.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

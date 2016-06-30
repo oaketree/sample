@@ -1,0 +1,1 @@
+﻿var app = angular.module("GyglApp", ['GyglApp.services', 'ngRoute']);
