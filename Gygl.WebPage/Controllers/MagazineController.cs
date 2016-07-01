@@ -47,10 +47,39 @@ namespace Gygl.WebPage.Controllers
                 return null;
         }
 
-        public PartialViewResult SelectYear(int? year,int? period, int page = 1)
+        public PartialViewResult SelectYear()
         {
-            return PartialView(GyglService.getPeriodicalByYear(page,year, period,6));
+            return PartialView();
         }
+        /// <summary>
+        /// 页面内获取
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="period"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public JsonResult getSelectYear(int? year, int? period, int page)
+        {
+            return Json(GyglService.getPeriodicalByYear(year, period, 6, page), JsonRequestBehavior.AllowGet);
+        }
+
+        public PartialViewResult SelectArticle()
+        {
+            return PartialView();
+        }
+        /// <summary>
+        /// 文章分页
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="period"></param>
+        /// <param name="category"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public JsonResult getSelectArticle(int? year, int? period, int category, int page)
+        {
+            return Json(ArticleService.getArticleByCategory(year, period, category, 15, page), JsonRequestBehavior.AllowGet);
+        }
+
 
         public PartialViewResult SelectPeriod(int year, int period)
         {
@@ -59,17 +88,7 @@ namespace Gygl.WebPage.Controllers
                 return PartialView("GetPeriod", ret);
             return null;
         }
-        /// <summary>
-        /// ？？？？要改
-        /// </summary>
-        /// <param name="year"></param>
-        /// <param name="period"></param>
-        /// <param name="category"></param>
-        /// <returns></returns>
-        public PartialViewResult SelectArticle(int? year, int? period, int category)
-        {
-            return PartialView(ArticleService.getTitle(year, period, category));
-        }
+    
 
 
         /// <summary>
@@ -77,7 +96,7 @@ namespace Gygl.WebPage.Controllers
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
-        public PartialViewResult GetPeriod(int id)
+        public PartialViewResult GetPeriod(int? id)
         {
             return PartialView(GyglService.getPeriodicalById(id));
         }

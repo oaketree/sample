@@ -18,7 +18,7 @@ namespace Core.DAL
             bool IsAsc);
         IQueryable<T> FindList(IQueryable<T> queryEntity, int take);
         IEnumerable<T> QueryBySql(string sql, SqlParameter[] para);
-        PageInfo<T> FindByPage(IQueryable<T> queryEntity, int PageSize, int page);
+        IQueryable<T> FindByPage(IQueryable<T> queryEntity, int PageSize, int page);
         void Update(T entity);
         void Update();
         T Insert(T entity);

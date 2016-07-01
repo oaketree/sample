@@ -21,6 +21,46 @@ fac.factory('searchService', function () {
                 { id: 5, value: "第五期" },
                 { id: 6, value: "第六期" }];
             return periods;
+        }, getNav: function (data) {
+            var _html = "";
+            if (data.CurrentPage == 1) {
+                _html += "<li class='prev-page'></li>"
+            } else {
+                _html += "<li class='prev-page' ng-click='click(" + data.CurrentPage - 1 + ")'><a href='javascript:void(0)'>上一页</a></li>";
+            }
+            var begin = 0;
+            var end = 0;
+            if (data.CurrentPage + 3 < data.TotalPages) {
+                end = data.CurrentPage + 3;
+            } else {
+                end = data.TotalPages;
+            }
+            if (data.CurrentPage - 3 > 1) {
+                begin = data.CurrentPage - 3;
+            } else {
+                begin = 1;
+            }
+            if (begin > 1) {
+                _html += "<li ng-click='click(1)'><a href='javascript:void(0)'>1</a></li>"
+                _html += "<li><span>...</span></li>";
+            }
+            for (var i = begin; i <= end; i++) {
+                if (i == data.CurrentPage) {
+                    _html += "<li class='active'><span>" + i + "</span></li>";
+                } else {
+                    _html += "<li ng-click='click(" + i + ")'><a href='javascript:void(0)'>" + i + "</a></li>";
+                }
+            }
+            if (end < data.TotalPages) {
+                _html += "<li><span>...</span></li>";
+                _html += "<li ng-click='click(" + data.TotalPages + ")'><a href='javascript:void(0)'>" + data.TotalPages + "</a></li>";
+            }
+            if (data.CurrentPage == data.TotalPages) {
+                _html += "<li class='next-page'></li>"
+            } else {
+                _html += "<li class='prev-page' ng-click='click(" + data.CurrentPage + 1 + ")'><a href='javascript:void(0)'>下一页</a></li>";
+            }
+            return _html;
         }
     }
     return service;
@@ -73,6 +113,30 @@ fac.factory('ajaxService', ['$q', '$http', function ($q, $http) {
             $http({
                 method: 'GET',
                 url: '/Magazine/GetDefaultCategoryList',
+            }).success(function (data) {
+                d.resolve(data);
+            }).error(function (data) {
+                d.reject(data);
+            });
+            return d.promise;
+        }, getSelectYear: function (y,p,page) {
+            var d = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/Magazine/getSelectYear',
+                params: { "year": y, "period": p, "page": page }
+            }).success(function (data) {
+                d.resolve(data);
+            }).error(function (data) {
+                d.reject(data);
+            });
+            return d.promise;
+        }, getSelectArticle: function (y, p, c, page) {
+            var d = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/Magazine/getSelectArticle',
+                params: { "year": y, "period": p, "category":c,"page": page }
             }).success(function (data) {
                 d.resolve(data);
             }).error(function (data) {

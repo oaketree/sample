@@ -1,54 +1,74 @@
 ﻿using Core.DAL;
 using Gygl.BLL.Magazine.ViewModels;
+using Gygl.BLL.Share;
 using Gygl.Contract.Magazine;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gygl.BLL.Magazine.Service
 {
-    public class GyglService:RepositoryBase<Periodical, WebDBContext>, IGyglService
+    public class GyglService : RepositoryBase<Periodical, WebDBContext>, IGyglService
     {
-        public GyglViewModel getPeriodicalById(int pid)
+        private Tuple<int, int> getPid(int year, int period, int currentPid)
         {
-            var c = FindAll().Count();
-            var p=Get(n => n.ID == pid);
+            int up = currentPid;
+            int down = currentPid;
+            var getNav = new GetNav(year, period);
+            var tempYear = getNav.upNav().year;
+            var tempPeriod = getNav.upNav().period;
+            var upPid = Get(n => n.Year ==tempYear && n.Period == tempPeriod);
+            if (upPid != null)
+                up = upPid.ID;
+            tempYear = getNav.downNav().year;
+            tempPeriod = getNav.downNav().period;
+            var downPid = Get(n => n.Year == tempYear && n.Period == tempPeriod);
+            if (downPid != null)
+                down = downPid.ID;
+            return new Tuple<int, int>(up,down);
+        }
 
-            if (p != null)
+        public GyglViewModel getPeriodicalById(int? pid)
+        {
+            if (pid != null)
             {
-                int nav = p.ID;
-                int up = 0;
-                int down = 0;
-                if (nav > 1)
+                var p = Get(n => n.ID == pid);
+                if (p != null)
                 {
-                    up = nav - 1;
+                    var gP = getPid(p.Year.Value, p.Period.Value, pid.Value);
+                    return new GyglViewModel
+                    {
+                        ID = p.ID,
+                        Period = p.Period.Value,
+                        TotalPeriod = p.TotalPeriod.Value,
+                        Year = p.Year.Value,
+                        CoverImage = p.CoverImage,
+                        Up = gP.Item1,
+                        Down = gP.Item2
+                    };
                 }
-                else {
-                    up = nav;
-                }
-
-                if (nav < c)
-                {
-                    down = nav + 1;
-                }
-                else {
-                    down = nav;
-                }
-                return new GyglViewModel
-                {
-                    ID = p.ID,
-                    Period = p.Period.Value,
-                    TotalPeriod = p.TotalPeriod.Value,
-                    Year = p.Year.Value,
-                    CoverImage = p.CoverImage,
-                    Up=up,
-                    Down=down
-                };
+                else
+                    return null;
             }
             else
-                return null;
+            {
+                var p = QueryEntity(null, o => o.RegDate, false).FirstOrDefault();
+                if (p != null)
+                {
+                    var gP = getPid(p.Year.Value, p.Period.Value, p.ID);
+                    return new GyglViewModel
+                    {
+                        ID = p.ID,
+                        Period = p.Period.Value,
+                        TotalPeriod = p.TotalPeriod.Value,
+                        Year = p.Year.Value,
+                        CoverImage = p.CoverImage,
+                        Up = gP.Item1,
+                        Down = gP.Item2
+                    };
+                }
+                else
+                    return null;
+            }
         }
         /// <summary>
         /// 分页排序
@@ -56,57 +76,45 @@ namespace Gygl.BLL.Magazine.Service
         /// <param name="year"></param>
         /// <param name="period"></param>
         /// <returns></returns>
-        public PageInfo<Periodical> getPeriodicalByYear(int? year, int? period, int pageSize, int page)
+        public PageGyglViewModel getPeriodicalByYear(int? year, int? period, int pageSize, int page)
         {
+            IQueryable<Periodical> qe = null;
+            PageGyglViewModel pif = new PageGyglViewModel();
             if (year != null)
             {
-                var qe = QueryEntity(n => n.Year == year, o => o.Period, true);
-                if (qe != null)
-                {
-                    return FindByPage(qe, pageSize, page);
-                }
-                else
-                    return null;
+                qe = QueryEntity(n => n.Year == year, o => o.Period, true);
             }
             else
             {
-                var qe = QueryEntity(n => n.Period == period, o => o.Year, false);
-                if (qe != null)
+                qe = QueryEntity(n => n.Period == period, o => o.Year, false);
+            }
+            if (qe != null)
+            {
+                var fbp = FindByPage(qe, pageSize, page).Select(s => new GyglViewModel
                 {
-                    return FindByPage(qe, pageSize, page);
-                }
-                else
-                    return null;
+                    ID = s.ID,
+                    CoverImage = s.CoverImage,
+                    Year = s.Year.Value,
+                    Period = s.Period.Value
+                });
+                pif.TotalItems = qe.Count();
+                pif.CurrentPage = page;
+                pif.ItemPerPage = pageSize;
+                pif.Entity = fbp;
+                return pif;
+            }
+            else
+            {
+                return null;
             }
         }
 
         public GyglViewModel getPeriodBySearch(int year, int period)
         {
-            var c = FindAll().Count();
-            var p= Get(n => n.Year == year && n.Period == period);
+            var p = Get(n => n.Year == year && n.Period == period);
             if (p != null)
             {
-                int nav = p.ID;
-                int up = 0;
-                int down = 0;
-                if (nav > 1)
-                {
-                    up = nav - 1;
-                }
-                else
-                {
-                    up = nav;
-                }
-
-                if (nav < c)
-                {
-                    down = nav + 1;
-                }
-                else
-                {
-                    down = nav;
-                }
-
+                var gP = getPid(p.Year.Value, p.Period.Value, p.ID);
                 return new GyglViewModel
                 {
                     ID = p.ID,
@@ -114,8 +122,8 @@ namespace Gygl.BLL.Magazine.Service
                     TotalPeriod = p.TotalPeriod.Value,
                     Year = p.Year.Value,
                     CoverImage = p.CoverImage,
-                    Up=up,
-                    Down=down
+                    Up = gP.Item1,
+                    Down = gP.Item2
                 };
             }
             else

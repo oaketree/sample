@@ -5,6 +5,7 @@ using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,10 @@ namespace Gygl.BLL.Magazine.Service
     {
         [Dependency]
         public IGyglService GyglService { get; set; }
+
+        [Dependency]
+        public ICategoryService CategoryService { get; set; }
+
         public List<TilteViewModel> getTitle(int gyglid,int categoryid)
         {
             var li = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid).Select(s=>new TilteViewModel
@@ -30,17 +35,37 @@ namespace Gygl.BLL.Magazine.Service
         }
 
 
-        public List<TilteViewModel> getTitle(int year,int period, int categoryid)
+        public PageArticleViewModel getArticleByCategory(int? year, int? period, int category, int pageSize, int page)
         {
-            var gyglid = GyglService.Get(g => g.Year == year && g.Period == period).ID;
-            var li = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid).Select(s => new TilteViewModel
+            IQueryable<Article> qe = null;
+            PageArticleViewModel pif = new PageArticleViewModel();
+            pif.Category= CategoryService.Get(g => g.ID == category).Name;
+            Expression<Func<Article, bool>> express = PredicateExtensions.True<Article>();
+            express = express.And(n => n.CategoryID==category);
+            if(year!=null)
+                express = express.And(n => n.Gygl.Year==year);
+            if(period!=null)
+                express = express.And(n => n.Gygl.Period == period);
+            qe = QueryEntity(express, o => o.RegDate, false);
+            if (qe != null)
             {
-                Title = s.Title,
-                Url = s.ID.ToString(),
-                Year=year,
-                Period=period
-            });
-            return li.ToList();
+                var fbp = FindByPage(qe, pageSize, page).Select(s => new TilteViewModel
+                {
+                    Title = s.Title,
+                    Url = s.ID.ToString(),
+                    Author=s.Author,
+                    Year = s.Gygl.Year.Value,
+                    Period = s.Gygl.Period.Value,
+                    GyglID=s.GyglID.Value
+                });
+                pif.TotalItems = qe.Count();
+                pif.CurrentPage = page;
+                pif.ItemPerPage = pageSize;
+                pif.Entity = fbp;
+                return pif;
+            }
+            else
+                return null;
         }
 
     }

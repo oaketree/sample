@@ -6,29 +6,19 @@
         },
         controller: 'periodicalCtrl'
     })
+        .when('/Periodical/:id/:aid', {
+            templateUrl: function ($routeParams) {
+                return '/Magazine/Periodical/' + $routeParams.id;
+            },
+            controller: 'periodicalCtrl'
+        })
     .when('/SelectYear', {
-        templateUrl: function ($routeParams) {
-            if ($routeParams.year != null)
-                return '/Magazine/SelectYear?year=' + $routeParams.year;
-            else
-                return '/Magazine/SelectYear?period=' + $routeParams.period;
-        }
+        templateUrl: '/Magazine/SelectYear',
+        controller: 'yearCtrl'
     })
     .when('/SelectArticle', {
-        templateUrl: function ($routeParams) {
-            var y = $routeParams.year;
-            var p = $routeParams.period;
-            var c = $routeParams.category;
-            if (y == null && p == null) {
-                return '/Magazine/SelectArticle?category=' + c;
-            } else if (y == null && p != null) {
-                return '/Magazine/SelectArticle?period=' + p + '&category=' + c;
-            } else if (y != null && p == null) {
-                return '/Magazine/SelectArticle?year=' + y + '&category=' + c;
-            }else {
-                return '/Magazine/SelectArticle?year=' + y + '&period=' + p + '&category=' +c;
-            }
-        }
+        templateUrl: '/Magazine/SelectArticle',
+        controller: 'articleCtrl'
     })
      .when('/SelectPeriod', {
          templateUrl: function ($routeParams) {
@@ -40,11 +30,17 @@
             return '/Magazine/GetPeriod/' + $routeParams.id;
         }
     })
+     .when('/GetPeriod', {
+         templateUrl: '/Magazine/GetPeriod'
+     })
     .when('/GetPeriod2/:id', {
         templateUrl: function ($routeParams) {
             return '/Magazine/GetPeriod2/' + $routeParams.id;
         }
     })
+    .otherwise({
+        redirectTo: '/GetPeriod'
+    });
 }]);
 
 

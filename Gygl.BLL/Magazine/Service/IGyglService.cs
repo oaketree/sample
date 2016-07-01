@@ -11,8 +11,8 @@ namespace Gygl.BLL.Magazine.Service
 {
     public interface IGyglService : IRepository<Periodical>
     {
-        GyglViewModel getPeriodicalById(int pid);
-        PageInfo<Periodical> getPeriodicalByYear(int? year, int? period, int pageSize, int page);
+        GyglViewModel getPeriodicalById(int? pid);
+        PageGyglViewModel getPeriodicalByYear(int? year, int? period, int pageSize, int page);
         GyglViewModel getPeriodBySearch(int year, int period);
     }
 }

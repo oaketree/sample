@@ -71,16 +71,11 @@ namespace Core.DAL
             return dbContext.Database.SqlQuery<T1>(sql, para);
         }
 
-        public virtual PageInfo<T1> FindByPage(IQueryable<T1> QueryEntity, int PageSize, int page)
+        public virtual IQueryable<T1> FindByPage(IQueryable<T1> QueryEntity, int PageSize, int page)
         {
-            return new PageInfo<T1>
-            {
-                TotalItems = QueryEntity.Count(),
-                CurrentPage = page,
-                ItemPerPage = PageSize,
-                Entity = QueryEntity.Skip((page - 1) * PageSize).Take(PageSize)
-            };
+            return QueryEntity.Skip((page - 1) * PageSize).Take(PageSize);
         }
+
         public virtual void Update(T1 entity)
         {
             MyDbSet.Attach(entity);

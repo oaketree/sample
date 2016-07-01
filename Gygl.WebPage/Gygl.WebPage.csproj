@@ -388,10 +388,6 @@
       <Project>{1572EB37-06AA-442E-81F6-49EFE6DB7497}</Project>
       <Name>Gygl.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gygl.Contract\Gygl.Contract.csproj">
-      <Project>{fb74dde3-ee02-4784-976f-67a841e587df}</Project>
-      <Name>Gygl.Contract</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

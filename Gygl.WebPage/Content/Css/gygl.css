@@ -13,7 +13,7 @@
     z-index: 101; /* 此处的图层要大于页面 */
 }
 
-.pagination{padding:20px;background-color:#fff;text-align:center}
+.pagination{padding:20px;text-align:center}
 .pagination ul{display:inline-block;*display:inline;*zoom:1;margin-left:0;margin-bottom:0}
 .pagination ul > li{display:inline}
 .pagination ul > li > a,.pagination ul > li > span{margin:0 1px;float:left;padding:4px 12px 3px;line-height:20px;text-decoration:none;background-color:#eee;color:#666}
