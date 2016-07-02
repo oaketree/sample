@@ -32,23 +32,29 @@
             alert("请选择后查询!");
         } else {
             if (c != null) {
-                if (y == null && p == null) {
-                    $location.path("/SelectArticle").search({ category: c, page: 1 });
-                } else if (y == null && p != null) {
-                    $location.path("/SelectArticle").search({ period: p, category: c, page: 1 });
-                } else if (y != null && p == null) {
-                    $location.path("/SelectArticle").search({ year: y, category: c, page: 1 });
-                } else {
-                    $location.path("/SelectArticle").search({ year: y, period: p, category: c, page: 1 });
-                }
+                $location.path("/SelectArticle").search({ year: y, period: p, category: c, page: 1 });
+                //if (y == null && p == null) {
+                //    $location.path("/SelectArticle").search({ category: c, page: 1 });
+                //} else if (y == null && p != null) {
+                //    $location.path("/SelectArticle").search({ period: p, category: c, page: 1 });
+                //} else if (y != null && p == null) {
+                //    $location.path("/SelectArticle").search({ year: y, category: c, page: 1 });
+                //} else {
+                //    $location.path("/SelectArticle").search({ year: y, period: p, category: c, page: 1 });
+                //}
             } else {
-                if (y == null && p != null) {
-                    $location.path("/SelectYear").search({ period: p, page: 1 });
-                } else if (y != null && p == null) {
-                    $location.path("/SelectYear").search({ year: y, page: 1 });
-                } else {
+                if (y != null && p != null) {
                     $location.path("/SelectPeriod").search({ year: y, period: p });
+                } else {
+                    $location.path("/SelectYear").search({ year: y,period: p, page: 1 });
                 }
+                //if (y == null && p != null) {
+                //    $location.path("/SelectYear").search({ period: p, page: 1 });
+                //} else if (y != null && p == null) {
+                //    $location.path("/SelectYear").search({ year: y, page: 1 });
+                //} else {
+                //    $location.path("/SelectPeriod").search({ year: y, period: p });
+                //}
             }
         }
     }
