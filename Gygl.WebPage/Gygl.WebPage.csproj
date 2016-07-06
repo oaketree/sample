@@ -371,6 +371,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Scripts\Home\" />
     <Folder Include="Content\Upload\Magazine\Page\" />
   </ItemGroup>
   <ItemGroup>

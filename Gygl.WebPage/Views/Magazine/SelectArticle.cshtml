@@ -1,18 +1,20 @@
-﻿<div id="q_top05" ng-controller="articleCtrl">
+﻿<div id="q_top05">
     <div id="m_top05">
         <div id="top05">
             <div class="top05_01" id="readbq">
                 <div class="blank30"></div>
                 <div id="lsh">《工业锅炉》——{{category}}</div>
                 <div class="mingyuzhubian01 readlanmulie" id="conreadlie">
-                    <ul ng-repeat="article in articles">
-                        <li class="readlan">{{article.Year}}年第{{article.Period}}期</li>
-                        <li class="readlantit"><a href="#/Periodical/{{article.GyglID}}/{{article.Url}}">{{article.Title}}</a></li>
-                        <li class="readlanzz">{{article.Author}}</li>
-                    </ul>
-                    <div class="blank30"></div>
+                        <ul ng-repeat="article in articles">
+                            <li class="readlan">{{article.Year}}年第{{article.Period}}期</li>
+                            <li class="readlantit"><a href="#/Periodical/{{article.GyglID}}/{{article.Url}}" title="{{article.Title}}">{{article.Title|limitTo : 27}}</a></li>
+                            <li class="readlanzz">{{article.Author|limitTo : 10}}</li>
+                        </ul>
+                     <div class="blank30"></div>
                     <div class="readlanmulieline"></div>
-                    <div class="pagination"><ul ng-bind-html="nav"></ul></div>
+                    <div class="pagination">
+                        <ul id="pagingdata"></ul>
+                    </div>
                     <div style="clear:both"></div>
                 </div>
             </div>

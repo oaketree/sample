@@ -45,11 +45,43 @@ app.directive('closeMenu', function () {
         }
     }
 });
-//app.directive('pagingData', function () {
+
+//app.directive('pagingData', ['$compile', '$parse',function ($compile, $parse) {
 //    return {
 //        restrict: 'AEC',
-//        scope: {},
-//        transclude:true,
-//        template: "<ul ng-transclude></ul>"
+//        scope: false,
+//        //template: "{{nav}}",
+//        link: function (scope, element, attrs, controller) {
+
+//            //element.html($parse(attrs.content)(scope));
+
+//            //console.log($parse(attrs.content)(scope));
+//            element.html("{{" + attrs.content + "}}");
+//            $compile(element.contents())(scope);
+
+//            console.log(element.html());
+
+//            //console.log($compile("{{nav}}")(scope));
+//            //var markup = scope.$eval(attrs.content);
+//            //console.log(markup);
+//            //element.html(markup);
+//            //$compile(element.contents())(scope);
+//            //element.html(el);
+//        }
 //    };
-//})
+//}])
+
+
+//app.directive('pagingData', ['$compile', function ($compile) {
+//    return function (scope, element, attrs) {
+//        scope.$watch(
+//          function (scope) {
+//              return scope.$eval(attrs.compile);
+//          },
+//          function (value) {
+//              element.html(value);
+//              $compile(element.contents())(scope);
+//          }
+//        );
+//    };
+//}])

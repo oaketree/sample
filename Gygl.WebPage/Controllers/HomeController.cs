@@ -20,7 +20,6 @@ namespace Gygl.WebPage.Controllers
             return PartialView();
         }
 
-
         public PartialViewResult Bottom()
         {
             return PartialView();
@@ -30,6 +29,9 @@ namespace Gygl.WebPage.Controllers
         {
             return PartialView();
         }
+
+        
+
         /// <summary>
         /// session不自动关闭
         /// </summary>

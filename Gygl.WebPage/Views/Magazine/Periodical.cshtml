@@ -1,13 +1,13 @@
 ﻿@model Gygl.BLL.Magazine.ViewModels.GyglViewModel
-<div ng-controller="periodicalCtrl">
+<div>
     <div id="q_top004">
         <div id="m_top004">
             <div id="top004">
                 <div><img src="/Content/images/readonline.gif" width="184" height="38" /></div>
                 <div class="readqishu">@Model.Year 年第&nbsp;<span class="readqishu02">@Model.Period</span>&nbsp; 期（总第 @Model.TotalPeriod 期）</div>
                 <div class="readlsbq">
-                    <div class="readlsh"><a href="#/GetPeriod2/@Model.ID">理事会</a></div>
-                    <div class="readbqy"><a href="#/GetPeriod/@Model.ID">版权页</a></div>
+                    <div class="readlsh"><a ng-href="#/GetPeriod2/@Model.ID">理事会</a></div>
+                    <div class="readbqy"><a ng-href="#/GetPeriod/@Model.ID">版权页</a></div>
                 </div>
             </div>
         </div>

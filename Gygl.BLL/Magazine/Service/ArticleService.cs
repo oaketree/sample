@@ -30,33 +30,56 @@ namespace Gygl.BLL.Magazine.Service
         }
         public List<int> getArticleList(int gyglId)
         {
-            var li = FindAll(n => n.GyglID == gyglId).Select(s => s.ID);
+            var li = FindAll(n => n.GyglID == gyglId).OrderBy(o => o.Category.SortID).ThenBy(t=>t.ID).Select(s => s.ID);
             return li.ToList();
+            //var li = QueryEntity(n => n.GyglID == gyglId, o => o.Category.SortID, true).Select(s => s.ID);
+            //return li.ToList();
         }
 
 
-        public PageArticleViewModel getArticleByCategory(int? year, int? period, int category, int pageSize, int page)
+        public PageArticleViewModel getArticleByCategory(int? year, int? period, int? category,string key, int pageSize, int page)
         {
+            bool p = false;
             IQueryable<Article> qe = null;
             PageArticleViewModel pif = new PageArticleViewModel();
-            pif.Category= CategoryService.Get(g => g.ID == category).Name;
             Expression<Func<Article, bool>> express = PredicateExtensions.True<Article>();
-            express = express.And(n => n.CategoryID==category);
-            if(year!=null)
-                express = express.And(n => n.Gygl.Year==year);
-            if(period!=null)
+            if (category != null) {
+                pif.Category = CategoryService.Get(g => g.ID == category).Name;
+                express = express.And(n => n.CategoryID == category);
+                p = true;
+            }
+            if (!string.IsNullOrEmpty(key)) {
+                pif.Category = pif.Category + "   \"" + key + "\"";
+                express = express.And(n => n.Title.Contains(key) || n.Keyword.Contains(key));
+                p = true;
+            }
+            if (year != null) {
+                express = express.And(n => n.Gygl.Year == year);
+                p = true;
+            }
+            if (period != null) {
                 express = express.And(n => n.Gygl.Period == period);
-            qe = QueryEntity(express, o => o.RegDate, false);
+                p = true;
+            }
+            if (p == false)
+            {
+                pif.Category = "所有文章";
+                qe = QueryEntity(null, o => o.RegDate, false);
+            }
+            else {
+                qe = QueryEntity(express, o => o.RegDate, false);
+            }
+
             if (qe != null)
             {
                 var fbp = FindByPage(qe, pageSize, page).Select(s => new TilteViewModel
                 {
                     Title = s.Title,
                     Url = s.ID.ToString(),
-                    Author=s.Author,
+                    Author = s.Author,
                     Year = s.Gygl.Year.Value,
                     Period = s.Gygl.Period.Value,
-                    GyglID=s.GyglID.Value
+                    GyglID = s.GyglID.Value
                 });
                 pif.TotalItems = qe.Count();
                 pif.CurrentPage = page;

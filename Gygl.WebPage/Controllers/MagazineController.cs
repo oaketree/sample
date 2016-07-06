@@ -75,9 +75,9 @@ namespace Gygl.WebPage.Controllers
         /// <param name="category"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public JsonResult getSelectArticle(int? year, int? period, int category, int page)
+        public JsonResult getSelectArticle(int? year, int? period, int? category,string key, int page)
         {
-            return Json(ArticleService.getArticleByCategory(year, period, category, 15, page), JsonRequestBehavior.AllowGet);
+            return Json(ArticleService.getArticleByCategory(year, period, category, key,20, page), JsonRequestBehavior.AllowGet);
         }
 
 

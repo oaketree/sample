@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 body {
@@ -173,8 +173,29 @@ z-index:555;
 	padding-right:15px;
 }
 	
+	
+#top003>div input {
+	text-indent:10px;
+	height:25px;
+	line-height:25px;
+	
+	 border:#afafaf 1px solid; 
+
+
+	background-color: #f3f3f3;
+	
+	
+	
+	 color:#b49f9f;
+	 font-size:14px!important;
+	 
+	
+	
+	
+}
+	
 #top003 {
-	padding-left:200px;
+	padding-left:50px;
 }
 
 #top003 img {
@@ -532,7 +553,13 @@ text-justify:inter-ideograp;
 	background-color:#f4f8ff;
 	
 	}
+#conreadlie > ul {
+width:100%;
+}
 
+#conreadlie > div,#conreadlie ul {
+
+clear:both;}
 .readlanyou {
 	text-align:right;}
 	

@@ -7,7 +7,7 @@
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
     @Styles.Render("~/Content/magazinecss")
 </head>
-<body ng-app="GyglApp" ng-controller="pageCtrl">
+<body ng-app="GyglApp">
     @RenderSection("hscripts", required: false)
     @Html.Action("PeriodicalTop", "Home")
     @Html.Action("Search", "Magazine")

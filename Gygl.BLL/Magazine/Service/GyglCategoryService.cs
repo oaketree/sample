@@ -24,8 +24,8 @@ namespace Gygl.BLL.Magazine.Service
                 SortID=s.Category.SortID.Value,
                 CategoryID= s.CategoryID.Value,
             });
-            list.OrderBy(o => o.SortID);
-            foreach (var item in list)
+            var sortedList=list.OrderBy(o => o.SortID);
+            foreach (var item in sortedList)
             {
                 cvm.Add(new CatalogViewModel
                 {
@@ -43,9 +43,10 @@ namespace Gygl.BLL.Magazine.Service
             {
                 var list = FindAll(n => n.GyglID == gygl.ID).Select(s=>new {
                     CategoryID=s.CategoryID,
-                    Category=s.Category.Name
+                    Category=s.Category.Name,
+                    SortID=s.Category.SortID
                 });
-                return list;
+                return list.OrderBy(o=>o.SortID);
             }
             else
                 return null;

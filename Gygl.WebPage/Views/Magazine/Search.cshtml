@@ -1,11 +1,11 @@
-﻿<div id="q_top003">
+﻿<div id="q_top003" ng-controller="pageCtrl">
     <div id="m_top003">
         <div id="top003">
             <div><a href="#"><img src="/Content/images/readingdh03.png" width="79" height="28" /></a></div>
             <div><a href="#"><img src="/Content/images/readingdh04.png" width="79" height="26" /></a></div>
             <div>
                 <div class="readsele01">
-                    <select ng-options="a.id as a.value for a in years" ng-model="yearOption" class="readingselect03" ng-change="ySelect()">
+                    <select ng-options="a.id as a.value for a in years" ng-model="search.year" class="readingselect03" ng-change="ySelect()">
                         <option value="">请选择年份</option>
                     </select>
 
@@ -13,20 +13,25 @@
             </div>
             <div>
                 <div class="readsele01">
-                    <select class="readingselect03" ng-options="a.id as a.value for a in periods" ng-model="periodOption" ng-change="pSelect()">
+                    <select class="readingselect03" ng-options="a.id as a.value for a in periods" ng-model="search.period" ng-change="pSelect()">
                         <option value="">请选择期数</option>
                     </select>
                 </div>
             </div>
             <div>
                 <div class="readsele01">
-                    <select class="readingselect03" ng-options="a.CategoryID as a.Category for a in categorys" ng-model="categoryOption">
+                    <select class="readingselect03" ng-options="a.CategoryID as a.Category for a in categorys" ng-model="search.category">
                         <option value="">请选择栏目</option>
                     </select>
                 </div>
             </div>
+            <div>
+                <div class="readsele01">
+                    <input type="text" placeholder="请输入关键字" ng-model="search.key" maxlength="10"/>
+                </div>
+            </div>
             <div class="readingbtn">
-                <a href="javascript:void(0)" ng-click="search()">
+                <a href="javascript:void(0)" ng-click="searchButton()">
                     <i class="icon-repeat"></i>&nbsp;查找
                 </a>
             </div>

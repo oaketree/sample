@@ -1,5 +1,4 @@
-﻿var fac = angular.module("GyglApp.services", []);
-fac.factory('searchService', function () {
+﻿fac.factory('searchService', function () {
     var service = {
         getYear: function () {
             var year = new Date().getFullYear();
@@ -22,43 +21,47 @@ fac.factory('searchService', function () {
                 { id: 6, value: "第六期" }];
             return periods;
         }, getNav: function (data) {
-            var _html = "";
-            if (data.CurrentPage == 1) {
-                _html += "<li class='prev-page'></li>"
+            var _html = '';
+            var cp = parseInt(data.CurrentPage);
+            var tp = parseInt(data.TotalPages);
+            if (cp == 1) {
+                _html += '<li class=\'prev-page\'></li>';
             } else {
-                _html += "<li class='prev-page' ng-click='click(" + data.CurrentPage - 1 + ")'><a href='javascript:void(0)'>上一页</a></li>";
+                var num = cp - 1;
+                _html += '<li class=\'prev-page\' ng-click=\'click(' + num + ')\'><a href=\'javascript:void(0)\'>上一页</a></li>';
             }
             var begin = 0;
             var end = 0;
-            if (data.CurrentPage + 3 < data.TotalPages) {
-                end = data.CurrentPage + 3;
+            if (cp + 3 < tp) {
+                end = cp + 3;
             } else {
-                end = data.TotalPages;
+                end = tp;
             }
-            if (data.CurrentPage - 3 > 1) {
-                begin = data.CurrentPage - 3;
+            if (cp - 3 > 1) {
+                begin =cp - 3;
             } else {
                 begin = 1;
             }
             if (begin > 1) {
-                _html += "<li ng-click='click(1)'><a href='javascript:void(0)'>1</a></li>"
-                _html += "<li><span>...</span></li>";
+                _html += '<li ng-click=\'click(1)\'><a href=\'javascript:void(0)\'>1</a></li>';
+                _html += '<li><span>...</span></li>';
             }
             for (var i = begin; i <= end; i++) {
-                if (i == data.CurrentPage) {
-                    _html += "<li class='active'><span>" + i + "</span></li>";
+                if (i == cp) {
+                    _html += '<li class=\'active\'><span>' + i + '</span></li>';
                 } else {
-                    _html += "<li ng-click='click(" + i + ")'><a href='javascript:void(0)'>" + i + "</a></li>";
+                    _html += '<li ng-click=\'click(' + i + ')\'><a href=\'javascript:void(0)\'>' + i + '</a></li>';
                 }
             }
-            if (end < data.TotalPages) {
-                _html += "<li><span>...</span></li>";
-                _html += "<li ng-click='click(" + data.TotalPages + ")'><a href='javascript:void(0)'>" + data.TotalPages + "</a></li>";
+            if (end < tp) {
+                _html += '<li><span>...</span></li>';
+                _html += '<li ng-click=\'click(' + tp + ')\'><a href=\'javascript:void(0)\'>' +tp + '</a></li>';
             }
-            if (data.CurrentPage == data.TotalPages) {
-                _html += "<li class='next-page'></li>"
+            if (cp == tp) {
+                _html += '<li class=\'next-page\'></li>';
             } else {
-                _html += "<li class='prev-page' ng-click='click(" + data.CurrentPage + 1 + ")'><a href='javascript:void(0)'>下一页</a></li>";
+                var num = cp + 1;
+                _html += '<li class=\'prev-page\' ng-click=\'click(' +num + ')\'><a href=\'javascript:void(0)\'>下一页</a></li>';
             }
             return _html;
         }
@@ -131,12 +134,12 @@ fac.factory('ajaxService', ['$q', '$http', function ($q, $http) {
                 d.reject(data);
             });
             return d.promise;
-        }, getSelectArticle: function (y, p, c, page) {
+        }, getSelectArticle: function (y, p, c,k, page) {
             var d = $q.defer();
             $http({
                 method: 'GET',
                 url: '/Magazine/getSelectArticle',
-                params: { "year": y, "period": p, "category":c,"page": page }
+                params: { "year": y, "period": p, "category":c,"key":k,"page": page }
             }).success(function (data) {
                 d.resolve(data);
             }).error(function (data) {
@@ -157,7 +160,7 @@ fac.factory('navService', function () {
                 else
                     return articlelist[0];
             }, down: function () {
-                if (index = articlelist.length - 1)
+                if (index == articlelist.length - 1)
                     return articlelist[index];
                 else
                     return articlelist[index + 1];
@@ -166,16 +169,28 @@ fac.factory('navService', function () {
         return service;
     }
     var service = {
-        getNavIndex: function (data, index) {
-            var articlelist = [];
-            articlelist = eval(data);
-            return getIndex(articlelist, index);
-        }, getNavAid: function (data, aid) {
-            var articlelist = [];
-            articlelist = eval(data);
-            var p = articlelist.indexOf(aid);
-            return getIndex(articlelist, p)
+        init: function (data, index) {
+            var o = {};
+            var d = eval(data);
+            o.getNavIndex = function () {
+                return getIndex(d, index);
+            };
+            o.getNavAid = function () {
+                var p = d.indexOf(index);
+                return getIndex(d, p)
+            }
+            return o;
         }
+        //, getNavIndex: function (data, index) {
+        //    var articlelist = [];
+        //    articlelist = eval(data);
+        //    return getIndex(articlelist, index);
+        //}, getNavAid: function (data, aid) {
+        //    var articlelist = [];
+        //    articlelist = eval(data);
+        //    var p = articlelist.indexOf(aid);
+        //    return getIndex(articlelist, p)
+        //}
     }
     return service;
 })
