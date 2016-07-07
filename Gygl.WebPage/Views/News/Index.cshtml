@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "新闻";
+}
+@section Css{
+    @Styles.Render("~/Content/staticss")
+}
+@section hscripts{
+    @Scripts.Render("~/bundles/angular")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/news")
+}
+
+@section Header{
+    @Html.Action("Header", "Home")
+}
+<div ng-view></div>

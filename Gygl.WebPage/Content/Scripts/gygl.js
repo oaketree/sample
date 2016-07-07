@@ -53,4 +53,8 @@ $(function () {
     $.loginCheck();
     $.loginout();
     $.startHeartBeat();
+    //打印
+    $("#zzdybutton").click(function () {
+        $.print("#print");
+    })
 })

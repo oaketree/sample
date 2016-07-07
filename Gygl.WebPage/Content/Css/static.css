@@ -1,0 +1,141 @@
+#staticmain>div {
+	float:left;
+
+	}
+
+#staticmain02>div {
+	clear:both;
+
+
+	}
+
+.staticjs {
+	width:470px;
+	padding-left:30px;
+	text-align:justify;
+	}
+	
+	
+.blank30 {
+	height:30px;
+	clear:both;}
+	
+.readlanmulieline {
+	clear:both;
+	height:1px;
+	background-color:#d0d9eb;}
+	
+	
+	
+.readlanyou {
+	text-align:right;}
+
+.staticjs02 {
+	width:400px;
+	padding-left:30px;
+	text-align:justify;
+	}
+	
+	
+.statictit {
+	color:#4482b2;
+	font-weight:bold;
+
+	font-size:22px;
+	text-align:center;
+
+	padding-bottom:20px;
+
+
+	
+	}
+	
+.statictit_fu {
+	font-size:16px!important;
+	color:#5f1f00;}
+	
+	
+	
+.staticlie {
+	color:#b83800;}	
+	
+	
+	
+	
+.staticfont07{
+	font-weight:bold;
+	font-size:18px;}
+	
+.staticfont07_01{
+	color:#999;
+
+	font-size:12px;
+	text-align:center;
+	width:100%;
+	}
+	
+	
+.staticfont07_02{
+	font-weight:bold;
+	font-size:14px;
+	text-align:center;
+	width:100%;}
+	
+	
+.staticadvertisement>div {
+	width:48%;
+	padding-right:5px;
+	float:left;
+	font-size:12px;
+	font-weight:bold;
+}
+	
+.zznewpic {
+	width:100%;
+	text-align:center;
+	padding:30px 0;}	
+	
+	
+
+#zzdg {
+	width:100%;}
+
+
+
+	
+
+#zzdybutton a {
+	
+	font-size:12px;
+	font-weight:bold;
+	
+	
+	}
+
+
+#zzdybutton {
+	padding-left:60px;
+	
+
+	
+	
+	}
+
+#zzdybutton>div {
+	float:left;
+	height:25px;
+	
+line-height:25px;
+	
+	}
+
+
+#zzdybuttoncenter {
+	text-align:center;
+	background-image:url(/Content/images/ma_24.gif);
+	background-repeat:repeat-x;
+	width:80px;}
+	
+#zzdg >div {
+	float:left;
+	width:50%;}

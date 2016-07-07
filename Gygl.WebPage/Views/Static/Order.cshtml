@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Title = "订购";
+}
+@section Css{
+    @Styles.Render("~/Content/staticss")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/static")
+}
+@section Header{
+    @Html.Action("Header", "Home")
+}
+<div id="q_top05">
+    <div id="m_top05">
+        <div id="top05">
+            <div class="center_zhuti"></div>
+            <div>
+                <div class="statictit">《工业锅炉》杂志订购</div>
+            </div>
+            <div class="bgcolor01">
+                <div class="bgcolor0202"></div>
+            </div>
+            <div class="topbank20"></div>
+            <div id="staticmain">
+                <div class="staticfont07_02">
+                    国内统一刊号：CN31-1400/TK&nbsp; &nbsp; 国际标准连续出版物号：ISSN1004-8774&nbsp; &nbsp; 邮发代号：4-586<br />
+                </div><br /><br />
+                <p>
+                    《工业锅炉》杂志是经原国家科委批准，由上海工业锅炉研究所主办的以介绍工业锅炉行业新技术、新经验为主的综合性技术刊物。《工业锅炉》为双月刊、大16开彩色印刷，国内外公开发行。报道内容包括有关锅炉的设计、制造、工艺、标准、辅机、环保技术、水处理、节能改造、运行管理、事故分析、司炉工园地、行业动态等，选稿注重创新性和实用性。本刊系中国科技论文统计源期刊（中国科技核心期刊），中国科学引文数据库来源期刊，入选中国学术期刊（光盘版），并获全国能源刊物优秀期刊奖。
+                </p>
+                <p>
+                    <br />
+                    <span class="staticfont07">读者对象：</span>包括从事锅炉及辅机教学、研究、设计、制造、检验、系统设计安装的科技人员、相关专业大专院校师生以及锅炉运行管理、节能环保监测人员和锅炉操作人员等。
+                </p>
+                <p>
+                    <br />
+                    <span class="staticfont07">主要栏目：</span>
+                    研究与开发、供热工程、环保技术、辅机技术、水处理技术、节能改造、运行管理、产品介绍、事故分析、行业信息等。
+                </p>
+                <p>
+                    <br />
+                    <span class="staticfont07">国内订阅：</span>
+                    全国各地邮局均可订阅 邮发代号：4-586  15元/册，全年6期共90元。<br />
+                    漏订者可到编辑部补订，邮购价（含挂号费）18元/册，全年6期共108元。
+                </p>
+                <p>
+                    <br />
+                    <span class="staticfont07">国外订阅：</span>
+                    中国国际图书贸易总公司（北京399信箱） 发行代号：BM1736
+                </p>
+                <br />
+                <span class="staticfont07">《工业锅炉》热忱欢迎广大读者订阅，欢迎国内外广大锅炉及辅机行业企业及相关单位刊登各类广告。</span>
+                <br /> <br />
+                <div id="zzdg">
+                    <div>
+                        编辑部地址：上海市宝昌路297号 （200071）<br />
+                        传真：021- 51803255<br />
+                        户名：上海工业锅炉研究所<br />
+                        开户银行：工行上海市天目东路支行<br />
+                    </div>
+                    <div>
+                        电话：021- 51020808-5103、5115<br />
+                        E-mail:shgygl@126.com<br />
+                        联系人: 周苇，顾春辉<br />
+                        银行帐号：1001215509300553939<br />
+                    </div>
+                </div>
+                <div style="width:100%;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="print">
+                        <tr>
+                            <td height="40" colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td width="72%" align="right" class="font07"><u>&nbsp; &nbsp; &nbsp; </u>年度《工业锅炉》（双月刊）订单回执</td>
+                            <td align="right">
+                                <div id="zzdybutton">
+                                    <div><img src="/Content/images/ma_22.gif" width="10" height="25" /></div>
+                                    <div id="zzdybuttoncenter"><a href="javascript:void(0)">打&nbsp; 印</a></div>
+                                    <div><img src="/Content/images/ma_23.gif" width="12" height="25" /></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#333333">
+                                    <tr>
+                                        <td width="10%" height="25" align="center" bgcolor="#FFF">订阅单位</td>
+                                        <td width="50%" bgcolor="#FFF">&nbsp;</td>
+                                        <td width="10%" align="center" bgcolor="#FFF">收件人</td>
+                                        <td bgcolor="#FFF">&nbsp;</td>
+                                        <td width="10%" align="center" bgcolor="#FFF">邮编</td>
+                                        <td bgcolor="#FFF">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td height="25" align="center" bgcolor="#FFF">收件地址</td>
+                                        <td bgcolor="#FFF">&nbsp;</td>
+                                        <td align="center" bgcolor="#FFF">电话</td>
+                                        <td colspan="3" bgcolor="#FFF">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td height="25" align="center" bgcolor="#FFF">订阅份数</td>
+                                        <td bgcolor="#FFF">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td width="20%" align="right"><u>&nbsp; &nbsp; </u></td>
+                                                    <td>份&nbsp; （108元/份含挂号费）</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td align="center" bgcolor="#FFF">总计</td>
+                                        <td colspan="3" bgcolor="#FFF">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td width="50%">&nbsp;</td>
+                                                    <td>元</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="25" align="center" bgcolor="#FFF">汇款情况</td>
+                                        <td colspan="5" bgcolor="#FFF">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td>&nbsp;<u>&nbsp; </u>月<u>&nbsp; </u>日</td>
+                                                    <td>已从 <u>银行 / 邮局</u> （请用√表示）汇出</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="25" align="center" bgcolor="#FFF">是否开票</td>
+                                        <td colspan="5" bgcolor="#FFF">&nbsp;<u>&nbsp; &nbsp; </u> 单位名称请写全，如需开票，未注明抬头，则将订阅单位视为抬头</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="40" colspan="2"><p><strong>注：汇款后请将回执传真至本刊编辑部</strong></p></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="topbank20"></div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+

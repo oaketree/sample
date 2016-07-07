@@ -36,8 +36,6 @@ namespace Gygl.WebPage.Controllers
         {
             return PartialView();
         }
-
-
         public PartialViewResult Periodical(int id)
         {
             var ret = GyglService.getPeriodicalById(id);
@@ -75,9 +73,9 @@ namespace Gygl.WebPage.Controllers
         /// <param name="category"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public JsonResult getSelectArticle(int? year, int? period, int? category,string key, int page)
+        public JsonResult getSelectArticle(int? year, int? period, int? category, string key, int page)
         {
-            return Json(ArticleService.getArticleByCategory(year, period, category, key,20, page), JsonRequestBehavior.AllowGet);
+            return Json(ArticleService.getArticleByCategory(year, period, category, key, 20, page), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -88,7 +86,7 @@ namespace Gygl.WebPage.Controllers
                 return PartialView("GetPeriod", ret);
             return null;
         }
-    
+
 
 
         /// <summary>
@@ -115,12 +113,12 @@ namespace Gygl.WebPage.Controllers
 
         public ActionResult GetPages(int aid)
         {
-            return Json(ImageService.getArticlePages(aid),JsonRequestBehavior.AllowGet);
+            return Json(ImageService.getArticlePages(aid), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetArticleList(int pid)
         {
-            return Json(ArticleService.getArticleList(pid),JsonRequestBehavior.AllowGet);
+            return Json(ArticleService.getArticleList(pid), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetFirstPages(int pid)
@@ -130,12 +128,17 @@ namespace Gygl.WebPage.Controllers
 
         public ActionResult GetCategoryList(int y, int p)
         {
-            return Json(GyglCategoryService.getSearchCatalog(y,p),JsonRequestBehavior.AllowGet);
+            return Json(GyglCategoryService.getSearchCatalog(y, p), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetDefaultCategoryList()
         {
-            return Json(CategoryService.getCategoryList(),JsonRequestBehavior.AllowGet);
+            return Json(CategoryService.getCategoryList(), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCurrentPeriod()
+        {
+            return Json(GyglService.getCurrentPeriod(),JsonRequestBehavior.AllowGet);
         }
 
         public PartialViewResult Search()

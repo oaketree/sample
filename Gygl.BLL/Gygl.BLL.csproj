@@ -84,6 +84,10 @@
     <Compile Include="Magazine\ViewModels\GyglViewModel.cs" />
     <Compile Include="Magazine\ViewModels\PageArticleViewModel.cs" />
     <Compile Include="Magazine\ViewModels\PageGyglViewModel.cs" />
+    <Compile Include="News\Service\INewsService.cs" />
+    <Compile Include="News\Service\NewsService.cs" />
+    <Compile Include="News\ViewModels\NewsViewModel.cs" />
+    <Compile Include="News\ViewModels\PageNewsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\Manage\IRoleAuthoriseManage.cs" />
     <Compile Include="Register\Manage\IUserDetailManage.cs" />

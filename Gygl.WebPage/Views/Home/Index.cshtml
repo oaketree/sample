@@ -1,7 +1,169 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "首页";
 }
-
-<h2>Index</h2>
-
+@section Css{
+    @Styles.Render("~/Content/homecss")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/home")
+}
+@section hscripts{
+    @Scripts.Render("~/bundles/angular")
+}
+@section Header{
+    @Html.Action("Header", "Home")
+}
+<div id="q_top05">
+    <div id="q_top05_02">
+        <div id="m_top05">
+            <div id="top05_title">
+                <img src="/Content/images/magazine01.png" width="156" height="78" />
+            </div>
+            <div id="top05_news" ng-controller="news">
+                <ul>
+                    <li ng-repeat="n in nl">
+                        <a ng-href="/News#/ReadNews/{{n.ID}}">{{n.Title}}</a>&nbsp;<span class="sj">{{n.RegDate|jsonDate:'yyyy-MM-dd'}}</span>
+                    </li>
+                </ul>
+                <div class="top05_newsmore"><a ng-href="/News#/NewsList/1">more...</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="q_top06">
+    <div id="q_top06_02">
+        <div id="m_top06">
+            <div class="tcenter ttitle"><img src="/Content/images/magazine02.png" width="145" height="37" /></div>
+            @*<div id="magazine_search">
+                <div><input type="search" value="请输入文章名" class="searchbox" onfocus="this.value=''" onblur="if(this.value==''){this.value='请输入文章名'}"></div>
+                <div>
+                    <select class="searchbox02">
+                        <option>年份选择</option>
+                        <option>2010年</option>
+                        <option>2011年</option>
+                    </select>
+                </div>
+                <div>
+                    <select class="searchbox02">
+                        <option>期数选择</option>
+                        <option>第1期</option>
+                        <option>第2期</option>
+                        <option>第3期</option>
+                        <option>第4期</option>
+                        <option>第5期</option>
+                        <option>第6期</option>
+                    </select>
+                </div>
+                <div><img src="/Content/images/magazinebutton01.gif" width="68" height="34" /></div>
+            </div>*@
+            <div class="shengming01"><img src="/Content/images/magazine03.png" width="342" height="33" /></div>
+            <div ng-controller="current">
+                <div class="newstitle02">{{cp.Year}}年第&nbsp;<span class="qishufont">{{cp.Period}}</span>&nbsp;期</div>
+                <div id="newsabc">
+                    <ul>
+                        <li ng-repeat="title in cp.Title">
+                        <span class="qishuliepretit">[{{title.Category}}]</span>&nbsp;<a href="/Magazine/#/Periodical/{{title.GyglID}}/{{title.Url}}">{{title.Title|limitTo:20}}...{{title.Author|limitTo:11}}</a>
+                        </li>
+                    </ul>
+                    <div class="magazinebutton02"><a href="/Magazine/#/GetPeriod/{{cp.ID}}"><img src="/Content/images/magazinebutton02.gif" width="120" height="42" /></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="q_top07">
+    <div id="m_top07">
+        <div class="bottomblank35">
+            <p>
+                《工业锅炉》杂志是经原国家科委批准，由上海工业锅炉研究所主办的以介绍(工业)锅炉行业新技术、新经验为主的综合性技术刊物。《工业锅炉》为双月刊、大16开彩色印刷，国内外公开发行。
+                报道内容包括有关锅炉的设计、制造、工艺、标准、辅机、环保技术、水处理、节能改造、运行管理、事故分析、司炉工园地、行业动态等，选稿注重创新性和实用性。本刊系中国科技论文统计源期刊（中国科技核心期刊），中国科学引文数据库来源期刊，入选中国学术期刊（光盘版），并获全国能
+                源刊物优秀期刊奖。
+            </p>
+        </div>
+        <div id="magazinejies">
+            <div><img src="/Content/images/lie01.gif" width="75" height="167" /></div>
+            <div><img src="/Content/images/lie02.gif" width="75" height="167" /></div>
+            <div><img src="/Content/images/lie03.gif" width="75" height="167" /></div>
+            <div><img src="/Content/images/lie04.gif" width="75" height="167" /></div>
+            <div><img src="/Content/images/lie05.gif" width="75" height="167" /></div>
+            <div><img src="/Content/images/lie06.gif" width="75" height="167" /></div>
+            <div><img src="/Content/images/lie07.gif" width="75" height="167" /></div>
+            <div><img src="/Content/images/lie08.gif" width="75" height="167" /></div>
+        </div>
+        <div id="magazinedg">
+            <div class="magazinedglefgblank"><a href="@Url.Action("Order","Static")" target="_blank"><img src="/Content/images/magazinebutton03.gif" width="120" height="41" /></a></div>
+            <div><img src="/Content/images/magazine02.gif" width="130" height="41" /></div>
+        </div>
+    </div>
+</div>
+<div id="q_top07_bottom">
+    <div id="q_top07_02_bottom">
+    </div>
+</div>
+<div id="q_top08">
+</div>
+<div id="q_top09">
+    <div id="m_top09">
+        <div class="textaligncenter"><img src="/Content/images/magazinezhengaotit.gif" width="131" height="34" /></div>
+        <div id="shengaosan">
+            <div>
+                <div><img src="/Content/images/shengao01_1.gif" width="147" height="147" /></div>
+                <div><img src="/Content/images/magazineonline.gif" width="80" height="23" /></div>
+            </div>
+            <div>
+                <div><img src="/Content/images/shengao02_1.gif" width="147" height="147" /></div>
+                <div><img src="/Content/images/magazinecha.gif" width="119" height="23" /></div>
+            </div>
+            <div>
+                <div><img src="/Content/images/shengao03_1.gif" width="147" height="147" /></div>
+                <div><img src="/Content/images/magazinezhengaolu.gif" width="119" height="23" /></div>
+            </div>
+        </div>
+        <div><img src="/Content/images/magazine05.png" width="361" height="75" /></div>
+        <div class="textalignright"><img src="/Content/images/magazine06.png" width="268" height="45" /></div>
+    </div>
+</div>
+<div id="q_top10">
+    <div id="q_top10_02">
+    </div>
+</div>
+<div id="q_top11">
+    <div id="q_top11_02">
+        <div id="m_top011">
+            <div>
+                <div>
+                    <div><img src="/Content/images/magazine07.gif" width="134" height="377" /></div>
+                    <div>
+                        2008年迁址<br />
+                        上海宝昌路297号
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        《工业锅炉》<br />
+                        优秀论文评选活动
+                    </div>
+                    <div><img src="/Content/images/magazine08.gif" width="134" height="377" /></div>
+                </div>
+                <div>
+                    <div><img src="/Content/images/magazine09.gif" width="134" height="377" /></div>
+                    <div>
+                        《工业锅炉》杂志<br />
+                        1985年创刊
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        《工业杂志》<br />
+                        广告&理事单位
+                    </div>
+                    <div><img src="/Content/images/magazine10.gif" width="134" height="377" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="q_top12">
+    <div id="q_top12_02">
+    </div>
+</div>

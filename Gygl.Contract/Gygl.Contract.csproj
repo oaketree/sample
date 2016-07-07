@@ -55,6 +55,8 @@
     <Compile Include="Magazine\GyglCategory.cs" />
     <Compile Include="Magazine\Image.cs" />
     <Compile Include="Magazine\WebDBContext.cs" />
+    <Compile Include="News\New.cs" />
+    <Compile Include="News\WebDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register\Authorise.cs" />
     <Compile Include="Register\Role.cs" />

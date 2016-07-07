@@ -1,0 +1,27 @@
+﻿<div id="q_top05">
+    <div id="m_top05">
+        <div id="top05">
+            <div class="center_zhuti"></div>
+            <div>
+                <div class="statictit">最新动态</div>
+            </div>
+            <div class="bgcolor01">
+                <div class="bgcolor0202"></div>
+            </div>
+            <div class="topbank20"></div>
+            <div id="staticmain02">
+                <div ng-repeat="new in news">
+                    <a ng-href="#/ReadNews/{{new.ID}}"> {{new.Title}}</a>&nbsp; <span class="staticfont07_01">[{{new.RegDate|jsonDate:'yyyy-MM-dd'}}发布]</span>
+                </div>
+            </div>
+            <div class="blank30"></div>
+            <div class="readlanmulieline"></div>
+            <div class="pagination">
+                <ul id="pagingdata"></ul>
+            </div>
+            <div class="topbank20"></div>
+        </div>
+    </div>
+</div>
+
+

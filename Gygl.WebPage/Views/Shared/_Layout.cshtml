@@ -7,8 +7,9 @@
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
     @RenderSection("Css", required: false)
 </head>
-<body>
+<body ng-app="GyglApp">
     @Html.Action("Top", "Home")
+    @Html.Action("Top2", "Home")
     @RenderSection("Header",required:false)
     @RenderSection("hscripts", required: false)
     @RenderBody()

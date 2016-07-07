@@ -1,0 +1,21 @@
+﻿<div id="q_top05">
+    <div id="m_top05">
+        <div id="top05">
+            <div class="center_zhuti"></div>
+            <div>
+                <div class="statictit">{{news.Title}}</div>
+            </div>
+            <div class="bgcolor01">
+                <div class="bgcolor0202"></div>
+            </div>
+            <div class="topbank20"></div>
+            <div id="staticmain">
+                <div class="staticfont07_01">[{{news.RegDate|jsonDate:'yyyy-MM-dd'}}发布]</div><br />
+                <br />
+                <article ng-bind-html="news.Content|trustHtml"></article>
+            </div>
+        </div>
+        <div class="topbank20"></div>
+    </div>
+</div>
+<div style="clear:both;"></div>

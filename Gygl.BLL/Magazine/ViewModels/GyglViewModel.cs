@@ -16,4 +16,13 @@ namespace Gygl.BLL.Magazine.ViewModels
         public int Up { get; set; }
         public int Down { get; set; }
     }
+
+    public class GyglTitleViewModel {
+        public int ID { get; set; }
+        public int Year { get; set; }
+        public int Period { get; set; }
+
+        public IEnumerable<TilteViewModel> Title { get; set; }
+    }
+
 }

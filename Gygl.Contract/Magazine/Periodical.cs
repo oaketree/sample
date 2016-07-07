@@ -27,5 +27,6 @@ namespace Gygl.Contract.Magazine
         public string CoverImage { get; set; }
 
         public virtual ICollection<GyglCategory> Category { get; set; }
+        public virtual ICollection<Article> Article { get; set; }
     }
 }

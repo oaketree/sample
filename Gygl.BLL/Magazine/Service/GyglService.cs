@@ -129,5 +129,25 @@ namespace Gygl.BLL.Magazine.Service
             else
                 return null;
         }
+
+
+        public GyglTitleViewModel getCurrentPeriod()
+        {
+            var period = QueryEntity(null, o => o.RegDate, false).FirstOrDefault();
+            var gtvm = new GyglTitleViewModel
+            {
+                ID = period.ID,
+                Year = period.Year.Value,
+                Period = period.Period.Value,
+                Title = period.Article.OrderBy(o=>o.ID).Take(10).Select(s => new TilteViewModel {
+                    Category = s.Category.Name,
+                    Author=s.Author,
+                    Title=s.Title,
+                    Url=s.ID.ToString(),
+                    GyglID=s.GyglID.Value
+                })
+            };
+            return gtvm;
+        }
     }
 }

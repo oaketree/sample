@@ -7,13 +7,13 @@ namespace Gygl.BLL.Magazine.ViewModels
         public string Category { get; set; }
         public int CategoryID { get; set; }
         public List<TilteViewModel> Title { get; set; }
-        //public int SortID { get; set; }
     }
 
     public class TilteViewModel
     {
         public int Year { get; set; }
         public int Period { get; set; }
+        public string Category { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }
         public string Author { get; set; }

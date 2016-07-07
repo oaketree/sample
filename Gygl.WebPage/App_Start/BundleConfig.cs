@@ -37,10 +37,39 @@ namespace Gygl.WebPage
                         "~/Content/Scripts/gygl.js"
                         ));
 
-            //bundles.Add(new ScriptBundle("~/bundles/catalog").Include(
-            //            "~/Content/Scripts/jquery-ui.min.js",
-            //            "~/Content/Scripts/jquery.simplesidebar.js"));
+            bundles.Add(new ScriptBundle("~/bundles/home").Include(
+                  "~/Content/Scripts/Home/app.js",
+                "~/Content/Scripts/Home/services.js",
+                "~/Content/Scripts/Home/controllers.js",
+                "~/Content/Scripts/Home/filter.js",
+                        "~/Content/Scripts/common.js",
+                        "~/Content/Scripts/gygl.js"
+                        ));
 
+            bundles.Add(new ScriptBundle("~/bundles/news").Include(
+                  "~/Content/Scripts/News/app.js",
+                "~/Content/Scripts/News/services.js",
+                "~/Content/Scripts/News/routers.js",
+                "~/Content/Scripts/News/controllers.js",
+                "~/Content/Scripts/News/filter.js",
+                        "~/Content/Scripts/common.js",
+                        "~/Content/Scripts/gygl.js"
+                        ));
+
+            bundles.Add(new ScriptBundle("~/bundles/static").Include(
+                "~/Content/Scripts/jquery.print.js",
+                        "~/Content/Scripts/common.js",
+                        "~/Content/Scripts/gygl.js"));
+
+
+            bundles.Add(new StyleBundle("~/Content/homecss").Include(
+                     "~/Content/Css/magazine.css"));
+
+            bundles.Add(new StyleBundle("~/Content/staticss").Include(
+                "~/Content/Css/gygl.css",
+                     "~/Content/Css/magazinenei.css",
+                      "~/Content/Css/magazineneire.css",
+                      "~/Content/Css/static.css"));
 
 
             bundles.Add(new StyleBundle("~/Content/registercss").Include(

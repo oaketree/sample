@@ -16,7 +16,6 @@ namespace Core.DAL
            (Expression<Func<T, bool>> conditions,
             Expression<Func<T, TOrderBy>> orderby,
             bool IsAsc);
-        IQueryable<T> FindList(IQueryable<T> queryEntity, int take);
         IEnumerable<T> QueryBySql(string sql, SqlParameter[] para);
         IQueryable<T> FindByPage(IQueryable<T> queryEntity, int PageSize, int page);
         void Update(T entity);

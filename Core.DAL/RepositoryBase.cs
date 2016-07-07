@@ -61,11 +61,6 @@ namespace Core.DAL
             return query.AsNoTracking();
         }
 
-        public virtual IQueryable<T1> FindList(IQueryable<T1> queryEntity,int take)
-        {
-            return queryEntity.Take(take);
-        }
-
         public virtual IEnumerable<T1> QueryBySql(string sql,SqlParameter[] para)
         {
             return dbContext.Database.SqlQuery<T1>(sql, para);

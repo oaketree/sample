@@ -7,7 +7,7 @@
                 <div class="mingyuzhubian01 readlanmulie" id="conreadlie">
                         <ul ng-repeat="article in articles">
                             <li class="readlan">{{article.Year}}年第{{article.Period}}期</li>
-                            <li class="readlantit"><a href="#/Periodical/{{article.GyglID}}/{{article.Url}}" title="{{article.Title}}">{{article.Title|limitTo : 27}}</a></li>
+                            <li class="readlantit"><a ng-href="#/Periodical/{{article.GyglID}}/{{article.Url}}" title="{{article.Category}}:{{article.Title}}">{{article.Title|limitTo : 27}}</a></li>
                             <li class="readlanzz">{{article.Author|limitTo : 10}}</li>
                         </ul>
                      <div class="blank30"></div>

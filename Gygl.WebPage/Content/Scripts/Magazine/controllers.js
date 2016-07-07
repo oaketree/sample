@@ -103,6 +103,12 @@ app.controller("yearCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchServ
     var y = $routeParams.year;
     var p = $routeParams.period;
     var page = $routeParams.page;
+
+    if (y == null && p == null&&page==null) {
+        y = new Date().getFullYear();
+        page = 1;
+    }
+
     ajaxService.getSelectYear(y, p, page).then(function (data) {
         $scope.periods = data.Entity;
         var ele = $compile(searchService.getNav(data))($scope)
@@ -113,7 +119,7 @@ app.controller("yearCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchServ
         ajaxService.getSelectYear(y, p, page).then(function (data) {
             $scope.periods = data.Entity;
             var ele = $compile(searchService.getNav(data))($scope)
-            angular.element(document.getElementById('pagingdata')).append(ele);
+            angular.element(document.getElementById('pagingdata')).empty().append(ele);
             //$scope.nav = $sce.trustAsHtml(searchService.getNav(data));
         })
     }

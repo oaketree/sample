@@ -138,7 +138,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MagazineController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -154,6 +156,7 @@
     <Content Include="Content\Css\magazineneire.css" />
     <Content Include="Content\Css\magazinereading.css" />
     <Content Include="Content\Css\main_temp.css" />
+    <Content Include="Content\Css\static.css" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Images\bg01.gif" />
     <Content Include="Content\Images\buttonhong.gif" />
@@ -253,6 +256,9 @@
     <Content Include="Content\Images\magazine_top03.gif" />
     <Content Include="Content\Images\magazine_top04.gif" />
     <Content Include="Content\Images\magazine_top05.gif" />
+    <Content Include="Content\Images\ma_22.gif" />
+    <Content Include="Content\Images\ma_23.gif" />
+    <Content Include="Content\Images\ma_24.gif" />
     <Content Include="Content\Images\NO60303_页面_041.jpg" />
     <Content Include="Content\Images\NO60303_页面_042.jpg" />
     <Content Include="Content\Images\NO60303_页面_043.jpg" />
@@ -312,11 +318,21 @@
     <Content Include="Content\Scripts\bootstrap.min.js" />
     <Content Include="Content\Scripts\common.js" />
     <Content Include="Content\Scripts\gygl.js" />
+    <Content Include="Content\Scripts\Home\app.js" />
+    <Content Include="Content\Scripts\Home\controllers.js" />
+    <Content Include="Content\Scripts\Home\filter.js" />
+    <Content Include="Content\Scripts\Home\services.js" />
+    <Content Include="Content\Scripts\jquery.print.js" />
     <Content Include="Content\Scripts\Magazine\app.js" />
     <Content Include="Content\Scripts\Magazine\controllers.js" />
     <Content Include="Content\Scripts\Magazine\directives.js" />
     <Content Include="Content\Scripts\Magazine\routers.js" />
     <Content Include="Content\Scripts\Magazine\services.js" />
+    <Content Include="Content\Scripts\News\app.js" />
+    <Content Include="Content\Scripts\News\controllers.js" />
+    <Content Include="Content\Scripts\News\filter.js" />
+    <Content Include="Content\Scripts\News\routers.js" />
+    <Content Include="Content\Scripts\News\services.js" />
     <Content Include="Content\Scripts\Register\gygl.reg.js" />
     <Content Include="Content\Scripts\jquery-1.10.2.js" />
     <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
@@ -358,7 +374,6 @@
     <Content Include="Views\Register\ChangePasswordSuccess.cshtml" />
     <Content Include="Views\Register\LoginJump.cshtml" />
     <Content Include="Views\Magazine\Periodical.cshtml" />
-    <Content Include="Views\Home\PeriodicalTop.cshtml" />
     <Content Include="Views\Magazine\Catalog.cshtml" />
     <Content Include="Views\Magazine\Search.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
@@ -368,11 +383,25 @@
     <Content Include="Views\Magazine\GetPeriod.cshtml" />
     <Content Include="Views\Magazine\GetPeriod2.cshtml" />
     <Content Include="Views\Magazine\SelectArticle.cshtml" />
+    <Content Include="Views\Home\Top2.cshtml" />
+    <Content Include="Views\Home\Top3.cshtml" />
+    <Content Include="Views\Home\TopShare.cshtml" />
+    <Content Include="Views\Static\Order.cshtml" />
+    <Content Include="Views\Static\Introduction.cshtml" />
+    <Content Include="Views\Static\Faq.cshtml" />
+    <Content Include="Views\Static\Contact.cshtml" />
+    <Content Include="Views\Static\Notice.cshtml" />
+    <Content Include="Views\Static\Advertisement.cshtml" />
+    <Content Include="Views\Static\EssayNotice.cshtml" />
+    <Content Include="Views\News\NewsList.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\ReadNews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Scripts\Home\" />
     <Folder Include="Content\Upload\Magazine\Page\" />
+    <Folder Include="Content\Upload\News\Files\" />
+    <Folder Include="Content\Upload\News\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

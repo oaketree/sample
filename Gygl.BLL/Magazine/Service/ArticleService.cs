@@ -77,6 +77,7 @@ namespace Gygl.BLL.Magazine.Service
                     Title = s.Title,
                     Url = s.ID.ToString(),
                     Author = s.Author,
+                    Category=s.Category.Name,
                     Year = s.Gygl.Year.Value,
                     Period = s.Gygl.Period.Value,
                     GyglID = s.GyglID.Value
@@ -90,6 +91,7 @@ namespace Gygl.BLL.Magazine.Service
             else
                 return null;
         }
+        
 
     }
 }
