@@ -126,10 +126,10 @@ namespace Core.DAL
             return QueryEntity.Skip((page - 1) * PageSize).Take(PageSize);
         }
 
-        public virtual Task<IQueryable<T1>> FindByPageAsync(IQueryable<T1> QueryEntity, int PageSize, int page)
+        public virtual Task<IQueryable<S>> FindByPageAsync<S>(IQueryable<T1> FindAll, int PageSize, int page, Expression<Func<T1, S>> select)
         {
             return Task.Run(()=> {
-                return QueryEntity.Skip((page - 1) * PageSize).Take(PageSize);
+                return FindAll.Skip((page - 1) * PageSize).Take(PageSize).Select(select);
             });
         }
 

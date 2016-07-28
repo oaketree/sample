@@ -27,7 +27,7 @@ namespace Core.DAL
             bool IsAsc);
         IEnumerable<T> QueryBySql(string sql, SqlParameter[] para);
         IQueryable<T> FindByPage(IQueryable<T> queryEntity, int PageSize, int page);
-        Task<IQueryable<T>> FindByPageAsync(IQueryable<T> QueryEntity, int PageSize, int page);
+        Task<IQueryable<S>> FindByPageAsync<S>(IQueryable<T> FindAll, int PageSize, int page, Expression<Func<T, S>> select);
         void Update(T entity);
         void Update();
         Task UpdateAsync(T entity);

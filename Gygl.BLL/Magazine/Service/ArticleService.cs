@@ -21,38 +21,39 @@ namespace Gygl.BLL.Magazine.Service
         [Dependency]
         public IImageService ImageService { get; set; }
 
-        public async Task<List<TilteViewModel>> getTitle(int gyglid,int categoryid)
+        //分布视图不支持异步
+        public List<TilteViewModel> getTitle(int gyglid,int categoryid)
         {
-            //var li = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid).Select(s=>new TilteViewModel
-            //{
-            //    Title=s.Title,
-            //    Url=s.ID.ToString()
-            //});
-            var fa = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid);
-            var li = await FindAllAsync(fa, s => new TilteViewModel{
+            var li = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid).Select(s => new TilteViewModel
+            {
                 Title = s.Title,
                 Url = s.ID.ToString()
             });
+            //var fa = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid);
+            //var li = await FindAllAsync(fa, s => new TilteViewModel{
+            //    Title = s.Title,
+            //    Url = s.ID.ToString()
+            //});
             return li.ToList();
         }
         public async Task<List<int>> getArticleList(int gyglId)
         {
-            //var li = FindAll(n => n.GyglID == gyglId).OrderBy(o => o.Category.SortID).ThenBy(t=>t.ID).Select(s => s.ID);
-            //return li.ToList();
             var fa = FindAll(n => n.GyglID == gyglId).OrderBy(o => o.Category.SortID).ThenBy(t => t.ID);
             var li = await FindAllAsync(fa, s => s.ID);
             return li.ToList();
         }
 
 
-        public PageArticleViewModel getArticleByCategory(int? year, int? period, int? category,string key, int pageSize, int page)
+        public async Task<PageArticleViewModel> getArticleByCategory(int? year, int? period, int? category,string key, int pageSize, int page)
         {
             bool p = false;
             IQueryable<Article> qe = null;
             PageArticleViewModel pif = new PageArticleViewModel();
             Expression<Func<Article, bool>> express = PredicateExtensions.True<Article>();
             if (category != null) {
-                pif.Category = CategoryService.Get(g => g.ID == category).Name;
+                var categoryid=await CategoryService.GetAsync(g => g.ID == category);
+                var name = categoryid.Name;
+                pif.Category = name;
                 express = express.And(n => n.CategoryID == category);
                 p = true;
             }
@@ -77,23 +78,23 @@ namespace Gygl.BLL.Magazine.Service
             else {
                 qe = QueryEntity(express, o => o.RegDate, false);
             }
-
-            if (qe != null)
+            var c = qe.Count();
+            if (c!=0)
             {
-                var fbp = FindByPage(qe, pageSize, page).Select(s => new TilteViewModel
+                var fbp = FindByPageAsync(qe, pageSize, page, s => new TilteViewModel
                 {
                     Title = s.Title,
                     Url = s.ID.ToString(),
                     Author = s.Author,
-                    Category=s.Category.Name,
+                    Category = s.Category.Name,
                     Year = s.Gygl.Year.Value,
                     Period = s.Gygl.Period.Value,
                     GyglID = s.GyglID.Value
                 });
-                pif.TotalItems = qe.Count();
+                pif.TotalItems = c;
                 pif.CurrentPage = page;
                 pif.ItemPerPage = pageSize;
-                pif.Entity = fbp;
+                pif.Entity = await fbp;
                 return pif;
             }
             else

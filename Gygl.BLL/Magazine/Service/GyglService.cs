@@ -4,6 +4,7 @@ using Gygl.BLL.Share;
 using Gygl.Contract.Magazine;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Gygl.BLL.Magazine.Service
 {
@@ -24,7 +25,7 @@ namespace Gygl.BLL.Magazine.Service
             var downPid = Get(n => n.Year == tempYear && n.Period == tempPeriod);
             if (downPid != null)
                 down = downPid.ID;
-            return new Tuple<int, int>(up,down);
+            return Tuple.Create(up,down);
         }
 
         public GyglViewModel getPeriodicalById(int? pid)
@@ -64,31 +65,35 @@ namespace Gygl.BLL.Magazine.Service
         /// <param name="year"></param>
         /// <param name="period"></param>
         /// <returns></returns>
-        public PageGyglViewModel getPeriodicalByYear(int? year, int? period, int pageSize, int page)
+        public async Task<PageGyglViewModel> getPeriodicalByYear(int? year, int? period, int pageSize, int page)
         {
-            IQueryable<Periodical> qe = null;
+            //IQueryable<Periodical> qe = null;
+            IQueryable<Periodical> fa = null;
             PageGyglViewModel pif = new PageGyglViewModel();
             if (year != null)
             {
-                qe = QueryEntity(n => n.Year == year, o => o.Period, true);
+                fa = FindAll(n => n.Year == year).OrderBy(o => o.Period);
+                //qe = QueryEntity(n => n.Year == year, o => o.Period, true);
             }
             else
             {
-                qe = QueryEntity(n => n.Period == period, o => o.Year, false);
+                fa = FindAll(n => n.Period == period).OrderByDescending(o => o.Year);
+                //qe = QueryEntity(n => n.Period == period, o => o.Year, false);
             }
-            if (qe != null)
+            var c = fa.Count();
+            if (c!=0)
             {
-                var fbp = FindByPage(qe, pageSize, page).Select(s => new GyglViewModel
+                var fbp = FindByPageAsync(fa, pageSize, page, s => new GyglViewModel
                 {
                     ID = s.ID,
                     CoverImage = s.CoverImage,
                     Year = s.Year.Value,
                     Period = s.Period.Value
                 });
-                pif.TotalItems = qe.Count();
+                pif.TotalItems = c;
                 pif.CurrentPage = page;
                 pif.ItemPerPage = pageSize;
-                pif.Entity = fbp;
+                pif.Entity =await fbp;
                 return pif;
             }
             else

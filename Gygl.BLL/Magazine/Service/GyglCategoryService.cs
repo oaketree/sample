@@ -16,12 +16,11 @@ namespace Gygl.BLL.Magazine.Service
         [Dependency]
         public IGyglService GyglService { get; set; }
 
-
-        public async Task<List<CatalogViewModel>> getCatalogByID(int gyglid)
+        //分布视图不支持异步
+        public List<CatalogViewModel> getCatalogByID(int gyglid)
         {
             var cvm = new List<CatalogViewModel>();
-            var fa = FindAll(n => n.GyglID == gyglid);
-            var list = await FindAllAsync(fa, s => new
+            var list = FindAll(n => n.GyglID == gyglid).Select(s => new
             {
                 Category = s.Category.Name,
                 SortID = s.Category.SortID.Value,
@@ -33,7 +32,7 @@ namespace Gygl.BLL.Magazine.Service
                 cvm.Add(new CatalogViewModel
                 {
                     Category = item.Category,
-                    Title = await ArticleService.getTitle(gyglid, item.CategoryID)
+                    Title = ArticleService.getTitle(gyglid, item.CategoryID)
                 });
             }
             return cvm;

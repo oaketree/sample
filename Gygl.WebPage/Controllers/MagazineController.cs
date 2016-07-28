@@ -28,15 +28,15 @@ namespace Gygl.WebPage.Controllers
         public ICategoryService CategoryService { get; set; }
 
 
-        public async Task<PartialViewResult> CatalogAsync(int id)
-        {
-            var result = await GyglCategoryService.getCatalogByID(id);
-            return PartialView(result);
-        }
+        //public async Task<PartialViewResult> CatalogAsync(int id)
+        //{
+        //    var result = await GyglCategoryService.getCatalogByID(id);
+        //    return PartialView(result);
+        //}
 
         public PartialViewResult Catalog(int id)
         {
-            return CatalogAsync(id).Result;
+            return PartialView(GyglCategoryService.getCatalogByID(id));
         }
 
         public PartialViewResult RightNav()
@@ -62,10 +62,11 @@ namespace Gygl.WebPage.Controllers
         /// <param name="year"></param>
         /// <param name="period"></param>
         /// <param name="page"></param>
-        /// <returns></returns>
-        public JsonResult getSelectYear(int? year, int? period, int page)
+        /// <returns>改造</returns>
+        public async Task<JsonResult> getSelectYear(int? year, int? period, int page)
         {
-            return Json(GyglService.getPeriodicalByYear(year, period, 6, page), JsonRequestBehavior.AllowGet);
+            var result = await GyglService.getPeriodicalByYear(year, period, 6, page);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public PartialViewResult SelectArticle()
@@ -79,10 +80,11 @@ namespace Gygl.WebPage.Controllers
         /// <param name="period"></param>
         /// <param name="category"></param>
         /// <param name="page"></param>
-        /// <returns></returns>
-        public JsonResult getSelectArticle(int? year, int? period, int? category, string key, int page)
+        /// <returns>改造</returns>
+        public async Task<JsonResult> getSelectArticle(int? year, int? period, int? category, string key, int page)
         {
-            return Json(ArticleService.getArticleByCategory(year, period, category, key, 20, page), JsonRequestBehavior.AllowGet);
+            var result = await ArticleService.getArticleByCategory(year, period, category, key, 20, page);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 
