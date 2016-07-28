@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* CSS Document */
 
 body {
@@ -77,6 +77,24 @@ body {
 
 	}
 
+
+
+	
+.bgcolor01 {
+	background-color:#044a94;
+	height:3px;
+	width:770px;
+
+	}
+
+	
+	
+.bgcolor0202 {
+	background-color:#c9483c;
+	height:3px;
+	width:450px;
+	}
+	
 
 .readyoubg02 a {
 
@@ -168,9 +186,12 @@ z-index:555;
 }
 	
 #top003>div {
-	height:60px;
-	line-height:60px;
+
 	padding-right:15px;
+	padding-top:10px;
+
+
+
 }
 	
 	
@@ -196,12 +217,13 @@ z-index:555;
 	
 #top003 {
 	padding-left:50px;
+
+
 }
 
-#top003 img {
-	margin-bottom:8px;
-	
-}
+#q_top004 {
+	clear:both;}
+
 
 .readingbtn a {
 	background-image:url(/Content/images/readbubg01.gif);
@@ -235,12 +257,17 @@ z-index:555;
 #top004>div {
 	float:left;
 	height:60px;
-	line-height:60px;
-	top:-10px;
+	line-height:80px;
+
 	position: relative;
 
 
 }
+
+
+
+
+
 
 
 
@@ -252,7 +279,7 @@ z-index:555;
 	text-align:right;
 	line-height:30px;
 	position:relative;
-top:-30px!important;
+top:-20px!important;
 	
 	}
 
@@ -272,11 +299,12 @@ top:10px!important;
 	float:left;
 	width:83px;
 	height:60px;
+	line-height:60px;
 	font-size:16px;
 	font-weight:bold;
 	text-align:center;
 	position:relative;
-	top:-8px;
+
 
 	}
 
@@ -330,6 +358,12 @@ top:10px!important;
 	height:aoto;
 
 	
+	}
+	
+.top05_01_02 {
+	width:800px;
+	min-height:300px;
+	height:aoto;
 	}
 
 
@@ -454,6 +488,18 @@ text-justify:inter-ideograp;
 .readfengyou {
 	width:400px;
 	float:left;}
+	
+	
+.readfengyou02 {
+	width:95%;
+	float:left;}
+	
+.readfengyou02>div {
+	float:left;
+
+}	
+	
+	
 
 .readdg>div {
 	float:left;
@@ -553,13 +599,7 @@ text-justify:inter-ideograp;
 	background-color:#f4f8ff;
 	
 	}
-#conreadlie > ul {
-width:100%;
-}
 
-#conreadlie > div,#conreadlie ul {
-
-clear:both;}
 .readlanyou {
 	text-align:right;}
 	
@@ -700,7 +740,11 @@ clear:both;}
 	
 	}
 
+.qtopchongtop {
+	position:relative!important;
 
+
+	padding-top:0!important;}
 
 .readtitqishu {
 	font-size:26px;
@@ -717,6 +761,19 @@ clear:both;}
 
 .readqishuyou {
 	line-height:28px;}
+	
+	
+.readqishuyou02 {
+	width:450px;
+	padding-right:80px;
+	line-height:28px;}
+	
+	
+#top005_1>div {
+	float:left;}
+	
+#top005_1 {
+	width:900px;}
 
 .blank30 {
 	height:30px;
@@ -744,6 +801,11 @@ clear:both;}
 
 #readqishuyouchai >div {
 	float:left;
+	}
+	
+#readqishuyouchai02{
+	padding-top:70px;
+	
 	}
 
 .readbglan {
@@ -812,13 +874,7 @@ clear:both;}
  top:0;
  opacity: 0.9;}
  
- 
-.readposition{
 
-	margin-top:18px;
-
-
-}
 
  .you-fixed{
  position:fixed;

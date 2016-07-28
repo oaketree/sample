@@ -17,7 +17,7 @@
                             <div class="blank20"></div>
                             <div id="readqishuyouchai">
                                 <div class="readqishuyouchai_left">
-                                    <span class="readlan">出版日期：</span>2015年2月20日<br />
+                                    <span class="readlan">出版日期：</span>@Model.Publish<br />
                                     <span class="readlan">周&nbsp; &nbsp; 期：</span>双月刊(总第 @Model.TotalPeriod 期)<br />
                                     <span class="readlan">主办单位：</span>上海工业锅炉研究所<br />
                                     <span class="readlan">ISSN：</span>1004-8774<br />
@@ -37,7 +37,7 @@
                         <div class="readdg readdgyou blanktop20">
                             <div class="readbtn readbtndg"><a href="@Url.Action("Order","Static")">订&nbsp; 购</a></div>
                             <div class="readbtn readbtnyd"><a href="#/Periodical/@Model.ID">在线阅读</a></div>
-                            <div class="readbtn readbtnxz"><a href="#">下载本期</a></div>
+                            @*<div class="readbtn readbtnxz"><a href="#">下载本期</a></div>*@
                         </div>
                     </div>
                     <div style="clear:both"></div>
@@ -45,34 +45,7 @@
                 <div class="blank30"></div>
                 <div id="lsh">《工业锅炉》杂志理事会</div>
                 <div class="mingyuzhubian01">
-                    <span class="readlan">理事长</span><br />
-                    林宗虎&nbsp; 西安交通大学教授、博导、工程院院士<br />
-                    <br />
-                    <span class="readlan">常任理事（按姓氏笔划排列）</span><br />
-                    林宗虎&nbsp; 西安交通大学教授、博导、工程院院士<br />
-                    程其耀&nbsp; 上海工业锅炉研究所原所长、教授级高级工程师<br />
-                    留振铎&nbsp; 中国电器工业协会工业锅炉分会常务副理事长、高级经济师<br />
-                    林宗虎&nbsp; 西安交通大学教授、博导、工程院院士<br />
-                    程其耀&nbsp; 上海工业锅炉研究所原所长、教授级高级工程师<br />
-                    留振铎&nbsp; 中国电器工业协会工业锅炉分会常务副理事长、高级经济师<br />
-                    林宗虎&nbsp; 西安交通大学教授、博导、工程院院士<br />
-                    程其耀&nbsp; 上海工业锅炉研究所原所长、教授级高级工程师<br />
-                    留振铎&nbsp; 中国电器工业协会工业锅炉分会常务副理事长、高级经济师<br />
-                    林宗虎&nbsp; 西安交通大学教授、博导、工程院院士<br />
-                    程其耀&nbsp; 上海工业锅炉研究所原所长、教授级高级工程师<br />
-                    留振铎&nbsp; 中国电器工业协会工业锅炉分会常务副理事长、高级经济师<br />
-                    林宗虎&nbsp; 西安交通大学教授、博导、工程院院士<br />
-                    程其耀&nbsp; 上海工业锅炉研究所原所长、教授级高级工程师<br />
-                    留振铎&nbsp; 中国电器工业协会工业锅炉分会常务副理事长、高级经济师<br />
-                    林宗虎&nbsp; 西安交通大学教授、博导、工程院院士<br />
-                    程其耀&nbsp; 上海工业锅炉研究所原所长、教授级高级工程师<br />
-                    留振铎&nbsp; 中国电器工业协会工业锅炉分会常务副理事长、高级经济师<br />
-                    <br />
-                    <span class="readlan">理事（按姓氏笔划排列）</span><br />
-                    林宗虎&nbsp; 西安交通大学教授、博导、工程院院士<br />
-                    程其耀&nbsp; 上海工业锅炉研究所原所长、教授级高级工程师<br />
-                    留振铎&nbsp; 中国电器工业协会工业锅炉分会常务副理事长、高级经济师<br />
-                    <br />
+                    @Html.Raw(Model.Council)
                 </div>
             </div>
         </div>

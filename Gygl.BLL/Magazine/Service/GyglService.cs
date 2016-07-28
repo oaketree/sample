@@ -29,46 +29,34 @@ namespace Gygl.BLL.Magazine.Service
 
         public GyglViewModel getPeriodicalById(int? pid)
         {
+            Periodical p = null;
             if (pid != null)
             {
-                var p = Get(n => n.ID == pid);
-                if (p != null)
+                p = Get(n => n.ID == pid);
+            }
+            else {
+                p = QueryEntity(null, o => o.RegDate, false).FirstOrDefault();
+            }
+            if (p != null)
+            {
+                var gP = getPid(p.Year.Value, p.Period.Value, p.ID);
+                return new GyglViewModel
                 {
-                    var gP = getPid(p.Year.Value, p.Period.Value, pid.Value);
-                    return new GyglViewModel
-                    {
-                        ID = p.ID,
-                        Period = p.Period.Value,
-                        TotalPeriod = p.TotalPeriod.Value,
-                        Year = p.Year.Value,
-                        CoverImage = p.CoverImage,
-                        Up = gP.Item1,
-                        Down = gP.Item2
-                    };
-                }
-                else
-                    return null;
+                    ID = p.ID,
+                    Period = p.Period.Value,
+                    TotalPeriod = p.TotalPeriod.Value,
+                    Year = p.Year.Value,
+                    CoverImage = p.CoverImage,
+                    Publish = p.Publish.Value.ToShortDateString(),
+                    Council=p.Council,
+                    CopyRight=p.CopyRight,
+                    Up = gP.Item1,
+                    Down = gP.Item2,
+                };
             }
             else
-            {
-                var p = QueryEntity(null, o => o.RegDate, false).FirstOrDefault();
-                if (p != null)
-                {
-                    var gP = getPid(p.Year.Value, p.Period.Value, p.ID);
-                    return new GyglViewModel
-                    {
-                        ID = p.ID,
-                        Period = p.Period.Value,
-                        TotalPeriod = p.TotalPeriod.Value,
-                        Year = p.Year.Value,
-                        CoverImage = p.CoverImage,
-                        Up = gP.Item1,
-                        Down = gP.Item2
-                    };
-                }
-                else
-                    return null;
-            }
+                return null;
+           
         }
         /// <summary>
         /// 分页排序
@@ -121,6 +109,8 @@ namespace Gygl.BLL.Magazine.Service
                     Period = p.Period.Value,
                     TotalPeriod = p.TotalPeriod.Value,
                     Year = p.Year.Value,
+                    Council = p.Council,
+                    CopyRight = p.CopyRight,
                     CoverImage = p.CoverImage,
                     Up = gP.Item1,
                     Down = gP.Item2

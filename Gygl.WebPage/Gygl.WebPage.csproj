@@ -396,6 +396,7 @@
     <Content Include="Views\News\NewsList.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\News\ReadNews.cshtml" />
+    <Content Include="Views\Static\Council.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

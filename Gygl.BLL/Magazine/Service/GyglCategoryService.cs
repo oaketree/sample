@@ -4,6 +4,7 @@ using Gygl.Contract.Magazine;
 using Microsoft.Practices.Unity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Gygl.BLL.Magazine.Service
 {
@@ -16,13 +17,15 @@ namespace Gygl.BLL.Magazine.Service
         public IGyglService GyglService { get; set; }
 
 
-        public List<CatalogViewModel> getCatalogByID(int gyglid)
+        public async Task<List<CatalogViewModel>> getCatalogByID(int gyglid)
         {
             var cvm = new List<CatalogViewModel>();
-            var list = FindAll(n => n.GyglID == gyglid).Select(s=>new {
-                Category=s.Category.Name,
-                SortID=s.Category.SortID.Value,
-                CategoryID= s.CategoryID.Value,
+            var fa = FindAll(n => n.GyglID == gyglid);
+            var list = await FindAllAsync(fa, s => new
+            {
+                Category = s.Category.Name,
+                SortID = s.Category.SortID.Value,
+                CategoryID = s.CategoryID.Value,
             });
             var sortedList=list.OrderBy(o => o.SortID);
             foreach (var item in sortedList)
@@ -30,7 +33,7 @@ namespace Gygl.BLL.Magazine.Service
                 cvm.Add(new CatalogViewModel
                 {
                     Category = item.Category,
-                    Title = ArticleService.getTitle(gyglid, item.CategoryID)
+                    Title = await ArticleService.getTitle(gyglid, item.CategoryID)
                 });
             }
             return cvm;

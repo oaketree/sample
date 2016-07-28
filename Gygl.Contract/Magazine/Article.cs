@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -36,5 +37,8 @@ namespace Gygl.Contract.Magazine
 
         [ForeignKey("CategoryID")]
         public virtual Category Category { get; set; }
+
+
+        //public virtual ICollection<Image> Image { get; set; }
     }
 }

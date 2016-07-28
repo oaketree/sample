@@ -43,11 +43,9 @@ namespace Cms.BLL.Common.Services.Tests
             });
 
             //Console.Write(JsonConvert.SerializeObject(cm));
-
-
             var c = HandleMenu.handleSubMenu(cm, 0);
-            Console.Write(JsonConvert.SerializeObject(c));
-
+            //Console.Write(JsonConvert.SerializeObject(c));
+            System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(c));
         }
     }
 }

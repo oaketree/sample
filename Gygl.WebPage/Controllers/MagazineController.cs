@@ -3,6 +3,7 @@ using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -27,9 +28,15 @@ namespace Gygl.WebPage.Controllers
         public ICategoryService CategoryService { get; set; }
 
 
+        public async Task<PartialViewResult> CatalogAsync(int id)
+        {
+            var result = await GyglCategoryService.getCatalogByID(id);
+            return PartialView(result);
+        }
+
         public PartialViewResult Catalog(int id)
         {
-            return PartialView(GyglCategoryService.getCatalogByID(id));
+            return CatalogAsync(id).Result;
         }
 
         public PartialViewResult RightNav()
@@ -111,19 +118,21 @@ namespace Gygl.WebPage.Controllers
         }
 
 
-        public ActionResult GetPages(int aid)
+        public async Task<JsonResult> GetPages(int aid)
         {
+            await ArticleService.updateHit(aid);
             return Json(ImageService.getArticlePages(aid), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetArticleList(int pid)
+        public async Task<JsonResult> GetArticleList(int pid)
         {
-            return Json(ArticleService.getArticleList(pid), JsonRequestBehavior.AllowGet);
+            var result = await ArticleService.getArticleList(pid);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetFirstPages(int pid)
         {
-            return Json(ImageService.getFirstPages(pid), JsonRequestBehavior.AllowGet);
+            return Json(ArticleService.getFirstPages(pid), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetCategoryList(int y, int p)

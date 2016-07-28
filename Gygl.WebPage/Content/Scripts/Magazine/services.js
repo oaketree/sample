@@ -83,6 +83,7 @@ fac.factory('ajaxService', ['$q', '$http', function ($q, $http) {
             var d = $q.defer();
             $http({
                 method: 'GET',
+                responseType:"json",
                 url: '/Magazine/GetPages',
                 params: { "aid": aid }
             }).success(function (data) {

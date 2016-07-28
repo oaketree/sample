@@ -31,7 +31,7 @@
         var p = s.period;
         var c = s.category;
         var k = s.key;
-        if (y == null && p == null && c == null&&k.length==0) {
+        if (y == null && p == null && c == null && k.length == 0) {
             //alert("请输入查询条件!");
             $location.path("/SelectArticle").search({ page: 1 });
         } else {
@@ -56,8 +56,7 @@ app.controller("periodicalCtrl", ['$scope', 'ajaxService', '$routeParams', 'navS
         ajaxService.getPages(aid)
             .then(function (data) {
                 $scope.pages = data;
-            });
-        ajaxService.getArticleList($routeParams.id)
+                ajaxService.getArticleList($routeParams.id)
         .then(function (data) {
             var o = navService.init(data, parseInt(aid));
             $scope.nav = {
@@ -65,19 +64,21 @@ app.controller("periodicalCtrl", ['$scope', 'ajaxService', '$routeParams', 'navS
                 down: o.getNavAid().down()
             }
         })
+            })
+
     } else {
         ajaxService.getFirstPages($routeParams.id)
        .then(function (data) {
            $scope.pages = data;
+           ajaxService.getArticleList($routeParams.id)
+       .then(function (data) {
+           var o = navService.init(data, 0);
+           $scope.nav = {
+               up: o.getNavIndex().up(),
+               down: o.getNavIndex().down()
+           }
+       })
        });
-        ajaxService.getArticleList($routeParams.id)
-        .then(function (data) {
-            var o = navService.init(data, 0);
-            $scope.nav = {
-                up: o.getNavIndex().up(),
-                down: o.getNavIndex().down()
-            }
-        })
     }
 
     var currentaid = 0;
@@ -86,14 +87,14 @@ app.controller("periodicalCtrl", ['$scope', 'ajaxService', '$routeParams', 'navS
             ajaxService.getPages(aid)
             .then(function (data) {
                 $scope.pages = data;
-            })
-            $(document).scrollTop(0);
-            ajaxService.getArticleList($routeParams.id).then(function (data) {
-                var o = navService.init(data, aid);
-                $scope.nav = {
-                    up: o.getNavAid().up(),
-                    down: o.getNavAid().down()
-                }
+                $(document).scrollTop(0);
+                ajaxService.getArticleList($routeParams.id).then(function (data) {
+                    var o = navService.init(data, aid);
+                    $scope.nav = {
+                        up: o.getNavAid().up(),
+                        down: o.getNavAid().down()
+                    }
+                })
             })
         }
         currentaid = aid;
@@ -104,7 +105,7 @@ app.controller("yearCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchServ
     var p = $routeParams.period;
     var page = $routeParams.page;
 
-    if (y == null && p == null&&page==null) {
+    if (y == null && p == null && page == null) {
         y = new Date().getFullYear();
         page = 1;
     }
@@ -124,7 +125,7 @@ app.controller("yearCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchServ
         })
     }
 }]);
-app.controller("articleCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService','$compile', function ($scope, $routeParams, ajaxService, searchService,$compile) {
+app.controller("articleCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
     var y = $routeParams.year;
     var p = $routeParams.period;
     var c = $routeParams.category;

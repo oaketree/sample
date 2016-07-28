@@ -46,30 +46,17 @@ app.directive('closeMenu', function () {
     }
 });
 
-//app.directive('pagingData', ['$compile', '$parse',function ($compile, $parse) {
-//    return {
-//        restrict: 'AEC',
-//        scope: false,
-//        //template: "{{nav}}",
-//        link: function (scope, element, attrs, controller) {
+app.directive('toTop', function () {
+    return {
+        restrict: 'AC',
+        link: function (scope, element, attrs) {
+            element.bind('click', function () {
+                $(document).scrollTop(0);
+            })
+        }
+    }
+});
 
-//            //element.html($parse(attrs.content)(scope));
-
-//            //console.log($parse(attrs.content)(scope));
-//            element.html("{{" + attrs.content + "}}");
-//            $compile(element.contents())(scope);
-
-//            console.log(element.html());
-
-//            //console.log($compile("{{nav}}")(scope));
-//            //var markup = scope.$eval(attrs.content);
-//            //console.log(markup);
-//            //element.html(markup);
-//            //$compile(element.contents())(scope);
-//            //element.html(el);
-//        }
-//    };
-//}])
 
 
 //app.directive('pagingData', ['$compile', function ($compile) {

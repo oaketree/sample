@@ -2,15 +2,16 @@
 using Gygl.BLL.Register.ViewModels;
 using Gygl.Contract.Register;
 using System;
+using System.Threading.Tasks;
 
 namespace Gygl.BLL.Register.Manage
 {
     public interface IUserManage:IRepository<Users>
     {
         bool CkUserName(string username);
-        Tuple<bool, string> Reg(RegViewModel rvm);
-        string Activate(int uid, string code);
-        object Login(string u, string p, bool auto);
+        Task<Tuple<bool, string>> Reg(RegViewModel rvm);
+        Task<string> Activate(int uid, string code);
+        Task<object> Login(string u, string p, bool auto);
         object LoginCheck();
         void LoginOut();
         object Forget(string u, string e);

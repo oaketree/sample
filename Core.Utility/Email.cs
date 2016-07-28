@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Core.Utility
@@ -52,9 +53,16 @@ namespace Core.Utility
             catch (Exception ex)
             {
                 isSuccess = false;
-               exMessage =ex.Message;
+                exMessage = ex.Message;
             }
         }
 
+        public Tuple<bool, string> Result
+        {
+            get
+            {
+                return Tuple.Create(isSuccess, exMessage);
+            }
+        }
     }
 }

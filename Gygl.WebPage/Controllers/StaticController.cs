@@ -43,5 +43,10 @@ namespace Gygl.WebPage.Controllers
         {
             return View();
         }
+
+        public ActionResult Council()
+        {
+            return View();
+        }
     }
 }

@@ -7,6 +7,7 @@ using Gygl.Contract.Register;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gygl.BLL.Register.Manage
 {
@@ -23,7 +24,7 @@ namespace Gygl.BLL.Register.Manage
             return !IsExist(n => n.UserName == username);
         }
 
-        public Tuple<bool, string> Reg(RegViewModel rvm)
+        public  async Task<Tuple<bool, string>> Reg(RegViewModel rvm)
         {
             var au = new Users
             {
@@ -37,7 +38,7 @@ namespace Gygl.BLL.Register.Manage
                 ActiveCode = Guid.NewGuid().ToString("N")
             };
             Insert(au);
-            UserDetailManage.Insert(new UserDetail
+            await UserDetailManage.InsertAsync(new UserDetail
             {
                 DisplayName = rvm.DisplayName,
                 CompanyName = rvm.CompanyName,
@@ -46,14 +47,14 @@ namespace Gygl.BLL.Register.Manage
                 Tel = rvm.Tel,
                 UserID = au.UserID,
             });
-            UserRoleManage.Insert(new UserRole
+            await UserRoleManage.InsertAsync(new UserRole
             {
                 UserID = au.UserID,
                 RoleID = 4
             });
-            return SendRegisterMail(au.UserName, au.UserID.ToString(), au.ActiveCode, rvm.Email);
+            return await SendRegisterMail(au.UserName, au.UserID.ToString(), au.ActiveCode, rvm.Email);
         }
-        private Tuple<bool,string> SendRegisterMail(string username, string userid, string activecode, string email)
+        private Task<Tuple<bool,string>> SendRegisterMail(string username, string userid, string activecode, string email)
         {
             string sub = "《工业锅炉》杂志—邮箱验证";
             string[] b ={"<p>亲爱的{0}</p>",
@@ -65,10 +66,14 @@ namespace Gygl.BLL.Register.Manage
             string emailLoginName = "shgygl";
             string emailLoginpassword = "bjb142900";
             var e = new Email(sub, body, emailFrom, email);
-            e.send(smtp, emailLoginName, emailLoginpassword);
-            return new Tuple<bool, string>(e.isSuccess,e.exMessage);
+            return 
+            Task.Run(()=> {
+                e.send(smtp, emailLoginName, emailLoginpassword);
+                return e.Result;
+            });
+            
         }
-        public string Activate(int uid, string code)
+        public async Task<string> Activate(int uid, string code)
         {
             string r = string.Empty;
             var u = Get(n => n.UserID == uid && n.ActiveCode == code);
@@ -77,7 +82,7 @@ namespace Gygl.BLL.Register.Manage
                 if (!u.Valid.Value)
                 {
                     u.Valid = true;
-                    Update(u);
+                    await UpdateAsync(u);
                     r = "恭喜您的帐号已经激活。";
                 }
                 else
@@ -92,10 +97,10 @@ namespace Gygl.BLL.Register.Manage
             return r;
         }
 
-        public object Login(string u, string p, bool auto)
+        public async Task<object> Login(string u, string p, bool auto)
         {
             var sp = Security.Sha256(p);
-            var usr =Get(n => n.UserName == u && n.Password == sp);
+            var usr =await GetAsync(n => n.UserName == u && n.Password == sp);
             if (usr == null)
             {
                 return new { status = 0, text = "用户名或密码错误！" };
@@ -109,8 +114,8 @@ namespace Gygl.BLL.Register.Manage
                     {
                         var ac = Guid.NewGuid().ToString("N");
                         usr.ActiveCode = ac;
-                        Update(usr);
-                        var s=SendRegisterMail(usr.UserName, usr.UserID.ToString(), ac, usr.UserDetail.Email);
+                        await UpdateAsync(usr);
+                        var s=await SendRegisterMail(usr.UserName, usr.UserID.ToString(), ac, usr.UserDetail.Email);
                         if(!s.Item1)
                             return new { status = 0, text = s.Item2 };
                     }
@@ -122,7 +127,7 @@ namespace Gygl.BLL.Register.Manage
                     usr.UserLoginNum = usr.UserLoginNum + 1;
                     usr.lastdate = DateTime.Now;
                     usr.EntryPoint = EntryPoint.Magazine;
-                    Update(usr);
+                    await UpdateAsync(usr);
                     SetSession(usr.UserID,usr.UserName,RoleAuthoriseManage.GetAuthoriseByUser(usr));
                     if (auto)
                     {

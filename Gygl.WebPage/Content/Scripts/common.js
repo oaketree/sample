@@ -1,11 +1,11 @@
 $(function () {
     var st = 180;
-    $('#m_top02>div>div').mouseenter(function () {
-        $(this).find('ul').stop(false, true).delay(400).slideDown(st);
+    $('#m_top02chong>div>div').mouseenter(function () {
+        $(this).find('ul').stop(false, true).slideDown(st);
         $('#q_top02bg,#q_top02bg_2').stop(false, true).slideDown(st);
     }).mouseleave(function () {
         $(this).find('ul').stop(false, true).slideUp(st);
-        $('#q_top02bg,#q_top02bg_2').stop(false, true).delay(300).slideUp(st);
+        $('#q_top02bg,#q_top02bg_2').stop(false, true).slideUp(st);
     });
 });
 /*图片切换*/
@@ -33,11 +33,6 @@ $(function () {
             $(this).find("img").attr('src', srcdh);
         $(this).removeClass("readyoubg02").addClass("readyoubg01");
     });
-
-    $("#readzd").click(function () {
-        $(document).scrollTop(0);
-    })
-
 });
 
 /*滚动置顶*/

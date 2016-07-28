@@ -23,5 +23,8 @@ namespace Gygl.Contract.Magazine
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? RegDate { get; set; }
 
+        //[ForeignKey("ArticleID")]
+        //public virtual Article Article { get; set; }
+
     }
 }

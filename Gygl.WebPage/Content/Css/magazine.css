@@ -636,13 +636,7 @@ color:#ffba26;
 
 
 #q_top02bg {
-	
-	
 		 position:fixed;
-	
-	
-
-
 		 background-color:#000;
 		  filter:alpha(opacity=70);  
       -moz-opacity:0.7  
@@ -677,3 +671,46 @@ color:#ffba26;
 	}	
 	
 	
+#m_top02chong>div {
+	float:left;}
+	
+#ietuchong01_02 ul {
+	display:none;}
+
+#ietuchong01_02>div {
+	padding:0 15px;
+	float:left;
+	height:68px;
+	min-height:68px;
+	height:auto;
+	}
+
+#q_top02chong {
+	height:78px;
+	background-color:#f3f3f3;
+	position:fixed;
+	z-index:222;
+	padding-top:40px;
+	}
+	
+	
+#q_top02chong a {
+	color:#fff;
+
+	}
+	
+#q_top02chong a:hover {
+	color:#ffba26;
+
+	}
+
+#ietuchong01_02 ul {
+
+	position:absolute;
+	width:500px;
+
+	}
+#ietuchong01_02 li {
+	float:left;
+	padding-right:15px;
+	line-height:40px;}

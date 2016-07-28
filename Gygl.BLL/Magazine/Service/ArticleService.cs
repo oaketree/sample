@@ -18,22 +18,30 @@ namespace Gygl.BLL.Magazine.Service
 
         [Dependency]
         public ICategoryService CategoryService { get; set; }
+        [Dependency]
+        public IImageService ImageService { get; set; }
 
-        public List<TilteViewModel> getTitle(int gyglid,int categoryid)
+        public async Task<List<TilteViewModel>> getTitle(int gyglid,int categoryid)
         {
-            var li = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid).Select(s=>new TilteViewModel
-            {
-                Title=s.Title,
-                Url=s.ID.ToString()
+            //var li = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid).Select(s=>new TilteViewModel
+            //{
+            //    Title=s.Title,
+            //    Url=s.ID.ToString()
+            //});
+            var fa = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid);
+            var li = await FindAllAsync(fa, s => new TilteViewModel{
+                Title = s.Title,
+                Url = s.ID.ToString()
             });
             return li.ToList();
         }
-        public List<int> getArticleList(int gyglId)
+        public async Task<List<int>> getArticleList(int gyglId)
         {
-            var li = FindAll(n => n.GyglID == gyglId).OrderBy(o => o.Category.SortID).ThenBy(t=>t.ID).Select(s => s.ID);
-            return li.ToList();
-            //var li = QueryEntity(n => n.GyglID == gyglId, o => o.Category.SortID, true).Select(s => s.ID);
+            //var li = FindAll(n => n.GyglID == gyglId).OrderBy(o => o.Category.SortID).ThenBy(t=>t.ID).Select(s => s.ID);
             //return li.ToList();
+            var fa = FindAll(n => n.GyglID == gyglId).OrderBy(o => o.Category.SortID).ThenBy(t => t.ID);
+            var li = await FindAllAsync(fa, s => s.ID);
+            return li.ToList();
         }
 
 
@@ -91,7 +99,21 @@ namespace Gygl.BLL.Magazine.Service
             else
                 return null;
         }
-        
+
+        public async Task updateHit(int aid)
+        {
+            var ar = Get(n => n.ID == aid);
+            ar.Hit = ar.Hit + 1;
+            await UpdateAsync(ar);
+        }
+
+        public object getFirstPages(int pid)
+        {
+            var id = Get(n => n.GyglID == pid).ID;
+            return  ImageService.getArticlePages(id);
+            //.Image.OrderBy(o => o.SortID).Select(s => new { url = s.ImageID });
+        }
+
 
     }
 }

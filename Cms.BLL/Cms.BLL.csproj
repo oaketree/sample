@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Services\Async.cs" />
     <Compile Include="Common\Services\Menu.cs" />
     <Compile Include="Common\ViewModels\ChatUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

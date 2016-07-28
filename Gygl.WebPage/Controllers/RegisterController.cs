@@ -2,6 +2,7 @@
 using Gygl.BLL.Register.ViewModels;
 using Gygl.BLL.Share;
 using Microsoft.Practices.Unity;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Gygl.WebPage.Controllers
@@ -15,9 +16,10 @@ namespace Gygl.WebPage.Controllers
             return View();
         }
 
-        public ActionResult JsonLogin(string u, string p, bool auto = false)
+        public async Task<JsonResult> JsonLogin(string u, string p, bool auto = false)
         {
-            return Json(UserManage.Login(u, p, auto));
+            var result = await UserManage.Login(u, p, auto);
+            return Json(result);
         }
         public ActionResult JsonLoginCheck()
         {
@@ -38,11 +40,11 @@ namespace Gygl.WebPage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Reg(RegViewModel rvm)
+        public async Task<ActionResult> Reg(RegViewModel rvm)
         {
             if (ModelState.IsValid)
             {
-                var a = UserManage.Reg(rvm);
+                var a = await UserManage.Reg(rvm);
                 if(a.Item1)
                     return View("SendEmail", rvm);
                 else
@@ -77,9 +79,10 @@ namespace Gygl.WebPage.Controllers
         {
             return View(a);
         }
-        public ActionResult Activate(int? uid, string code)
+        public async Task<ActionResult> Activate(int? uid, string code)
         {
-            return View((object)UserManage.Activate(uid.Value, code));
+            var a = await UserManage.Activate(uid.Value, code);
+            return View(a);
         }
 
         public ActionResult ChangePassword(int? uid, string code)
