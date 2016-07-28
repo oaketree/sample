@@ -1,17 +1,19 @@
 ﻿using Core.DAL;
 using Gygl.Contract.Register;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Gygl.BLL.Register.Manage
 {
     public class UserRoleManage : RepositoryBase<UserRole, WebDBContext>, IUserRoleManage
     {
-        public void InsertUserRoleByMagazine(Users usr)
+        public async Task InsertUserRoleByMagazine(Users usr)
         {
             var ur = FindAll(n => n.UserID == usr.UserID);
-            if (ur.Count() == 0)
+            var c = await Count(ur);
+            if (c == 0)
             {
-                Insert(new UserRole
+                await InsertAsync(new UserRole
                 {
                     UserID = usr.UserID,
                     RoleID = 4
@@ -19,9 +21,10 @@ namespace Gygl.BLL.Register.Manage
             }
             else
             {
-                if (!ur.Any(n => n.RoleID == 4))
+                var any = await Any(ur, n => n.RoleID == 4);
+                if (!any)
                 {
-                    Insert(new UserRole
+                    await InsertAsync(new UserRole
                     {
                         UserID = usr.UserID,
                         RoleID = 4

@@ -15,6 +15,7 @@ namespace Core.DAL
         T Get(Expression<Func<T, bool>> conditions = null);
         Task<T> GetAsync(Expression<Func<T, bool>> conditions);
         Task<int> Count(IQueryable<T> FindAll);
+        Task<bool> Any(IQueryable<T> FindAll, Expression<Func<T, bool>> conditons);
         bool IsExist(Expression<Func<T, bool>> conditons);
         Task<bool> IsExistAsync(Expression<Func<T, bool>> conditons);
         IQueryable<T> FindAll(Expression<Func<T, bool>> conditions);

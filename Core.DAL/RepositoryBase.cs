@@ -64,6 +64,15 @@ namespace Core.DAL
                 return FindAll.Count();
             });
         }
+
+        public virtual Task<bool> Any(IQueryable<T1> FindAll, Expression<Func<T1, bool>> conditons)
+        {
+            return Task.Run(() => {
+                return FindAll.Any(conditons);
+            });
+        }
+
+
         public virtual bool IsExist(Expression<Func<T1, bool>> conditons)
         {
             var entry = MyDbSet.Where(conditons).AsNoTracking();

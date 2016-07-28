@@ -19,9 +19,10 @@ namespace Gygl.BLL.Register.Manage
         public IUserRoleManage UserRoleManage { get; set; }
         [Dependency]
         public IRoleAuthoriseManage RoleAuthoriseManage { get; set; }
-        public bool CkUserName(string username)
+        public async Task<bool> CkUserName(string username)
         {
-            return !IsExist(n => n.UserName == username);
+            var result = await IsExistAsync(n => n.UserName == username);
+            return !result;
         }
 
         public  async Task<Tuple<bool, string>> Reg(RegViewModel rvm)
@@ -122,13 +123,13 @@ namespace Gygl.BLL.Register.Manage
                     return new { status = 0, text = "该账号尚未激活，请至注册邮箱激活后登录！" };
                 }
                 else {
-                    UserRoleManage.InsertUserRoleByMagazine(usr);
+                    await UserRoleManage.InsertUserRoleByMagazine(usr);
                     usr.LoginIP = Utils.GetIP();
                     usr.UserLoginNum = usr.UserLoginNum + 1;
                     usr.lastdate = DateTime.Now;
                     usr.EntryPoint = EntryPoint.Magazine;
                     await UpdateAsync(usr);
-                    SetSession(usr.UserID,usr.UserName,RoleAuthoriseManage.GetAuthoriseByUser(usr));
+                    SetSession(usr.UserID,usr.UserName,await RoleAuthoriseManage.GetAuthoriseByUser(usr));
                     if (auto)
                     {
                         SetCookie(usr.UserName, usr.Password);
@@ -137,7 +138,7 @@ namespace Gygl.BLL.Register.Manage
                 }
             }
         }
-        public object LoginCheck()
+        public async Task<object> LoginCheck()
         {
             if (SessionHelper.Get("AccessInfo") != null)
             {
@@ -150,10 +151,10 @@ namespace Gygl.BLL.Register.Manage
                 var p = CookieHelper.GetCookieValue("Password");
                 if (u != string.Empty && p != string.Empty)
                 {
-                    var usr = Get(n => n.UserName == u && n.Password == p);
+                    var usr =await GetAsync(n => n.UserName == u && n.Password == p);
                     if (usr != null)
                     {
-                        SetSession(usr.UserID, usr.UserName, RoleAuthoriseManage.GetAuthoriseByUser(usr));
+                        SetSession(usr.UserID, usr.UserName, await RoleAuthoriseManage.GetAuthoriseByUser(usr));
                         return new { status = 1, text = string.Format("您好，{0}", usr.UserName) };
                     }
                     else
@@ -176,9 +177,9 @@ namespace Gygl.BLL.Register.Manage
             SessionHelper.Del("AccessInfo");
         }
 
-        public object Forget(string u, string e)
+        public async Task<object> Forget(string u, string e)
         {
-            var usr =Get(n => n.UserName == u && n.UserDetail.Email == e);
+            var usr =await GetAsync(n => n.UserName == u && n.UserDetail.Email == e);
             if (usr == null)
             {
                 return new { status = 0, text = "用户名或邮箱错误！" };
@@ -189,15 +190,15 @@ namespace Gygl.BLL.Register.Manage
                 {
                     var ac = Guid.NewGuid().ToString("N");
                     usr.ActiveCode = ac;
-                    Update(usr);
+                    await UpdateAsync(usr);
                 }
                 return new { status = 1, uid = usr.UserID, code = usr.ActiveCode };
             }
         }
 
-        public PasswordViewModel GetUser(int uid, string code)
+        public async Task<PasswordViewModel> GetUser(int uid, string code)
         {
-            var user = Get(n => n.UserID == uid && n.ActiveCode == code);
+            var user = await GetAsync(n => n.UserID == uid && n.ActiveCode == code);
             if (user == null)
             {
                 return null;
@@ -212,23 +213,23 @@ namespace Gygl.BLL.Register.Manage
             }
         }
 
-        public PasswordViewModel UpdatePass(PasswordViewModel pvm)
+        public async Task<PasswordViewModel> UpdatePass(PasswordViewModel pvm)
         {
-            var usr = Get(pvm.UserID);
+            var usr = await GetAsync(pvm.UserID);
             usr.UserPassword = pvm.UserPassword;
             usr.Password = Security.Sha256(pvm.UserPassword);
-            Update(usr);
+            await UpdateAsync(usr);
             return new PasswordViewModel
             {
                 UserName = usr.UserName,
                 UserPassword = usr.UserPassword,
             };
         }
-        public UserViewModel GetUser()
+        public async Task<UserViewModel> GetUser()
         {
             var login = (AccessInfo)SessionHelper.Get("AccessInfo");
             var uid = login.UserID;
-            var user = UserDetailManage.Get(uid);
+            var user = await UserDetailManage.GetAsync(uid);
             return new UserViewModel
             {
                 UserID = user.UserID,
@@ -239,14 +240,14 @@ namespace Gygl.BLL.Register.Manage
                 Tel = user.Tel
             };
         }
-        public void EditUser(UserViewModel uvm)
+        public async Task EditUser(UserViewModel uvm)
         {
-            var ud = UserDetailManage.Get(uvm.UserID);
+            var ud = await UserDetailManage.GetAsync(uvm.UserID);
             ud.DisplayName = uvm.DisplayName;
             ud.CompanyName = uvm.CompanyName;
             ud.Email = uvm.Email;
             ud.Address = uvm.Address;
-            UserDetailManage.Update(ud);
+            await UserDetailManage.UpdateAsync(ud);
         }
 
 

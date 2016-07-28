@@ -21,17 +21,19 @@ namespace Gygl.WebPage.Controllers
             var result = await UserManage.Login(u, p, auto);
             return Json(result);
         }
-        public ActionResult JsonLoginCheck()
+        public async Task<JsonResult> JsonLoginCheck()
         {
-            return Json(UserManage.LoginCheck());
+            var result = await UserManage.LoginCheck();
+            return Json(result);
         }
         public void JsonLoginOut()
         {
             UserManage.LoginOut();
         }
-        public ActionResult JsonForget(string u, string e)
+        public async Task<JsonResult> JsonForget(string u, string e)
         {
-            return Json(UserManage.Forget(u, e));
+            var result = await UserManage.Forget(u, e);
+            return Json(result);
         }
         public ActionResult Reg()
         {
@@ -52,18 +54,19 @@ namespace Gygl.WebPage.Controllers
             }
             return View();
         }
-        public ActionResult Manage()
+        public async Task<ActionResult> Manage()
         {
-            return View(UserManage.GetUser());
+            var result =await UserManage.GetUser();
+            return View(result);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Manage(UserViewModel uvm)
+        public async Task<ActionResult> Manage(UserViewModel uvm)
         {
             if (ModelState.IsValid)
             {
-                UserManage.EditUser(uvm);
+                await UserManage.EditUser(uvm);
             }
             return View(uvm);
         }
@@ -85,9 +88,9 @@ namespace Gygl.WebPage.Controllers
             return View(a);
         }
 
-        public ActionResult ChangePassword(int? uid, string code)
+        public async Task<ActionResult> ChangePassword(int? uid, string code)
         {
-            var a = UserManage.GetUser(uid.Value, code);
+            var a = await UserManage.GetUser(uid.Value, code);
             if (a == null)
             {
                 return RedirectToAction("ForgetPassword");
@@ -99,11 +102,11 @@ namespace Gygl.WebPage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(PasswordViewModel pvm)
+        public async Task<ActionResult> ChangePassword(PasswordViewModel pvm)
         {
             if (ModelState.IsValid)
             {
-                return View("ChangePasswordSuccess", UserManage.UpdatePass(pvm));
+                return View("ChangePasswordSuccess", await UserManage.UpdatePass(pvm));
             }
             return View(pvm);
         }
@@ -111,9 +114,10 @@ namespace Gygl.WebPage.Controllers
         {
             return View(pvm);
         }
-        public JsonResult CkUserName(string username)
+        public async Task<JsonResult> CkUserName(string username)
         {
-            return Json(UserManage.CkUserName(username.Trim()), JsonRequestBehavior.AllowGet);
+            var result = await UserManage.CkUserName(username.Trim());
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         public ActionResult LoginJump(Jump model)
         {
