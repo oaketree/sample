@@ -11,6 +11,6 @@ namespace Gygl.BLL.Magazine.Service
 {
     public interface ICategoryService : IRepository<Category>
     {
-        object getCategoryList();
+        Task<object> getCategoryList();
     }
 }

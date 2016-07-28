@@ -9,6 +9,6 @@ namespace Gygl.BLL.Magazine.Service
     public  interface IGyglCategoryService : IRepository<GyglCategory>
     {
         List<CatalogViewModel> getCatalogByID(int gyglid);
-        object getSearchCatalog(int year, int period);
+        Task<object> getSearchCatalog(int year, int period);
     }
 }

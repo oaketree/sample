@@ -51,7 +51,19 @@ namespace Core.DAL
                     return MyDbSet.FirstOrDefault(conditions);
             });
         }
-
+        public virtual Task<T1> GetAsync(IQueryable<T1> FindAll)
+        {
+            return Task.Run(() =>
+            {
+                return MyDbSet.FirstOrDefault();
+            });
+        }
+        public virtual Task<int> Count(IQueryable<T1> FindAll)
+        {
+            return Task.Run(()=> {
+                return FindAll.Count();
+            });
+        }
         public virtual bool IsExist(Expression<Func<T1, bool>> conditons)
         {
             var entry = MyDbSet.Where(conditons).AsNoTracking();

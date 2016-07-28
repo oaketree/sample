@@ -12,6 +12,6 @@ namespace Gygl.BLL.Magazine.Service
         Task<PageArticleViewModel> getArticleByCategory(int? year, int? period, int? category, string key, int pageSize, int page);
         Task<List<int>> getArticleList(int gyglId);
         Task updateHit(int aid);
-        object getFirstPages(int pid);
+        Task<object> getFirstPages(int pid);
     }
 }

@@ -14,6 +14,6 @@ namespace Gygl.BLL.Magazine.Service
         GyglViewModel getPeriodicalById(int? pid);
         Task<PageGyglViewModel> getPeriodicalByYear(int? year, int? period, int pageSize, int page);
         GyglViewModel getPeriodBySearch(int year, int period);
-        GyglTitleViewModel getCurrentPeriod();
+        Task<GyglTitleViewModel> getCurrentPeriod();
     }
 }

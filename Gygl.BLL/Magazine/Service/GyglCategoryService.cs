@@ -38,17 +38,19 @@ namespace Gygl.BLL.Magazine.Service
             return cvm;
         }
         //查询xx年x期的目录
-        public object getSearchCatalog(int year, int period)
+        public async Task<object> getSearchCatalog(int year, int period)
         {
-            var gygl = GyglService.Get(n => n.Year == year && n.Period == period);
+            var gygl = await GyglService.GetAsync(n => n.Year == year && n.Period == period);
             if (gygl != null)
             {
-                var list = FindAll(n => n.GyglID == gygl.ID).Select(s=>new {
-                    CategoryID=s.CategoryID,
-                    Category=s.Category.Name,
-                    SortID=s.Category.SortID
+                var fa = FindAll(n => n.GyglID == gygl.ID).OrderBy(o=>o.Category.SortID);
+                var list =await FindAllAsync(fa, s => new
+                {
+                    CategoryID = s.CategoryID,
+                    Category = s.Category.Name,
+                    //SortID = s.Category.SortID
                 });
-                return list.OrderBy(o=>o.SortID);
+                return list;
             }
             else
                 return null;

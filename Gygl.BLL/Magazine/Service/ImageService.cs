@@ -3,24 +3,20 @@ using Gygl.Contract.Magazine;
 using Microsoft.Practices.Unity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Gygl.BLL.Magazine.Service
 {
     public class ImageService: RepositoryBase<Image, WebDBContext>, IImageService
     {
-        //[Dependency]
-        //public IArticleService ArticleService { get; set; }
-        public object getArticlePages(int aid)
+        public async Task<object> getArticlePages(int aid)
         {
-            var li = QueryEntity(n => n.ArticleID == aid, o => o.SortID, true).Select(s => new { url = s.ImageID });
-            return li;
+            var fa = FindAll(n => n.ArticleID == aid).OrderBy(o => o.SortID);
+            var list = await FindAllAsync(fa, s => new { url = s.ImageID });
+            return list;
+            //var li = QueryEntity(n => n.ArticleID == aid, o => o.SortID, true).Select(s => new { url = s.ImageID });
+            //return li;
         }
 
-        //public object getFirstPages(int pid)
-        //{
-        //    var aid=ArticleService.Get(n => n.GyglID == pid).ID;
-        //    var li = QueryEntity(n => n.ArticleID == aid, o => o.SortID, true).Select(s => new { url = s.ImageID });
-        //    return li;
-        //}
     }
 }

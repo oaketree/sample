@@ -29,11 +29,6 @@ namespace Gygl.BLL.Magazine.Service
                 Title = s.Title,
                 Url = s.ID.ToString()
             });
-            //var fa = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid);
-            //var li = await FindAllAsync(fa, s => new TilteViewModel{
-            //    Title = s.Title,
-            //    Url = s.ID.ToString()
-            //});
             return li.ToList();
         }
         public async Task<List<int>> getArticleList(int gyglId)
@@ -78,7 +73,7 @@ namespace Gygl.BLL.Magazine.Service
             else {
                 qe = QueryEntity(express, o => o.RegDate, false);
             }
-            var c = qe.Count();
+            var c = await Count(qe);
             if (c!=0)
             {
                 var fbp = FindByPageAsync(qe, pageSize, page, s => new TilteViewModel
@@ -108,11 +103,11 @@ namespace Gygl.BLL.Magazine.Service
             await UpdateAsync(ar);
         }
 
-        public object getFirstPages(int pid)
+        public async Task<object> getFirstPages(int pid)
         {
-            var id = Get(n => n.GyglID == pid).ID;
-            return  ImageService.getArticlePages(id);
-            //.Image.OrderBy(o => o.SortID).Select(s => new { url = s.ImageID });
+            var ppid = await GetAsync(n => n.GyglID == pid);
+            var result = await ImageService.getArticlePages(ppid.ID);
+            return result;
         }
 
 

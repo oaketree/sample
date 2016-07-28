@@ -123,7 +123,8 @@ namespace Gygl.WebPage.Controllers
         public async Task<JsonResult> GetPages(int aid)
         {
             await ArticleService.updateHit(aid);
-            return Json(ImageService.getArticlePages(aid), JsonRequestBehavior.AllowGet);
+            var result = await ImageService.getArticlePages(aid);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> GetArticleList(int pid)
@@ -132,24 +133,28 @@ namespace Gygl.WebPage.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetFirstPages(int pid)
+        public async Task<JsonResult> GetFirstPages(int pid)
         {
-            return Json(ArticleService.getFirstPages(pid), JsonRequestBehavior.AllowGet);
+            var result = await ArticleService.getFirstPages(pid);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetCategoryList(int y, int p)
+        public async Task<JsonResult> GetCategoryList(int y, int p)
         {
-            return Json(GyglCategoryService.getSearchCatalog(y, p), JsonRequestBehavior.AllowGet);
+            var result = await GyglCategoryService.getSearchCatalog(y, p);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetDefaultCategoryList()
+        public async Task<JsonResult> GetDefaultCategoryList()
         {
-            return Json(CategoryService.getCategoryList(), JsonRequestBehavior.AllowGet);
+            var result = await CategoryService.getCategoryList();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetCurrentPeriod()
+        public async Task<JsonResult> GetCurrentPeriod()
         {
-            return Json(GyglService.getCurrentPeriod(),JsonRequestBehavior.AllowGet);
+            var result = await GyglService.getCurrentPeriod();
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
 
         public PartialViewResult Search()

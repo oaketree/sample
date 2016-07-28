@@ -11,8 +11,8 @@ namespace Gygl.BLL.News.Service
 {
     public interface INewsService : IRepository<New>
     {
-        IQueryable<NewsViewModel> getNewsList(int column, int count);
-        PageNewsViewModel getPagedNewsList(int pageSize, int page);
-        NewsViewModel getNewsById(int id);
+        Task<IQueryable<NewsViewModel>> getNewsList(int column, int count);
+        Task<PageNewsViewModel> getPagedNewsList(int pageSize, int page);
+        Task<NewsViewModel> getNewsById(int id);
     }
 }

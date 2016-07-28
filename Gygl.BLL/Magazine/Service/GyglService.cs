@@ -80,7 +80,7 @@ namespace Gygl.BLL.Magazine.Service
                 fa = FindAll(n => n.Period == period).OrderByDescending(o => o.Year);
                 //qe = QueryEntity(n => n.Period == period, o => o.Year, false);
             }
-            var c = fa.Count();
+            var c = await Count(fa); 
             if (c!=0)
             {
                 var fbp = FindByPageAsync(fa, pageSize, page, s => new GyglViewModel
@@ -126,9 +126,10 @@ namespace Gygl.BLL.Magazine.Service
         }
 
 
-        public GyglTitleViewModel getCurrentPeriod()
+        public async Task<GyglTitleViewModel> getCurrentPeriod()
         {
-            var period = QueryEntity(null, o => o.RegDate, false).FirstOrDefault();
+            var fa = FindAll().OrderByDescending(o => o.RegDate);
+            var period = await GetAsync(fa);
             var gtvm = new GyglTitleViewModel
             {
                 ID = period.ID,

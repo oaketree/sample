@@ -3,6 +3,7 @@ using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,19 +13,22 @@ namespace Gygl.WebPage.Controllers
     {
         [Dependency]
         public INewsService NewsService { get; set; }
-        public JsonResult GetNewsList(int count)
+        public async Task<JsonResult> GetNewsList(int count)
         {
-            return Json(NewsService.getNewsList(101,count),JsonRequestBehavior.AllowGet);
+            var result = await NewsService.getNewsList(101, count);
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetPagedNewsList(int page)
+        public async Task<JsonResult> GetPagedNewsList(int page)
         {
-            return Json(NewsService.getPagedNewsList(20, page), JsonRequestBehavior.AllowGet);
+            var result = await NewsService.getPagedNewsList(20, page);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetNews(int newsId)
+        public async Task<JsonResult> GetNews(int newsId)
         {
-            return Json(NewsService.getNewsById(newsId), JsonRequestBehavior.AllowGet);
+            var result = await NewsService.getNewsById(newsId);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public PartialViewResult ReadNews()

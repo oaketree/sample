@@ -11,9 +11,10 @@ namespace Gygl.BLL.Magazine.Service
 {
     public class CategoryService: RepositoryBase<Category, WebDBContext>, ICategoryService
     {
-        public object getCategoryList()
+        public async Task<object> getCategoryList()
         {
-            var li = FindAll().OrderBy(o => o.SortID).Select(s => new 
+            var fa = FindAll().OrderBy(o => o.SortID);
+            var li = await FindAllAsync(fa, s => new
             {
                 Category = s.Name,
                 CategoryID = s.ID
