@@ -82,6 +82,7 @@
     <Compile Include="Magazine\Service\ImageService.cs" />
     <Compile Include="Magazine\ViewModels\CatalogViewModel.cs" />
     <Compile Include="Magazine\ViewModels\GyglViewModel.cs" />
+    <Compile Include="Magazine\ViewModels\ImgeViewModel.cs" />
     <Compile Include="Magazine\ViewModels\PageArticleViewModel.cs" />
     <Compile Include="Magazine\ViewModels\PageGyglViewModel.cs" />
     <Compile Include="News\Service\INewsService.cs" />

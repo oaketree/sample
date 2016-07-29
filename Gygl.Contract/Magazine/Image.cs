@@ -10,16 +10,17 @@ namespace Gygl.Contract.Magazine
         [Key]
         public int ID { get; set; }
 
-        public int ArticleID { get; set; }
+        public int? ArticleID { get; set; }
 
         [StringLength(50)]
         public string ImageID { get; set; }
 
         public int? SortID { get; set; }
 
-        [StringLength(50)]
-        public string Guid { get; set; }
+        public int? GyglID { get; set; }
 
+        [StringLength(100)]
+        public string Url { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? RegDate { get; set; }
 
