@@ -13,5 +13,6 @@ namespace Gygl.BLL.Magazine.Service
         Task<List<int>> getArticleList(int gyglId);
         Task updateHit(int aid);
         Task<object> getFirstPages(int pid);
+        Task<object> getPages(int aid);
     }
 }

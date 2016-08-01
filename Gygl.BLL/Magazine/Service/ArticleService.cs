@@ -105,8 +105,17 @@ namespace Gygl.BLL.Magazine.Service
 
         public async Task<object> getFirstPages(int pid)
         {
-            var ppid = await GetAsync(n => n.GyglID == pid);
-            var result = await ImageService.getArticlePages(ppid.ID);
+            var aid = await GetAsync(n => n.GyglID == pid);
+            //var result = await ImageService.getArticlePages(aid.ID);
+            var result = await ImageService.getMixedPages(pid, aid.ID);
+            return result;
+        }
+
+        public async Task<object> getPages(int aid)
+        {
+            var pid = await GetAsync(n => n.ID==aid);
+            //var result = await ImageService.getArticlePages(aid);
+            var result = await ImageService.getMixedPages(pid.GyglID.Value, aid);
             return result;
         }
 

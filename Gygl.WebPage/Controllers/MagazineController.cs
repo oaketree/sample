@@ -17,8 +17,8 @@ namespace Gygl.WebPage.Controllers
         [Dependency]
         public IGyglService GyglService { get; set; }
 
-        [Dependency]
-        public IImageService ImageService { get; set; }
+        //[Dependency]
+        //public IImageService ImageService { get; set; }
 
 
         [Dependency]
@@ -123,7 +123,8 @@ namespace Gygl.WebPage.Controllers
         public async Task<JsonResult> GetPages(int aid)
         {
             await ArticleService.updateHit(aid);
-            var result = await ImageService.getArticlePages(aid);
+            //var result = await ImageService.getArticlePages(aid);
+            var result = await ArticleService.getPages(aid);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

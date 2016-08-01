@@ -52,11 +52,12 @@
 }]);
 app.controller("periodicalCtrl", ['$scope', 'ajaxService', '$routeParams', 'navService', function ($scope, ajaxService, $routeParams, navService) {
     var aid = $routeParams.aid;
+    var pid = $routeParams.id;
     if (aid != null) {
         ajaxService.getPages(aid)
             .then(function (data) {
                 $scope.pages = data;
-                ajaxService.getArticleList($routeParams.id)
+                ajaxService.getArticleList(pid)
         .then(function (data) {
             var o = navService.init(data, parseInt(aid));
             $scope.nav = {
@@ -67,10 +68,10 @@ app.controller("periodicalCtrl", ['$scope', 'ajaxService', '$routeParams', 'navS
             })
 
     } else {
-        ajaxService.getFirstPages($routeParams.id)
+        ajaxService.getFirstPages(pid)
        .then(function (data) {
            $scope.pages = data;
-           ajaxService.getArticleList($routeParams.id)
+           ajaxService.getArticleList(pid)
        .then(function (data) {
            var o = navService.init(data, 0);
            $scope.nav = {
@@ -88,7 +89,7 @@ app.controller("periodicalCtrl", ['$scope', 'ajaxService', '$routeParams', 'navS
             .then(function (data) {
                 $scope.pages = data;
                 $(document).scrollTop(0);
-                ajaxService.getArticleList($routeParams.id).then(function (data) {
+                ajaxService.getArticleList(pid).then(function (data) {
                     var o = navService.init(data, aid);
                     $scope.nav = {
                         up: o.getNavAid().up(),
