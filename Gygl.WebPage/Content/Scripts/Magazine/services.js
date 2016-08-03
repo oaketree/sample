@@ -154,44 +154,47 @@ fac.factory('ajaxService', ['$q', '$http', function ($q, $http) {
 
 fac.factory('navService', function () {
     var getIndex = function (articlelist, index) {
-        var service = {
-            up: function () {
-                if (index > 0)
-                    return articlelist[index - 1];
-                else
-                    return articlelist[0];
-            }, down: function () {
-                if (index == articlelist.length - 1)
-                    return articlelist[index];
-                else
-                    return articlelist[index + 1];
-            }
+        this.up = function () {
+            if (index > 0)
+                return articlelist[index - 1];
+            else
+                return articlelist[0];
         }
-        return service;
+        this.down = function () {
+            if (index == articlelist.length - 1)
+                return articlelist[index];
+            else
+                return articlelist[index + 1];
+        }
     }
+        //var service = {
+        //    up: function () {
+        //        if (index > 0)
+        //            return articlelist[index - 1];
+        //        else
+        //            return articlelist[0];
+        //    }, down: function () {
+        //        if (index == articlelist.length - 1)
+        //            return articlelist[index];
+        //        else
+        //            return articlelist[index + 1];
+        //    }
+        //}
+        //return service;
+    //}
     var service = {
         init: function (data, index) {
             var o = {};
             var d = eval(data);
             o.getNavIndex = function () {
-                return getIndex(d, index);
+                return new getIndex(d, index);
             };
             o.getNavAid = function () {
                 var p = d.indexOf(index);
-                return getIndex(d, p)
+                return new getIndex(d, p)
             }
             return o;
         }
-        //, getNavIndex: function (data, index) {
-        //    var articlelist = [];
-        //    articlelist = eval(data);
-        //    return getIndex(articlelist, index);
-        //}, getNavAid: function (data, aid) {
-        //    var articlelist = [];
-        //    articlelist = eval(data);
-        //    var p = articlelist.indexOf(aid);
-        //    return getIndex(articlelist, p)
-        //}
     }
     return service;
 })
