@@ -50,9 +50,17 @@
         }
     }
 }]);
-app.controller("periodicalCtrl", ['$scope', 'ajaxService', '$routeParams', 'navService', function ($scope, ajaxService, $routeParams, navService) {
+app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navService', function ($scope, ajaxService, $routeParams, navService) {
     var aid = $routeParams.aid;
     var pid = $routeParams.id;
+    ajaxService.getPeriod(pid)
+    .then(function (data) {
+        $scope.period = data;
+    })
+    ajaxService.getCatalog(pid)
+        .then(function (data) {
+            $scope.catalog = data;
+        })
     if (aid != null) {
         ajaxService.getPages(aid)
             .then(function (data) {
@@ -66,7 +74,6 @@ app.controller("periodicalCtrl", ['$scope', 'ajaxService', '$routeParams', 'navS
             }
         })
             })
-
     } else {
         ajaxService.getFirstPages(pid)
        .then(function (data) {
@@ -101,7 +108,7 @@ app.controller("periodicalCtrl", ['$scope', 'ajaxService', '$routeParams', 'navS
         currentaid = aid;
     }
 }]);
-app.controller("yearCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
+app.controller("yearSearchCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
     var y = $routeParams.year;
     var p = $routeParams.period;
     var page = $routeParams.page;
@@ -122,11 +129,10 @@ app.controller("yearCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchServ
             $scope.periods = data.Entity;
             var ele = $compile(searchService.getNav(data))($scope)
             angular.element(document.getElementById('pagingdata')).empty().append(ele);
-            //$scope.nav = $sce.trustAsHtml(searchService.getNav(data));
         })
     }
 }]);
-app.controller("articleCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
+app.controller("articleSearchCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
     var y = $routeParams.year;
     var p = $routeParams.period;
     var c = $routeParams.category;
@@ -145,4 +151,42 @@ app.controller("articleCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchS
             angular.element(document.getElementById('pagingdata')).empty().append(ele);
         })
     }
+}]);
+
+app.controller("periodSearchCtrl", ['$scope', '$routeParams', 'ajaxService', '$location', function ($scope, $routeParams, ajaxService, $location) {
+    var y = $routeParams.year;
+    var p = $routeParams.period;
+    ajaxService.getSelectPeriod(y, p).then(function (data) {
+        if (data !="")
+            $scope.cr = data;
+        else {
+            alert("数据还未录入");
+            $location.path("/GetPeriod");
+        }
+    })
+}]);
+
+app.controller("copyRightCtrl", ['$scope', 'ajaxService', '$routeParams','$location', function ($scope, ajaxService, $routeParams, $location) {
+    var pid = $routeParams.id;
+    ajaxService.getCopyRight(pid)
+    .then(function (data) {
+        if (data != "")
+            $scope.cr = data;
+        else {
+            alert("数据还未录入");
+            $location.path("/GetPeriod");
+        }
+    })
+}]);
+app.controller("councilCtrl", ['$scope', 'ajaxService', '$routeParams', '$location', function ($scope, ajaxService, $routeParams, $location) {
+    var pid = $routeParams.id;
+    ajaxService.getCopyRight(pid)
+    .then(function (data) {
+        if (data != "")
+            $scope.cr = data;
+        else {
+            alert("数据还未录入");
+            $location.path("/GetPeriod2");
+        }
+    })
 }]);

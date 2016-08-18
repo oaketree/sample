@@ -1,22 +1,15 @@
-﻿@model List<Gygl.BLL.Magazine.ViewModels.CatalogViewModel>
-<div id="q_topml">
+﻿<div id="q_topml">
     <div id="muread" show-catalog>目录</div>
     <div id="msgDiv">
         <div id="muludetail">
             <div class="subNav readmulutit"><img src="/Content/images/readgygl.gif" width="122" height="26" /></div>
             <div class="readmululine"></div>
-            @foreach (var item in Model)
-            {
-                <div class="subNavtit">
-                    <span class="icon-list readleftli"></span>&nbsp;<a href="javascript:void(0)" class="subNav" show-sub>@item.Category</a>
+                <div class="subNavtit" ng-repeat="item in catalog">
+                    <span class="icon-list readleftli"></span>&nbsp;<a href="javascript:void(0)" class="subNav" show-sub>{{item.Category}}</a>
                     <ul>
-                        @foreach (var subItem in item.Title)
-                        {
-                            <li><span class="icon-caret-right">&nbsp;</span><a href="javascript:void(0)" ng-click="click(@subItem.Url)">@subItem.Title</a></li>
-                        }
+                            <li ng-repeat="subItem in item.Title"><span class="icon-caret-right">&nbsp;</span><a href="javascript:void(0)" ng-click="click(subItem.Url)">{{subItem.Title}}</a></li>
                     </ul>
                 </div>
-            }
         </div>
     </div>
 </div>

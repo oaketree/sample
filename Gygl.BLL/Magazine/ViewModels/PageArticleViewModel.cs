@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gygl.BLL.Magazine.ViewModels
 {
-    public class PageArticleViewModel:PageInfo<TilteViewModel>
+    public class PageArticleViewModel:PageInfo<TitleViewModel>
     {
         public string Category { get; set; }
     }

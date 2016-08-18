@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gygl.BLL.Magazine.ViewModels
 {
-    public class ImgeViewModel
+    public class ImageViewModel
     {
         public string ImageID { get; set; }
         public string Url { get; set; }

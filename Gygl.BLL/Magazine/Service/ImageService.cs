@@ -26,11 +26,11 @@ namespace Gygl.BLL.Magazine.Service
         /// <param name="gyglid"></param>
         /// <param name="aid"></param>
         /// <returns></returns>
-        public async Task<List<ImgeViewModel>> getMixedPages(int gyglid,int aid)
+        public async Task<List<ImageViewModel>> getMixedPages(int gyglid,int aid)
         {
             var fa = FindAll(n => n.ArticleID == aid).OrderBy(o => o.SortID);
             var pageCount = await Count(fa);
-            var listArticle = await FindAllAsync(fa, s => new ImgeViewModel {
+            var listArticle = await FindAllAsync(fa, s => new ImageViewModel {
                 ImageID = s.ImageID,
                 Url = "javascript:void(0)",
                 Location= "Page"
@@ -40,11 +40,11 @@ namespace Gygl.BLL.Magazine.Service
                 return listArticle.ToList();
             return crossPage(listArticle.ToList(), listAd.ToList());
         }
-        private List<ImgeViewModel> crossPage(List<ImgeViewModel> page, List<ImgeViewModel> ad)
+        private List<ImageViewModel> crossPage(List<ImageViewModel> page, List<ImageViewModel> ad)
         {
             int common = ad.Count();
             int max = page.Count();
-            var endList = new ImgeViewModel[common+max];
+            var endList = new ImageViewModel[common+max];
             int j = 0;
             for (int i = 0; i < common; i++)
             {
@@ -59,7 +59,7 @@ namespace Gygl.BLL.Magazine.Service
         }
 
 
-        private async Task<IQueryable<ImgeViewModel>> getAd(int gyglid,int pageCount)
+        private async Task<IQueryable<ImageViewModel>> getAd(int gyglid,int pageCount)
         {
             var fa = FindAll(n => n.GyglID == gyglid);
             var count = await Count(fa);
@@ -72,7 +72,7 @@ namespace Gygl.BLL.Magazine.Service
             else
                 totalCount = halfPageCount;
             var newfa = FindAll(n => n.GyglID == gyglid).OrderBy(o => Guid.NewGuid()).Take(totalCount);
-            var list = await FindAllAsync(newfa, s => new ImgeViewModel
+            var list = await FindAllAsync(newfa, s => new ImageViewModel
             {
                 ImageID = s.ImageID,
                 Url = s.Url,

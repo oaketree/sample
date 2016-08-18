@@ -1,43 +1,41 @@
 ﻿app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
     .when('/Periodical/:id', {
-        templateUrl: function ($routeParams) {
-            return '/Magazine/Periodical/' + $routeParams.id;
-        },
-        controller: 'periodicalCtrl'
+        templateUrl: '/Magazine/Periodical',
+        controller: 'articleCtrl'
     })
         .when('/Periodical/:id/:aid', {
-            templateUrl: function ($routeParams) {
-                return '/Magazine/Periodical/' + $routeParams.id;
-            },
-            controller: 'periodicalCtrl'
+            templateUrl: '/Magazine/Periodical',
+            controller: 'articleCtrl'
         })
     .when('/SelectYear', {
         templateUrl: '/Magazine/SelectYear',
-        controller: 'yearCtrl'
+        controller: 'yearSearchCtrl'
     })
     .when('/SelectArticle', {
         templateUrl: '/Magazine/SelectArticle',
-        controller: 'articleCtrl'
+        controller: 'articleSearchCtrl'
     })
      .when('/SelectPeriod', {
-         templateUrl: function ($routeParams) {
-             return '/Magazine/SelectPeriod?year=' + $routeParams.year + '&period=' + $routeParams.period;
-         }
+         templateUrl: '/Magazine/CopyRight',
+         controller: 'periodSearchCtrl'
      })
     .when('/GetPeriod/:id', {
-        templateUrl: function ($routeParams) {
-            return '/Magazine/GetPeriod/' + $routeParams.id;
-        }
+        templateUrl: '/Magazine/CopyRight',
+        controller: 'copyRightCtrl'
     })
      .when('/GetPeriod', {
-         templateUrl: '/Magazine/GetPeriod'
+         templateUrl: '/Magazine/CopyRight',
+         controller: 'copyRightCtrl'
      })
     .when('/GetPeriod2/:id', {
-        templateUrl: function ($routeParams) {
-            return '/Magazine/GetPeriod2/' + $routeParams.id;
-        }
+        templateUrl: '/Magazine/Council',
+        controller: 'councilCtrl'
     })
+   .when('/GetPeriod2', {
+       templateUrl: '/Magazine/Council',
+       controller: 'councilCtrl'
+   })
     .otherwise({
         redirectTo: '/GetPeriod'
     });

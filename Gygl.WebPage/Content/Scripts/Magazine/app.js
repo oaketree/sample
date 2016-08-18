@@ -6,3 +6,8 @@ app.config([
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|sms|javascript):/);
     }
 ]);
+app.filter('trustHtml', ['$sce', function ($sce) {
+    return function (input) {
+        return $sce.trustAsHtml(input);
+    }
+}]);

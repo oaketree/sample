@@ -71,7 +71,47 @@
 
 fac.factory('ajaxService', ['$q', '$http', function ($q, $http) {
     var service = {
-        getFirstPages: function (pid) {
+        getSelectPeriod: function (y,p) {
+            var d = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/Magazine/GetSelectPeriod',
+                params: { "year": y, "period": p }
+            }).success(function (data) {
+                d.resolve(data);
+            }).error(function (data) {
+                d.reject(data);
+            })
+            return d.promise;
+        }, getCopyRight: function (id) {
+            var d = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/Magazine/GetCopyRight',
+                params: { "id": id }
+            }).success(function (data) {
+                d.resolve(data);
+            }).error(function (data) {
+                d.reject(data);
+            })
+            return d.promise;
+        }, getCatalog: function (id) {
+            var d = $q.defer();
+            $http.get('/Magazine/GetCatalog?id=' + id).success(function (data) {
+                d.resolve(data);
+            }).error(function (data) {
+                d.reject(data);
+            })
+            return d.promise;
+        }, getPeriod: function (pid) {
+            var d = $q.defer();
+            $http.get('/Magazine/GetPeriod?id=' + pid).success(function (data) {
+                d.resolve(data);
+            }).error(function (data) {
+                d.reject(data);
+            })
+            return d.promise;
+        }, getFirstPages: function (pid) {
             var d = $q.defer();
             $http.get('/Magazine/GetFirstPages?pid=' + pid).success(function (data) {
                 d.resolve(data);

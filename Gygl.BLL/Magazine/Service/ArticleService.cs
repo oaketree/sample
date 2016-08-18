@@ -22,14 +22,15 @@ namespace Gygl.BLL.Magazine.Service
         public IImageService ImageService { get; set; }
 
         //分布视图不支持异步
-        public List<TilteViewModel> getTitle(int gyglid,int categoryid)
+        public async Task<IQueryable<TitleViewBase>> getTitle(int gyglid,int categoryid)
         {
-            var li = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid).Select(s => new TilteViewModel
+            var fa = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid);
+            var li = await FindAllAsync(fa, s => new TitleViewBase
             {
                 Title = s.Title,
                 Url = s.ID.ToString()
             });
-            return li.ToList();
+            return li;
         }
         public async Task<List<int>> getArticleList(int gyglId)
         {
@@ -76,7 +77,7 @@ namespace Gygl.BLL.Magazine.Service
             var c = await Count(qe);
             if (c!=0)
             {
-                var fbp = FindByPageAsync(qe, pageSize, page, s => new TilteViewModel
+                var fbp = FindByPageAsync(qe, pageSize, page, s => new TitleViewModel
                 {
                     Title = s.Title,
                     Url = s.ID.ToString(),
@@ -106,7 +107,6 @@ namespace Gygl.BLL.Magazine.Service
         public async Task<object> getFirstPages(int pid)
         {
             var aid = await GetAsync(n => n.GyglID == pid);
-            //var result = await ImageService.getArticlePages(aid.ID);
             var result = await ImageService.getMixedPages(pid, aid.ID);
             return result;
         }

@@ -380,8 +380,8 @@
     <Content Include="Views\Magazine\RightNav.cshtml" />
     <Content Include="Views\Magazine\Index.cshtml" />
     <Content Include="Views\Magazine\SelectYear.cshtml" />
-    <Content Include="Views\Magazine\GetPeriod.cshtml" />
-    <Content Include="Views\Magazine\GetPeriod2.cshtml" />
+    <Content Include="Views\Magazine\CopyRight.cshtml" />
+    <Content Include="Views\Magazine\Council.cshtml" />
     <Content Include="Views\Magazine\SelectArticle.cshtml" />
     <Content Include="Views\Home\Top2.cshtml" />
     <Content Include="Views\Home\Top3.cshtml" />

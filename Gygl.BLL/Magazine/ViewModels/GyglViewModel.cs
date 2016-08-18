@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gygl.BLL.Magazine.ViewModels
 {
-    public class GyglViewModel
+    public class GyglViewModel:PeriodViewModel
     {
-        public int ID { get; set; }
-        public int Year { get; set; }
-        public int Period { get; set; }
-        public int TotalPeriod { get; set; }
         public string CoverImage { get; set; }
         public int Up { get; set; }
         public int Down { get; set; }
@@ -20,12 +16,8 @@ namespace Gygl.BLL.Magazine.ViewModels
         public string CopyRight { get; set; }
     }
 
-    public class GyglTitleViewModel {
-        public int ID { get; set; }
-        public int Year { get; set; }
-        public int Period { get; set; }
-
-        public IEnumerable<TilteViewModel> Title { get; set; }
+    public class GyglTitleViewModel :PeriodViewModel{
+        public IEnumerable<TitleViewModel> Title { get; set; }
     }
 
 }

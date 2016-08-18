@@ -55,7 +55,7 @@ namespace Core.DAL
         {
             return Task.Run(() =>
             {
-                return MyDbSet.FirstOrDefault();
+                return FindAll.FirstOrDefault();
             });
         }
         public virtual Task<int> Count(IQueryable<T1> FindAll)

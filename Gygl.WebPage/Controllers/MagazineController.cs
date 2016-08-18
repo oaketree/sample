@@ -17,10 +17,6 @@ namespace Gygl.WebPage.Controllers
         [Dependency]
         public IGyglService GyglService { get; set; }
 
-        //[Dependency]
-        //public IImageService ImageService { get; set; }
-
-
         [Dependency]
         public IArticleService ArticleService { get; set; }
 
@@ -28,29 +24,39 @@ namespace Gygl.WebPage.Controllers
         public ICategoryService CategoryService { get; set; }
 
 
-        //public async Task<PartialViewResult> CatalogAsync(int id)
-        //{
-        //    var result = await GyglCategoryService.getCatalogByID(id);
-        //    return PartialView(result);
-        //}
-
-        public PartialViewResult Catalog(int id)
+        public PartialViewResult Catalog()
         {
-            return PartialView(GyglCategoryService.getCatalogByID(id));
+            //return PartialView(GyglCategoryService.getCatalogByID(id));
+            return PartialView();
         }
+
+        public async Task<JsonResult> GetCatalog(int id)
+        {
+            var result = await GyglCategoryService.getCatalogByID(id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
         public PartialViewResult RightNav()
         {
             return PartialView();
         }
-        public PartialViewResult Periodical(int id)
+        public PartialViewResult Periodical()
         {
-            var ret = GyglService.getPeriodicalById(id);
-            if (ret != null)
-                return PartialView(GyglService.getPeriodicalById(id));
-            else
-                return null;
+            //var ret = GyglService.getPeriodicalById(id);
+            //if (ret != null)
+            //    return PartialView(GyglService.getPeriodicalById(id));
+            //else
+            //    return null;
+            return PartialView();
         }
+
+        public async Task<JsonResult> GetPeriod(int id)
+        {
+            var result = await GyglService.getPeriod(id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
         public PartialViewResult SelectYear()
         {
@@ -88,36 +94,55 @@ namespace Gygl.WebPage.Controllers
         }
 
 
-        public PartialViewResult SelectPeriod(int year, int period)
+        //public PartialViewResult SelectPeriod(int year, int period)
+        //{
+        //    var ret = GyglService.getPeriodBySearch(year, period);
+        //    if (ret != null)
+        //        return PartialView("CopyRight", ret);
+        //    return null;
+        //}
+        public async Task<JsonResult> GetSelectPeriod(int year, int period)
         {
-            var ret = GyglService.getPeriodBySearch(year, period);
-            if (ret != null)
-                return PartialView("GetPeriod", ret);
-            return null;
+            var result = await GyglService.getPeriodBySearch(year, period);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
+
 
 
 
         /// <summary>
-        /// 版权页
+        /// 版权页CopyRight
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
-        public PartialViewResult GetPeriod(int? id)
+        public PartialViewResult CopyRight()
         {
-            return PartialView(GyglService.getPeriodicalById(id));
+            //return PartialView(GyglService.getPeriodicalById(id));
+            return PartialView();
         }
+
+        public async Task<JsonResult> GetCopyRight(int? id)
+        {
+            var result = await GyglService.getPeriodicalById(id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// 理事会
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-
-        public PartialViewResult GetPeriod2(int id)
+        public PartialViewResult Council()
         {
-            return PartialView(GyglService.getPeriodicalById(id));
+            return PartialView();
         }
+        //用版权页获取
+        //public async Task<JsonResult> GetCouncil(int? id)
+        //{
+        //    var result = await GyglService.getPeriodicalById(id);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
 
         public async Task<JsonResult> GetPages(int aid)
@@ -151,7 +176,7 @@ namespace Gygl.WebPage.Controllers
             var result = await CategoryService.getCategoryList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        //首页的10条栏目
         public async Task<JsonResult> GetCurrentPeriod()
         {
             var result = await GyglService.getCurrentPeriod();

@@ -1,24 +1,23 @@
-﻿@model Gygl.BLL.Magazine.ViewModels.GyglViewModel
-<div id="q_top05">
+﻿<div id="q_top05">
     <div id="m_top05">
         <div id="top05">
             <div class="top05_01" id="readbq">
                 <div class="blank30"></div>
                 <div id="readfeng">
                     <div class="readfengzuo">
-                        <div><img src="/Content/Upload/Magazine/Cover/@Model.CoverImage" width="236" height="320" /></div>
+                        <div><img src="/Content/Upload/Magazine/Cover/{{cr.CoverImage}}" width="236" height="320" /></div>
                         <div class="readdg blanktop20">
-                            <div class="readingbtn blankleft30 "><a href="#/GetPeriod2/@Model.Up">上一期</a></div><div>&nbsp; </div><div class="readingbtn"><a href="#/GetPeriod2/@Model.Down">下一期</a></div>
+                            <div class="readingbtn blankleft30 "><a href="#/GetPeriod2/{{cr.Up}}">上一期</a></div><div>&nbsp; </div><div class="readingbtn"><a href="#/GetPeriod2/{{cr.Down}}">下一期</a></div>
                         </div>
                     </div>
                     <div class="readfengyou">
                         <div class="readqishuyou">
-                            <div class="blanktop20"><span class="readtitqishu">@Model.Year 年第 @Model.Period 期</span></div>
+                            <div class="blanktop20"><span class="readtitqishu">{{cr.Year}} 年第 {{cr.Period}} 期</span></div>
                             <div class="blank20"></div>
                             <div id="readqishuyouchai">
                                 <div class="readqishuyouchai_left">
-                                    <span class="readlan">出版日期：</span>@Model.Publish<br />
-                                    <span class="readlan">周&nbsp; &nbsp; 期：</span>双月刊(总第 @Model.TotalPeriod 期)<br />
+                                    <span class="readlan">出版日期：</span>{{cr.Publish}}<br />
+                                    <span class="readlan">周&nbsp; &nbsp; 期：</span>双月刊(总第 {{cr.TotalPeriod}} 期)<br />
                                     <span class="readlan">主办单位：</span>上海工业锅炉研究所<br />
                                     <span class="readlan">ISSN：</span>1004-8774<br />
                                     <span class="readlan"> 广告经营许可证：</span>3100820110002号<br />
@@ -36,7 +35,7 @@
                         <div class="blank10"></div>
                         <div class="readdg readdgyou blanktop20">
                             <div class="readbtn readbtndg"><a href="@Url.Action("Order","Static")">订&nbsp; 购</a></div>
-                            <div class="readbtn readbtnyd"><a href="#/Periodical/@Model.ID">在线阅读</a></div>
+                            <div class="readbtn readbtnyd"><a href="#/Periodical/{{cr.ID}}">在线阅读</a></div>
                             @*<div class="readbtn readbtnxz"><a href="#">下载本期</a></div>*@
                         </div>
                     </div>
@@ -45,7 +44,7 @@
                 <div class="blank30"></div>
                 <div id="lsh">《工业锅炉》杂志理事会</div>
                 <div class="mingyuzhubian01">
-                    @Html.Raw(Model.Council)
+                    <article ng-bind-html="cr.Council|trustHtml"></article>
                 </div>
             </div>
         </div>
