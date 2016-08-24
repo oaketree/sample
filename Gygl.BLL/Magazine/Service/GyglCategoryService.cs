@@ -26,14 +26,14 @@ namespace Gygl.BLL.Magazine.Service
             //    SortID = s.Category.SortID.Value,
             //    CategoryID = s.CategoryID.Value,
             //});
-            var fa = FindAll(n => n.GyglID == gyglid);
+            var fa = FindAll(n => n.GyglID == gyglid).OrderBy(o=>o.Category.SortID);
             var list = await FindAllAsync(fa, s => new {
                 Category = s.Category.Name,
-                SortID = s.Category.SortID.Value,
+                //SortID = s.Category.SortID.Value,
                 CategoryID = s.CategoryID.Value,
             });
-            var sortedList=list.OrderBy(o => o.SortID);
-            foreach (var item in sortedList)
+            //var sortedList=list.OrderBy(o => o.SortID);
+            foreach (var item in list)
             {
                 cvm.Add(new CatalogViewModel
                 {
@@ -43,10 +43,6 @@ namespace Gygl.BLL.Magazine.Service
             }
             return cvm;
         }
-
-
-
-
 
 
         //查询xx年x期的目录

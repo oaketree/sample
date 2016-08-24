@@ -56,24 +56,24 @@ app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navServ
     ajaxService.getPeriod(pid)
     .then(function (data) {
         $scope.period = data;
-    })
-    ajaxService.getCatalog(pid)
+        ajaxService.getCatalog(pid)
         .then(function (data) {
             $scope.catalog = data;
         })
+    })
     if (aid != null) {
         ajaxService.getPages(aid)
-            .then(function (data) {
-                $scope.pages = data;
-                ajaxService.getArticleList(pid)
         .then(function (data) {
-            var o = navService.init(data, parseInt(aid));
-            $scope.nav = {
-                up: o.getNavAid().up(),
-                down: o.getNavAid().down()
-            }
+            $scope.pages = data;
+            ajaxService.getArticleList(pid)
+    .then(function (data) {
+        var o = navService.init(data, parseInt(aid));
+        $scope.nav = {
+            up: o.getNavAid().up(),
+            down: o.getNavAid().down()
+        }
+    })
         })
-            })
     } else {
         ajaxService.getFirstPages(pid)
        .then(function (data) {

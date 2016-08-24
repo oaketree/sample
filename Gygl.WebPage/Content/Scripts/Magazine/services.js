@@ -97,7 +97,11 @@ fac.factory('ajaxService', ['$q', '$http', function ($q, $http) {
             return d.promise;
         }, getCatalog: function (id) {
             var d = $q.defer();
-            $http.get('/Magazine/GetCatalog?id=' + id).success(function (data) {
+            $http({
+                method: 'GET',
+                url: '/Magazine/GetCatalog',
+                params: { "id": id }
+            }).success(function (data) {
                 d.resolve(data);
             }).error(function (data) {
                 d.reject(data);
