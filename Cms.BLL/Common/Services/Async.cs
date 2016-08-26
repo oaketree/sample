@@ -10,6 +10,7 @@ namespace Cms.BLL.Common.Services
     {
         public Task<double> GetValueAsync(double num1, double num2)
         {
+            //Array.ForEach()
             return Task.Run(() =>
             {
                 for (int i = 0; i < 1000000; i++)
