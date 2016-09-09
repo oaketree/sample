@@ -13,6 +13,8 @@ namespace Gygl.WebPage.Controllers
     {
         [Dependency]
         public INewsService NewsService { get; set; }
+
+        [OutputCache(Duration = 120)]
         public async Task<JsonResult> GetNewsList(int count)
         {
             var result = await NewsService.getNewsList(101, count);
@@ -31,16 +33,19 @@ namespace Gygl.WebPage.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [OutputCache(Duration = 120)]
         public PartialViewResult ReadNews()
         {
             return PartialView();
         }
 
-
+        [OutputCache(Duration = 120)]
         public PartialViewResult NewsList()
         {
             return PartialView();
         }
+
+        [OutputCache(Duration = 120)]
         public ActionResult Index()
         {
             return View();

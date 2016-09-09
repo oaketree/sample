@@ -24,6 +24,7 @@ namespace Gygl.WebPage.Controllers
         public ICategoryService CategoryService { get; set; }
 
 
+        [OutputCache(Duration = 120)]
         public PartialViewResult Catalog()
         {
             //return PartialView(GyglCategoryService.getCatalogByID(id));
@@ -36,11 +37,13 @@ namespace Gygl.WebPage.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        [OutputCache(Duration = 120)]
         public PartialViewResult RightNav()
         {
             return PartialView();
         }
+
+        [OutputCache(Duration = 120)]
         public PartialViewResult Periodical()
         {
             //var ret = GyglService.getPeriodicalById(id);
@@ -57,7 +60,7 @@ namespace Gygl.WebPage.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        [OutputCache(Duration = 120)]
         public PartialViewResult SelectYear()
         {
             return PartialView();
@@ -75,6 +78,7 @@ namespace Gygl.WebPage.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [OutputCache(Duration = 120)]
         public PartialViewResult SelectArticle()
         {
             return PartialView();
@@ -107,14 +111,12 @@ namespace Gygl.WebPage.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
         /// <summary>
         /// 版权页CopyRight
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
+        [OutputCache(Duration = 120)]
         public PartialViewResult CopyRight()
         {
             //return PartialView(GyglService.getPeriodicalById(id));
@@ -133,6 +135,7 @@ namespace Gygl.WebPage.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [OutputCache(Duration = 120)]
         public PartialViewResult Council()
         {
             return PartialView();
@@ -171,23 +174,27 @@ namespace Gygl.WebPage.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [OutputCache(Duration = 120)]
         public async Task<JsonResult> GetDefaultCategoryList()
         {
             var result = await CategoryService.getCategoryList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //首页的10条栏目
+        [OutputCache(Duration = 120)]
         public async Task<JsonResult> GetCurrentPeriod()
         {
             var result = await GyglService.getCurrentPeriod();
             return Json(result,JsonRequestBehavior.AllowGet);
         }
 
+        [OutputCache(Duration = 120)]
         public PartialViewResult Search()
         {
             return PartialView();
         }
 
+        [OutputCache(Duration = 120)]
         public ActionResult Index()
         {
             return View();
