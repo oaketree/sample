@@ -14,13 +14,14 @@ namespace Gygl.WebPage.Controllers
         [Dependency]
         public INewsService NewsService { get; set; }
 
-        [OutputCache(Duration = 120)]
+        [OutputCache(Duration = 120,VaryByParam ="count")]
         public async Task<JsonResult> GetNewsList(int count)
         {
             var result = await NewsService.getNewsList(101, count);
             return Json(result,JsonRequestBehavior.AllowGet);
         }
 
+        [OutputCache(Duration = 120, VaryByParam = "page")]
         public async Task<JsonResult> GetPagedNewsList(int page)
         {
             var result = await NewsService.getPagedNewsList(20, page);
