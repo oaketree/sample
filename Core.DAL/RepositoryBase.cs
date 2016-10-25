@@ -58,12 +58,14 @@ namespace Core.DAL
                 return FindAll.FirstOrDefault();
             });
         }
+
         public virtual Task<int> Count(IQueryable<T1> FindAll)
         {
             return Task.Run(()=> {
                 return FindAll.Count();
             });
         }
+
 
         public virtual Task<bool> Any(IQueryable<T1> FindAll, Expression<Func<T1, bool>> conditons)
         {
@@ -72,19 +74,25 @@ namespace Core.DAL
             });
         }
 
+        //public virtual bool IsExist(Expression<Func<T1, bool>> conditons)
+        //{
+        //    var entry = MyDbSet.Where(conditons).AsNoTracking();
+        //    return (entry.Any());
+        //}
 
-        public virtual bool IsExist(Expression<Func<T1, bool>> conditons)
-        {
-            var entry = MyDbSet.Where(conditons).AsNoTracking();
-            return (entry.Any());
-        }
-
-        public virtual Task<bool> IsExistAsync(Expression<Func<T1, bool>> conditons)
+        public virtual Task<bool> IsExist(Expression<Func<T1, bool>> conditons)
         {
             return Task.Run(() =>
             {
                 var entry = MyDbSet.Where(conditons).AsNoTracking();
                 return (entry.Any());
+            });
+        }
+        public virtual Task<bool> IsExist(IQueryable<T1> FindAll)
+        {
+            return Task.Run(() =>
+            {
+                return FindAll.Any();
             });
         }
         public virtual IQueryable<T1> FindAll(Expression<Func<T1, bool>> conditions = null)

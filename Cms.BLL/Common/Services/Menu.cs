@@ -39,25 +39,47 @@ namespace Cms.BLL.Common.Services
         public static List<MenuItem> CreateMenuItem(List<MenuItem> menuItems, Func<int, MenuItem> getparentmenuitem)
         {
             var lm = new List<MenuItem>();
-            Func<int, List<MenuItem>> addparentmenuitem = null;
-            addparentmenuitem = m =>
-             {
-                 if (m != 0)
-                 {
-                     var nm = new MenuItem();
-                     var pitem = getparentmenuitem(m);
-                     if (!lm.Contains(pitem, new MenuDistinct())&&!menuItems.Contains(pitem,new MenuDistinct()))
-                     {
-                         nm.MenuID = pitem.MenuID;
-                         nm.PID = pitem.PID;
-                         nm.MenuName = pitem.MenuName;
-                         nm.Url = pitem.Url;
-                         lm.Add(nm);
-                     }
-                     addparentmenuitem(nm.PID);
-                 }  
-                 return lm;
-             };
+
+            var addparentmenuitem = Combitator.Fix<int,List<MenuItem>>(f=>m=> 
+            {
+                if (m != 0)
+                {
+                    var nm = new MenuItem();
+                    var pitem = getparentmenuitem(m);
+                    if (!lm.Contains(pitem, new MenuDistinct()) && !menuItems.Contains(pitem, new MenuDistinct()))
+                    {
+                        nm.MenuID = pitem.MenuID;
+                        nm.PID = pitem.PID;
+                        nm.MenuName = pitem.MenuName;
+                        nm.Url = pitem.Url;
+                        lm.Add(nm);
+                    }
+                    f(nm.PID);
+                }
+                return lm;
+            });
+
+
+
+            //Func<int, List<MenuItem>> addparentmenuitem = null;
+            //addparentmenuitem = m =>
+            // {
+            //     if (m != 0)
+            //     {
+            //         var nm = new MenuItem();
+            //         var pitem = getparentmenuitem(m);
+            //         if (!lm.Contains(pitem, new MenuDistinct())&&!menuItems.Contains(pitem,new MenuDistinct()))
+            //         {
+            //             nm.MenuID = pitem.MenuID;
+            //             nm.PID = pitem.PID;
+            //             nm.MenuName = pitem.MenuName;
+            //             nm.Url = pitem.Url;
+            //             lm.Add(nm);
+            //         }
+            //         addparentmenuitem(nm.PID);
+            //     } 
+            //     return lm;
+            // };
             foreach (var item in menuItems)
             {
                 addparentmenuitem(item.PID);

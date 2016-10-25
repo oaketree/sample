@@ -22,39 +22,31 @@ namespace Gygl.WebPage
                         "~/Content/Scripts/gygl.js",
                         "~/Content/Scripts/Register/gygl.reg.js"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/contribute").Include(
+            //bundles.Add(new ScriptBundle("~/bundles/mag").Include(
+            //    "~/Content/Scripts/Magazine/app.js",
+            //    "~/Content/Scripts/Magazine/routers.js",
+            //    "~/Content/Scripts/Magazine/services.js",
+            //    "~/Content/Scripts/Magazine/controllers.js",
+            //    "~/Content/Scripts/Magazine/directives.js",
             //            "~/Content/Scripts/common.js",
-            //            "~/Content/Scripts/gygl.js",
-            //            "~/Content/Scripts/gygl.co.js"));
+            //            "~/Content/Scripts/gygl.js"
+            //            ));
 
-            bundles.Add(new ScriptBundle("~/bundles/mag").Include(
-                "~/Content/Scripts/Magazine/app.js",
-                "~/Content/Scripts/Magazine/routers.js",
-                "~/Content/Scripts/Magazine/services.js",
-                "~/Content/Scripts/Magazine/controllers.js",
-                "~/Content/Scripts/Magazine/directives.js",
-                        "~/Content/Scripts/common.js",
-                        "~/Content/Scripts/gygl.js"
-                        ));
+            bundles.Add(new ScriptBundle("~/bundles/mag")
+                .IncludeDirectory("~/Content/Scripts/Share", "*.js")
+                .IncludeDirectory("~/Content/Scripts/Magazine", "*.js")
+                .Include("~/Content/Scripts/common.js", "~/Content/Scripts/gygl.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/home").Include(
-                  "~/Content/Scripts/Home/app.js",
-                "~/Content/Scripts/Home/services.js",
-                "~/Content/Scripts/Home/controllers.js",
-                "~/Content/Scripts/Home/filter.js",
-                        "~/Content/Scripts/common.js",
-                        "~/Content/Scripts/gygl.js"
-                        ));
 
-            bundles.Add(new ScriptBundle("~/bundles/news").Include(
-                  "~/Content/Scripts/News/app.js",
-                "~/Content/Scripts/News/services.js",
-                "~/Content/Scripts/News/routers.js",
-                "~/Content/Scripts/News/controllers.js",
-                "~/Content/Scripts/News/filter.js",
-                        "~/Content/Scripts/common.js",
-                        "~/Content/Scripts/gygl.js"
-                        ));
+            bundles.Add(new ScriptBundle("~/bundles/home")
+                .IncludeDirectory("~/Content/Scripts/Home", "*.js")
+                .Include("~/Content/Scripts/common.js","~/Content/Scripts/gygl.js"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/news")
+                .IncludeDirectory("~/Content/Scripts/Share", "*.js")
+                .IncludeDirectory("~/Content/Scripts/News", "*.js")
+                .Include("~/Content/Scripts/common.js","~/Content/Scripts/gygl.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/static").Include(
                 "~/Content/Scripts/jquery.print.js",

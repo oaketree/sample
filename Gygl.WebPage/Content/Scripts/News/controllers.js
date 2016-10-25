@@ -1,14 +1,14 @@
-﻿app.controller("newsList", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
+﻿app.controller("newsList", ['$scope', '$routeParams', 'ajaxService', 'navService', '$compile', function ($scope, $routeParams, ajaxService, navService, $compile) {
     var page = $routeParams.id;
     ajaxService.getPagedNewsList(page).then(function (data) {
         $scope.news = data.Entity;
-        var ele = $compile(searchService.getNav(data))($scope)
+        var ele = $compile(navService.getNav(data))($scope)
         angular.element(document.getElementById('pagingdata')).append(ele);
     })
     $scope.click = function (page) {
         ajaxService.getPagedNewsList(page).then(function (data) {
             $scope.news = data.Entity;
-            var ele = $compile(searchService.getNav(data))($scope)
+            var ele = $compile(navService.getNav(data))($scope)
             angular.element(document.getElementById('pagingdata')).empty().append(ele);
         })
     }

@@ -21,7 +21,7 @@ namespace Gygl.BLL.Register.Manage
         public IRoleAuthoriseManage RoleAuthoriseManage { get; set; }
         public async Task<bool> CkUserName(string username)
         {
-            var result = await IsExistAsync(n => n.UserName == username);
+            var result = await IsExist(n => n.UserName == username);
             return !result;
         }
 

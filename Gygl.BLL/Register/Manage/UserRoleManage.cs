@@ -10,8 +10,8 @@ namespace Gygl.BLL.Register.Manage
         public async Task InsertUserRoleByMagazine(Users usr)
         {
             var ur = FindAll(n => n.UserID == usr.UserID);
-            var c = await Count(ur);
-            if (c == 0)
+            var c = await IsExist(ur);
+            if (!c)
             {
                 await InsertAsync(new UserRole
                 {
