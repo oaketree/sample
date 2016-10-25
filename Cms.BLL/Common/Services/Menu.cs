@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,9 +59,6 @@ namespace Cms.BLL.Common.Services
                 }
                 return lm;
             });
-
-
-
             //Func<int, List<MenuItem>> addparentmenuitem = null;
             //addparentmenuitem = m =>
             // {

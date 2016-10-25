@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cms.BLL.Common.Services
+namespace Core.Utility
 {
     public static class Combitator
     {

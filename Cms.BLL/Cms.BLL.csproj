@@ -63,7 +63,6 @@
     <Compile Include="Common\Services\Arithmetic.cs" />
     <Compile Include="Common\Services\Async.cs" />
     <Compile Include="Common\Services\Menu.cs" />
-    <Compile Include="Common\Services\Combitator.cs" />
     <Compile Include="Common\ViewModels\ChatUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UContainer.cs" />
@@ -79,6 +78,10 @@
     <ProjectReference Include="..\Core.DAL\Core.DAL.csproj">
       <Project>{AEC754AD-3AFF-403A-A5F4-287105B838B7}</Project>
       <Name>Core.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Utility\Core.Utility.csproj">
+      <Project>{B80BD478-4D79-4661-A2E3-71EF0DC72544}</Project>
+      <Name>Core.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Combitator.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="FileDel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
