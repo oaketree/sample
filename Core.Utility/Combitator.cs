@@ -8,7 +8,7 @@ namespace Core.Utility
 {
     public static class Combitator
     {
-        //Y组合子
+        //不动点组合子 Y组合子
         //delegate TResult SelfApplicable<TResult>(SelfApplicable<TResult> self);
         //public static Func<TInput, TResult> Fix<TInput, TResult>(Func<Func<TInput, TResult>, Func<TInput, TResult>> g)
         //{
@@ -18,7 +18,12 @@ namespace Core.Utility
 
         public static Func<T, TResult> Fix<T, TResult>(Func<Func<T, TResult>, Func<T, TResult>> f)
         {
-            return n => f(Fix(f))(n);
+            return x => f(Fix(f))(x);
+        }
+
+        public static Func<T1, T2, TResult> Fix<T1, T2, TResult>(Func<Func<T1, T2, TResult>, Func<T1, T2, TResult>> f)
+        {
+            return (x, y) => f(Fix(f))(x, y);
         }
     }
 }

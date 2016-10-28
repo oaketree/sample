@@ -66,6 +66,10 @@
       <Project>{291C07C4-6A72-48EE-9628-448791F8736F}</Project>
       <Name>Cms.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Utility\Core.Utility.csproj">
+      <Project>{b80bd478-4d79-4661-a2e3-71ef0dc72544}</Project>
+      <Name>Core.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

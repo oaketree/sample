@@ -45,6 +45,7 @@
     <Compile Include="Combitator.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="FileDel.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteDownload.cs" />
     <Compile Include="Security.cs" />
