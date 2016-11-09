@@ -71,7 +71,8 @@ namespace Core.Utility
                     }
                     else
                     {
-                        File.Copy(originalImagePath, thumbnailPath, true);
+                        im.Save(thumbnailPath);
+                        //File.Copy(originalImagePath, thumbnailPath, true);
                     }
                     break;
                 case "H"://指定高，宽按比例
@@ -82,7 +83,8 @@ namespace Core.Utility
                     }
                     else
                     {
-                        File.Copy(originalImagePath, thumbnailPath, true);
+                        im.Save(thumbnailPath);
+                        //File.Copy(originalImagePath, thumbnailPath, true);
                     }
                     break;
                 case "Cut"://指定高宽裁减（不变形）  
@@ -106,7 +108,8 @@ namespace Core.Utility
                     }
                     else
                     {
-                        File.Copy(originalImagePath, thumbnailPath, true);
+                        im.Save(thumbnailPath);
+                        //File.Copy(originalImagePath, thumbnailPath, true);
                     }
                     break;
                 default:

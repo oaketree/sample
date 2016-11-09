@@ -40,7 +40,7 @@ namespace Cms.BLL.Common.Services.Tests
             });
 
             //Console.Write(JsonConvert.SerializeObject(cm));
-            var c = HandleMenu<CmsMenu>.SubMenu(cm, 0);
+            var c = HandleMenu<CmsMenu>.SubMenu(cm, 0).Where(s=>s.PID==0);
 
             
             //Console.Write(JsonConvert.SerializeObject(c));
