@@ -66,7 +66,7 @@ namespace Gygl.BLL.Register.Manage
             string smtp = "smtp.126.com";
             string emailLoginName = "shgygl";
             string emailLoginpassword = "bjb142900";
-            var e = new Email(sub, body, emailFrom, email);
+            var e = new DEmail(sub, body, emailFrom, email);
             return 
             Task.Run(()=> {
                 e.send(smtp, emailLoginName, emailLoginpassword);

@@ -113,10 +113,13 @@ app.controller("yearSearchCtrl", ['$scope', '$routeParams', 'ajaxService', 'sear
     var p = $routeParams.period;
     var page = $routeParams.page;
 
-    if (y == null && p == null && page == null) {
-        y = new Date().getFullYear();
+    //if (y == null && p == null && page == null) {
+    //    y = new Date().getFullYear();
+    //    page = 1;
+    //}
+
+    if (page == null)
         page = 1;
-    }
 
     ajaxService.getSelectYear(y, p, page).then(function (data) {
         $scope.periods = data.Entity;
