@@ -32,7 +32,7 @@ namespace Gygl.BLL.Magazine.Service
             var pageCount = await Count(fa);
             var listArticle = await FindAllAsync(fa, s => new ImageViewModel {
                 ImageID = s.ImageID,
-                Url = "javascript:void(0)",
+                Url = "",
                 Location= "Page"
             });
             var listAd = await getAd(gyglid, pageCount);

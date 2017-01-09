@@ -37,7 +37,7 @@
        controller: 'councilCtrl'
    })
     .otherwise({
-        redirectTo: '/GetPeriod'
+        redirectTo: '/SelectYear'
     });
 }]);
 

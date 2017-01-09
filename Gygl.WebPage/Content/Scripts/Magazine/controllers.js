@@ -98,6 +98,18 @@ app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navServ
                 currentaid = pAid;
             }
         }
+
+        $scope.loc = function (url) {
+            if (url != null && url != "") {
+                var r = confirm("是否打开广告页面？")
+                if (r)
+                    window.open(url);
+                else
+                    return false;
+            } else {
+                return false;
+            }
+        }
     })
 }]);
 app.controller("yearSearchCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
