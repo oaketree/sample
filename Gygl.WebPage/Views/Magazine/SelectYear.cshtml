@@ -37,7 +37,7 @@
                     <div id="readfeng" class="readfengnian">
 
                         <div class="readfengzuonianfen textcenter" ng-repeat="period in periods">
-                            <div><img ng-src="/Content/Upload/Magazine/Cover/{{period.CoverImage}}" width="189" height="256" /></div>
+                            <div><a ng-href="#/GetPeriod/{{period.ID}}"><img ng-src="/Content/Upload/Magazine/Cover/{{period.CoverImage}}" width="189" height="256" /></a></div>
                             <div>
                                 <div class="textcenter">{{period.Year}}年第 {{period.Period}} 期</div>
                                 <div class="readdg">

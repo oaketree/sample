@@ -170,21 +170,7 @@ fac.factory('navService', function () {
                 return articlelist[index + 1];
         }
     }
-        //var service = {
-        //    up: function () {
-        //        if (index > 0)
-        //            return articlelist[index - 1];
-        //        else
-        //            return articlelist[0];
-        //    }, down: function () {
-        //        if (index == articlelist.length - 1)
-        //            return articlelist[index];
-        //        else
-        //            return articlelist[index + 1];
-        //    }
-        //}
-        //return service;
-    //}
+
     var service = {
         init: function (data, index) {
             var o = {};

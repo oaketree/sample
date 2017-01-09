@@ -101,7 +101,7 @@ namespace Gygl.BLL.Magazine.Service
             {
                 if (period == null)
                 {
-                    fa = FindAll().OrderByDescending(o => o.Year).ThenBy(o => o.Period);
+                    fa = FindAll().OrderByDescending(o => o.Year).ThenByDescending(o => o.Period);
                 }
                 else
                 {
@@ -112,16 +112,6 @@ namespace Gygl.BLL.Magazine.Service
                 fa = FindAll(n => n.Year == year).OrderBy(o => o.Period);
             }
 
-            //if (year != null)
-            //{
-            //    fa = FindAll(n => n.Year == year).OrderBy(o => o.Period);
-            //    //qe = QueryEntity(n => n.Year == year, o => o.Period, true);
-            //}
-            //else
-            //{
-            //    fa = FindAll(n => n.Period == period).OrderByDescending(o => o.Year);
-            //    //qe = QueryEntity(n => n.Period == period, o => o.Year, false);
-            //}
             var c = await Count(fa); 
             if (c!=0)
             {

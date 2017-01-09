@@ -54,6 +54,7 @@ namespace Gygl.WebPage.Controllers
             return PartialView();
         }
 
+        [OutputCache(Duration = 120, VaryByParam = "id")]
         public async Task<JsonResult> GetPeriod(int id)
         {
             var result = await GyglService.getPeriod(id);
@@ -122,7 +123,7 @@ namespace Gygl.WebPage.Controllers
             //return PartialView(GyglService.getPeriodicalById(id));
             return PartialView();
         }
-
+        [OutputCache(Duration = 120, VaryByParam = "id")]
         public async Task<JsonResult> GetCopyRight(int? id)
         {
             var result = await GyglService.getPeriodicalById(id);
@@ -147,7 +148,7 @@ namespace Gygl.WebPage.Controllers
         //    return Json(result, JsonRequestBehavior.AllowGet);
         //}
 
-
+        [OutputCache(Duration = 120, VaryByParam = "aid")]
         public async Task<JsonResult> GetPages(int aid)
         {
             await ArticleService.updateHit(aid);
@@ -155,13 +156,14 @@ namespace Gygl.WebPage.Controllers
             var result = await ArticleService.getPages(aid);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        [OutputCache(Duration = 120, VaryByParam = "pid")]
         public async Task<JsonResult> GetArticleList(int pid)
         {
             var result = await ArticleService.getArticleList(pid);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [OutputCache(Duration = 120, VaryByParam = "pid")]
         public async Task<JsonResult> GetFirstPages(int pid)
         {
             var result = await ArticleService.getFirstPages(pid);

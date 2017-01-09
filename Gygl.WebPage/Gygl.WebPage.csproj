@@ -326,10 +326,10 @@
     <Content Include="Content\Scripts\Home\services.js" />
     <Content Include="Content\Scripts\jquery.print.js" />
     <Content Include="Content\Scripts\Magazine\app.js" />
+    <Content Include="Content\Scripts\Magazine\controllers - 复制.js" />
     <Content Include="Content\Scripts\Magazine\controllers.js" />
     <Content Include="Content\Scripts\Magazine\directives.js" />
     <Content Include="Content\Scripts\Magazine\routers.js" />
-    <Content Include="Content\Scripts\Magazine\services - 复制.js" />
     <Content Include="Content\Scripts\Magazine\services.js" />
     <Content Include="Content\Scripts\News\app.js" />
     <Content Include="Content\Scripts\News\controllers.js" />

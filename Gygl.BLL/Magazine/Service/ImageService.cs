@@ -40,11 +40,40 @@ namespace Gygl.BLL.Magazine.Service
                 return listArticle.ToList();
             return crossPage(listArticle.ToList(), listAd.ToList());
         }
+        /// <summary>
+        /// 广告文章交叉插入
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="ad"></param>
+        /// <returns></returns>
         private List<ImageViewModel> crossPage(List<ImageViewModel> page, List<ImageViewModel> ad)
         {
             int common = ad.Count();
             int max = page.Count();
             var endList = new ImageViewModel[common+max];
+            int j = 0;
+            for (int i = 0; i < common; i++)
+            {
+                endList[j++] = page[i];
+                endList[j++] = ad[i];
+            }
+            for (int i = common; i < max; i++)
+            {
+                endList[j++] = page[i];
+            }
+            return endList.ToList();
+        }
+        /// <summary>
+        /// 广告文章随机插入
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="ad"></param>
+        /// <returns></returns>
+        private List<ImageViewModel> crossPage2(List<ImageViewModel> page, List<ImageViewModel> ad)
+        {
+            int common = ad.Count();
+            int max = page.Count();
+            var endList = new ImageViewModel[common + max];
             int j = 0;
             for (int i = 0; i < common; i++)
             {
@@ -65,7 +94,7 @@ namespace Gygl.BLL.Magazine.Service
             var count = await Count(fa);
             if (count == 0)
                 return null;
-            int halfPageCount = pageCount / 2;
+            int halfPageCount = pageCount / 3;
             var totalCount = 0;
             if (count <= halfPageCount)
                 totalCount = count;

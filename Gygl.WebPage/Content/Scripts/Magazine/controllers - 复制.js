@@ -62,43 +62,57 @@ app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navServ
         })
     })
 
-    ajaxService.getArticleList(pid).then(function (data) {
-        if (aid != null) {
-            ajaxService.getPages(aid).then(function (dataAid) {
-                $scope.pages = dataAid;
-                var o = navService.init(data, parseInt(aid));
-                $scope.nav = {
-                    up: o.getNavAid().up(),
-                    down: o.getNavAid().down()
-                }
-            })
-        } else {
-            ajaxService.getFirstPages(pid).then(function (dataPid) {
-                $scope.pages = dataPid;
-                var o = navService.init(data, 0);
-                $scope.nav = {
-                    up: o.getNavIndex().up(),
-                    down: o.getNavIndex().down()
-                }
-            })
+    //ajaxService.getArticleList(pid).then(function (data) {
+    //})
+
+
+
+    if (aid != null) {
+        ajaxService.getPages(aid)
+        .then(function (data) {
+            $scope.pages = data;
+            ajaxService.getArticleList(pid)
+    .then(function (data) {
+        var o = navService.init(data, parseInt(aid));
+        $scope.nav = {
+            up: o.getNavAid().up(),
+            down: o.getNavAid().down()
         }
-        var currentaid = 0;
-        $scope.click = function (aid) {
-            var pAid = parseInt(aid);
-            if (currentaid != pAid) {
-                ajaxService.getPages(aid).then(function (dataAid) {
-                    $scope.pages = dataAid;
-                    $(document).scrollTop(0);
-                    var o = navService.init(data, pAid);
+    })
+        })
+    } else {
+        ajaxService.getFirstPages(pid)
+       .then(function (data) {
+           $scope.pages = data;
+           ajaxService.getArticleList(pid)
+       .then(function (data) {
+           var o = navService.init(data, 0);
+           $scope.nav = {
+               up: o.getNavIndex().up(),
+               down: o.getNavIndex().down()
+           }
+       })
+       });
+    }
+
+    var currentaid = 0;
+    $scope.click = function (aid) {
+        if (currentaid != aid) {
+            ajaxService.getPages(aid)
+            .then(function (data) {
+                $scope.pages = data;
+                $(document).scrollTop(0);
+                ajaxService.getArticleList(pid).then(function (data) {
+                    var o = navService.init(data, parseInt(aid));
                     $scope.nav = {
                         up: o.getNavAid().up(),
                         down: o.getNavAid().down()
                     }
                 })
-                currentaid = pAid;
-            }
+            })
         }
-    })
+        currentaid = aid;
+    }
 }]);
 app.controller("yearSearchCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
     var y = $routeParams.year;
