@@ -16,11 +16,9 @@
         <div id="m_top05">
             <div id="top05">
                 <div class="top05_01" close-menu>
-                    <div ng-repeat="page in pages">
-
-                        <a href="javascript:void(0)" ng-click="loc(page.Url)"><img ng-src="~/Content/Upload/Magazine/{{page.Location}}/{{page.ImageID}}" /></a>
-
-
+                    <div ng-repeat="page in pages" ng-init="pUrl=page.Url">
+                        <img ng-if="pUrl==''||pUrl==null" ng-src="~/Content/Upload/Magazine/{{page.Location}}/{{page.ImageID}}" />
+                        <a ng-if="pUrl!=''&&pUrl!=null" href="javascript:void(0)" ng-click="loc(page.Url)"><img ng-src="~/Content/Upload/Magazine/{{page.Location}}/{{page.ImageID}}" /></a>
                     </div>
                 </div>
                 @Html.Action("RightNav", "Magazine")
