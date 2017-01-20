@@ -1,10 +1,6 @@
 ﻿using Gygl.BLL.Magazine.Service;
 using Microsoft.Practices.Unity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Gygl.WebPage.Controllers
@@ -23,6 +19,8 @@ namespace Gygl.WebPage.Controllers
         [Dependency]
         public ICategoryService CategoryService { get; set; }
 
+        [Dependency]
+        public ICommentService CommentService { get; set; }
 
         [OutputCache(Duration = 120)]
         public PartialViewResult Catalog()
@@ -43,6 +41,7 @@ namespace Gygl.WebPage.Controllers
             return PartialView();
         }
 
+
         [OutputCache(Duration = 120)]
         public PartialViewResult Periodical()
         {
@@ -60,6 +59,29 @@ namespace Gygl.WebPage.Controllers
             var result = await GyglService.getPeriod(id);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<JsonResult> GetIp()
+        {
+            var result = Task.Run(() =>
+            {
+                return
+                HttpContext.Request.UserHostAddress;
+            });
+            return Json(await result, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> getComment(int aid, int page)
+        {
+            var result = await CommentService.getCommentByArticle(aid, 3, page);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task smtComment(int aid, string message)
+        {
+            if (message.Trim() != string.Empty && message != null)
+                await CommentService.smtComment(aid, message);
+        }
+
 
         [OutputCache(Duration = 120)]
         public PartialViewResult SelectYear()

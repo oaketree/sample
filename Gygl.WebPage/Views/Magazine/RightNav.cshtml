@@ -1,42 +1,66 @@
-﻿<div class="readyoudaohang">
+﻿<div id="dianpingceng">
+    <div id="dianpingcengnei">
+        <div>
+            <div class="dptitle">
+                <div><img src="/Content/images/dianping1_tit.gif" width="38" height="35" /></div>
+                <div class="dptitle02">对<span class="dptitle02span01">《{{title|limitTo : 22}}》</span>的全部点评<span class="dptitle02span02">（{{count}}）</span></div>
+            </div>
+            <div class="dptitlebottom"></div>
+            <div class="pllie" ng-repeat="comment in comments">
+                <div>{{comment.Advice}}</div>
+                <div>
+                    <div>来自IP地址：{{comment.IP}}</div>
+                    <div>点评时间：{{comment.Year}}&nbsp; {{comment.Time}}</div>
+                </div>
+                <div class="plline"></div>
+            </div>
+            <div class="pagination">
+                <ul id="pagingdata"></ul>
+            </div>
+            <div class="dpfb">
+                <div class="dpfb01"></div>
+            </div>
+            <div class="wydp">
+                <div class="wydp01">
+                    <div class="wydp01_01">
+                        <div class="wydp01_01_01"><img src="/Content/images/dpwy.gif" width="30" height="34" /></div>
+                        <div>我要点评</div>
+                    </div>
+                    <div class="wydp01_02">IP:{{ip}}</div>
+                    <div class="wydp01_02">（剩余字数：<span class="dptitle02span02" ng-bind="left()"></span>&nbsp;字）</div>
+                </div>
+                <div>
+                    <textarea name="" cols="3" rows="5" class="wydp02" ng-model="message" maxlength="80"></textarea>
+                </div>
+            </div>
+            <div class="pltj">
+                <div class="readbtn readbtnyd"><a href="javascript:void(0)" ng-click="smt()">提交评论</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="readyoudaohang">
     <!--右侧导航开始-->
     <div id="readyougddh">
-        <div id="readzd" class="readyoubg01" to-top>
+        <div id="readzd" class="readyoubg01" to-top  img-switch>
             <div class="height38"><img src="/Content/images/youdh01.gif" width="27" height="32" /></div>
             <div><a href="javascript:void(0)">返回顶部</a></div>
             <div class="hui1p"></div>
             <div class="bai1p"></div>
         </div>
-        @*<div class="readyoubg01">
-            <div class="height38"><img src="/Content/images/youdh02.gif" width="35" height="33" /></div>
-            <div class="height30"><a href="javascript:void(0)">个人中心</a></div>
-            <div class="hui1p"></div>
-            <div class="bai1p"></div>
-        </div>*@
-        <div class="readyoubg01">
+        <div class="readyoubg01"  img-switch article-comment>
             <div class="height38"><img src="/Content/images/youdh03.gif" width="27" height="26" /></div>
             <div class="height30"><a href="javascript:void(0)">点评</a></div>
             <div class="hui1p"></div>
             <div class="bai1p"></div>
         </div>
-        @*<div class="readyoubg01">
-            <div class="height38"><img src="/Content/images/youdh04.gif" width="33" height="37" /></div>
-            <div class="height30"><a href="javascript:void(0)">下载</a></div>
-            <div class="hui1p"></div>
-            <div class="bai1p"></div>
-        </div>*@
-        @*<div class="readyoubg01">
-            <div class="height38"><img src="/Content/images/youdh05.gif" width="37" height="32" /></div>
-            <div class="height30"><a href="javascript:void(0)">微信</a></div>
-            <div class="hui1p"></div>
-            <div class="bai1p"></div>
-        </div>*@
-        <div class="readyoubg01" ng-click="click(nav.up)">
+        <div class="readyoubg01" ng-click="click(nav.up)"  img-switch>
             <div class="height30"><a href="javascript:void(0)">上一篇</a></div>
             <div class="hui1p"></div>
             <div class="bai1p"></div>
         </div>
-        <div class="readyoubg01" ng-click="click(nav.down)">
+        <div class="readyoubg01" ng-click="click(nav.down)"  img-switch>
             <div><a href="javascript:void(0)">下一篇</a></div>
         </div>
     </div>

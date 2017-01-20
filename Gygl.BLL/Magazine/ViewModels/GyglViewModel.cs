@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,10 @@ namespace Gygl.BLL.Magazine.ViewModels
 
     public class GyglTitleViewModel :PeriodViewModel{
         public IEnumerable<TitleViewModel> Title { get; set; }
+    }
+
+    public class PageGyglViewModel : PageInfo<GyglViewModel>
+    {
     }
 
 }

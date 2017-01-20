@@ -24,6 +24,7 @@ namespace Gygl.BLL
             _unityContainer.RegisterType<Magazine.Service.IImageService, Magazine.Service.ImageService>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<Magazine.Service.IGyglService, Magazine.Service.GyglService>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<Magazine.Service.ICategoryService, Magazine.Service.CategoryService>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<Magazine.Service.ICommentService, Magazine.Service.CommentService>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<News.Service.INewsService, News.Service.NewsService>(new ContainerControlledLifetimeManager());
         }
 

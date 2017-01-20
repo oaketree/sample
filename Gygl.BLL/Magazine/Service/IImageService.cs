@@ -9,7 +9,7 @@ namespace Gygl.BLL.Magazine.Service
     public interface IImageService : IRepository<Image>
     {
         //Task<object> getArticlePages(int aid);
-        Task<List<ImageViewModel>> getMixedPages(int gyglid, int aid);
-        //object getFirstPages(int pid);
+        //Task<List<ImageViewModel>> getMixedPages(int gyglid, int aid);
+        Task<ArticleImageViewModel> getMixedPages(int gyglid, int aid);
     }
 }

@@ -75,6 +75,9 @@ namespace Gygl.BLL.Magazine.Service
                 qe = QueryEntity(express, o => o.RegDate, false);
             }
             var c = await Count(qe);
+            pif.TotalItems = c;
+            pif.CurrentPage = page;
+            pif.ItemPerPage = pageSize;
             if (c!=0)
             {
                 var fbp = FindByPageAsync(qe, pageSize, page, s => new TitleViewModel
@@ -87,9 +90,6 @@ namespace Gygl.BLL.Magazine.Service
                     Period = s.Gygl.Period.Value,
                     GyglID = s.GyglID.Value
                 });
-                pif.TotalItems = c;
-                pif.CurrentPage = page;
-                pif.ItemPerPage = pageSize;
                 pif.Entity = await fbp;
                 return pif;
             }

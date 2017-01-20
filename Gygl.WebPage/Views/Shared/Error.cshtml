@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -6,9 +9,17 @@
     <title>错误</title>
 </head>
 <body>
-    <hgroup>
-        <h1>错误。</h1>
-        <h2>处理你的请求时出错。</h2>
-    </hgroup>
+    <div>
+        <p>
+            There was a <b>@Model.Exception.GetType().Name</b>
+            while rendering <b>@Model.ControllerName</b>'s
+            <b>@Model.ActionName</b> action.
+        </p>
+        <p>
+            <b>@Model.Exception.Message</b>
+        </p>
+        <p>Stack trace:</p>
+        <pre>@Model.Exception.StackTrace</pre>
+    </div>
 </body>
 </html>

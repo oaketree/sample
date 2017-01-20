@@ -11,14 +11,6 @@ namespace Gygl.BLL.Magazine.Service
 {
     public class ImageService: RepositoryBase<Image, WebDBContext>, IImageService
     {
-        //public async Task<object> getArticlePages(int aid)
-        //{
-        //    var fa = FindAll(n => n.ArticleID == aid).OrderBy(o => o.SortID);
-        //    var list = await FindAllAsync(fa, s => new { url = s.ImageID });
-        //    return list;
-        //    //var li = QueryEntity(n => n.ArticleID == aid, o => o.SortID, true).Select(s => new { url = s.ImageID });
-        //    //return li;
-        //}
 
         /// <summary>
         /// 和广告页面混合的页面
@@ -26,20 +18,50 @@ namespace Gygl.BLL.Magazine.Service
         /// <param name="gyglid"></param>
         /// <param name="aid"></param>
         /// <returns></returns>
-        public async Task<List<ImageViewModel>> getMixedPages(int gyglid,int aid)
+        //public async Task<List<ImageViewModel>> getMixedPages(int gyglid,int aid)
+        //{
+        //    var fa = FindAll(n => n.ArticleID == aid).OrderBy(o => o.SortID);
+        //    var pageCount = await Count(fa);
+        //    var listArticle = await FindAllAsync(fa, s => new ImageViewModel {
+        //        ImageID = s.ImageID,
+        //        Url = "",
+        //        Location= "Page"
+        //    });
+        //    var listAd = await getAd(gyglid, pageCount);
+        //    if (listAd == null)
+        //        return listArticle.ToList();
+        //    return crossPage(listArticle.ToList(), listAd.ToList());
+        //}
+
+        public async Task<ArticleImageViewModel> getMixedPages(int gyglid, int aid)
         {
+            var aiv = new ArticleImageViewModel();
+            aiv.ArticleID = aid;
             var fa = FindAll(n => n.ArticleID == aid).OrderBy(o => o.SortID);
             var pageCount = await Count(fa);
-            var listArticle = await FindAllAsync(fa, s => new ImageViewModel {
+            var listArticle = await FindAllAsync(fa, s => new ImageViewModel
+            {
                 ImageID = s.ImageID,
                 Url = "",
-                Location= "Page"
+                Location = "Page"
             });
             var listAd = await getAd(gyglid, pageCount);
             if (listAd == null)
-                return listArticle.ToList();
-            return crossPage(listArticle.ToList(), listAd.ToList());
+            {
+                //aiv.AddRange(listArticle.ToList());
+                aiv.ImageViews = listArticle.ToList();
+            }
+            else {
+                //aiv.AddRange(crossPage(listArticle.ToList(), listAd.ToList()));
+                aiv.ImageViews = crossPage(listArticle.ToList(), listAd.ToList());
+            }   
+            return aiv;
         }
+
+
+
+
+
         /// <summary>
         /// 广告文章交叉插入
         /// </summary>

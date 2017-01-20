@@ -9,31 +9,31 @@ $(function () {
     });
 });
 /*图片切换*/
-$(function () {
-    $("div[id^=ietu] img").mouseenter(function () {
-        srcdh = this.src;
-        srcdhlnew = srcdh.substring(0, srcdh.lastIndexOf('.'));
-        this.src = srcdhlnew + "02" + ".gif?" + Math.random();
-    }).mouseleave(function () {
-        this.src = srcdh;
-    });
-});
+//$(function () {
+//    $("div[id^=ietu] img").mouseenter(function () {
+//        srcdh = this.src;
+//        srcdhlnew = srcdh.substring(0, srcdh.lastIndexOf('.'));
+//        this.src = srcdhlnew + "02" + ".gif?" + Math.random();
+//    }).mouseleave(function () {
+//        this.src = srcdh;
+//    });
+//});
 
 /*右导航*/
-$(function () {
-    $("#readyougddh>div").mouseenter(function () {
-        $(this).removeClass("readyoubg01").addClass("readyoubg02");
-        srcdh = $(this).find('img').attr('src');
-        if (srcdh!=null) {
-            srcdhlnew = srcdh.substring(0, srcdh.lastIndexOf("."));
-            $(this).find('img').attr('src', srcdhlnew + "02" + ".gif?" + Math.random());
-        }
-    }).mouseleave(function () {
-        if (srcdh!= null)
-            $(this).find("img").attr('src', srcdh);
-        $(this).removeClass("readyoubg02").addClass("readyoubg01");
-    });
-});
+//$(function () {
+//    $("#readyougddh>div").mouseenter(function () {
+//        $(this).removeClass("readyoubg01").addClass("readyoubg02");
+//        srcdh = $(this).find('img').attr('src');
+//        if (srcdh!=null) {
+//            srcdhlnew = srcdh.substring(0, srcdh.lastIndexOf("."));
+//            $(this).find('img').attr('src', srcdhlnew + "02" + ".gif?" + Math.random());
+//        }
+//    }).mouseleave(function () {
+//        if (srcdh!= null)
+//            $(this).find("img").attr('src', srcdh);
+//        $(this).removeClass("readyoubg02").addClass("readyoubg01");
+//    });
+//});
 
 /*滚动置顶*/
 $(window).scroll(function () {
@@ -50,8 +50,10 @@ $(window).scroll(function () {
         $("#readyougddh").removeClass("you-fixed");//右侧导航
     };
     if (pos > 150) {
+        $("#dianpingceng").css("top", 60);
         $("#readzd").slideDown(500);//右侧guadong
     } else {
+        $("#dianpingceng").css("top", 190-pos);
         $("#readzd").slideUp(500);//右侧guadong
     }
 });

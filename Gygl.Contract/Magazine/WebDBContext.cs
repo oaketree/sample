@@ -16,5 +16,6 @@ namespace Gygl.Contract.Magazine
         public virtual DbSet<Periodical> Gygl { get; set; }
         public virtual DbSet<Image> GyglImage { get; set; }
         public virtual DbSet<GyglCategory> GyglCategory { get; set; }
+        public virtual DbSet<Comment> Comment { get; set; }
     }
 }

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Magazine\Comment.cs" />
     <Compile Include="Magazine\Periodical.cs" />
     <Compile Include="Magazine\Article.cs" />
     <Compile Include="Magazine\Category.cs" />

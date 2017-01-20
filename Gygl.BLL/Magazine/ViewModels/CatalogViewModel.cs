@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Core.DAL;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Gygl.BLL.Magazine.ViewModels
@@ -21,5 +22,9 @@ namespace Gygl.BLL.Magazine.ViewModels
     public class TitleViewBase {
         public string Title { get; set; }
         public string Url { get; set; }
+    }
+    public class PageArticleViewModel : PageInfo<TitleViewModel>
+    {
+        public string Category { get; set; }
     }
 }

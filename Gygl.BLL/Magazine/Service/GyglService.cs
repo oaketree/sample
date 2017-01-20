@@ -1,4 +1,5 @@
 ﻿using Core.DAL;
+using Core.Utility;
 using Gygl.BLL.Magazine.ViewModels;
 using Gygl.BLL.Share;
 using Gygl.Contract.Magazine;
@@ -6,6 +7,7 @@ using Microsoft.Practices.Unity;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Gygl.BLL.Magazine.Service
 {
@@ -112,7 +114,10 @@ namespace Gygl.BLL.Magazine.Service
                 fa = FindAll(n => n.Year == year).OrderBy(o => o.Period);
             }
 
-            var c = await Count(fa); 
+            var c = await Count(fa);
+            pif.TotalItems = c;
+            pif.CurrentPage = page;
+            pif.ItemPerPage = pageSize;
             if (c!=0)
             {
                 var fbp = FindByPageAsync(fa, pageSize, page, s => new GyglViewModel
@@ -122,9 +127,6 @@ namespace Gygl.BLL.Magazine.Service
                     Year = s.Year.Value,
                     Period = s.Period.Value
                 });
-                pif.TotalItems = c;
-                pif.CurrentPage = page;
-                pif.ItemPerPage = pageSize;
                 pif.Entity =await fbp;
                 return pif;
             }
@@ -158,7 +160,7 @@ namespace Gygl.BLL.Magazine.Service
                 return null;
         }
 
-
+        //首页新闻列表
         public async Task<GyglTitleViewModel> getCurrentPeriod()
         {
             var fa = FindAll().OrderByDescending(o => o.Year).ThenByDescending(t => t.Period);
@@ -181,16 +183,10 @@ namespace Gygl.BLL.Magazine.Service
                 Year = period.Year.Value,
                 Period = period.Period.Value,
                 Title=await tsk
-                //Title = period.Article.OrderBy(o => o.ID).Take(10).Select(s => new TitleViewModel
-                //{
-                //    Category = s.Category.Name,
-                //    Author = s.Author,
-                //    Title = s.Title,
-                //    Url = s.ID.ToString(),
-                //    GyglID = s.GyglID.Value
-                //})
             };
             return gtvm;
         }
+
+        
     }
 }

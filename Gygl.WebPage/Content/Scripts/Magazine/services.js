@@ -150,6 +150,41 @@ fac.factory('ajaxService', ['$q', '$http', function ($q, $http) {
                 d.reject(data);
             });
             return d.promise;
+        }, getIp: function () {
+            var d = $q.defer()
+            $http({
+                method: 'GET',
+                url: '/Magazine/GetIp',
+            }).success(function (data) {
+                d.resolve(data);
+            }).error(function (data) {
+                d.reject(data);
+            });
+            return d.promise;
+        }, getComment: function (aid,page) {
+            var d = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/Magazine/getComment',
+                params: { "aid": aid,"page":page }
+            }).success(function (data) {
+                d.resolve(data);
+            }).error(function (data) {
+                d.reject(data);
+            });
+            return d.promise;
+        }, smtComment: function (aid, message) {
+            var d = $q.defer();
+            $http({
+                method: 'POST',
+                url: '/Magazine/smtComment',
+                data: { "aid": aid, "message": message }
+            }).success(function (data) {
+                d.resolve(data);
+            }).error(function (data) {
+                d.reject(data);
+            });
+            return d.promise;
         }
     }
     return service;
@@ -164,7 +199,7 @@ fac.factory('navService', function () {
                 return articlelist[0];
         }
         this.down = function () {
-            if (index == articlelist.length - 1)
+            if (index === articlelist.length - 1)
                 return articlelist[index];
             else
                 return articlelist[index + 1];
