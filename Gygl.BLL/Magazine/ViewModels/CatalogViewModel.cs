@@ -7,8 +7,8 @@ namespace Gygl.BLL.Magazine.ViewModels
     public class CatalogViewModel
     {
         public string Category { get; set; }
-        //public int CategoryID { get; set; }
-        public IQueryable<TitleViewBase> Title { get; set; }
+        public int CategoryID { get; set; }
+        public List<TitleViewBase> Title { get; set; }
     }
 
     public class TitleViewModel:TitleViewBase
@@ -22,6 +22,7 @@ namespace Gygl.BLL.Magazine.ViewModels
     public class TitleViewBase {
         public string Title { get; set; }
         public string Url { get; set; }
+        public int CategoryID { get; set; }
     }
     public class PageArticleViewModel : PageInfo<TitleViewModel>
     {

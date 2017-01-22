@@ -22,16 +22,29 @@ namespace Gygl.BLL.Magazine.Service
         public IImageService ImageService { get; set; }
 
         //分布视图不支持异步
-        public async Task<IQueryable<TitleViewBase>> getTitle(int gyglid,int categoryid)
+        //public async Task<IQueryable<TitleViewBase>> getTitle(int gyglid,int categoryid)
+        //{
+        //    var fa = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid);
+        //    var li = await FindAllAsync(fa, s => new TitleViewBase
+        //    {
+        //        Title = s.Title,
+        //        Url = s.ID.ToString()
+        //    });
+        //    return li;
+        //}
+        public async Task<IQueryable<TitleViewBase>> getTitle(int gyglid)
         {
-            var fa = FindAll(n => n.GyglID == gyglid && n.CategoryID == categoryid);
+            var fa = FindAll(n => n.GyglID == gyglid);
             var li = await FindAllAsync(fa, s => new TitleViewBase
             {
-                Title = s.Title,
+                CategoryID=s.CategoryID.Value,
+                Title=s.Title,
                 Url = s.ID.ToString()
             });
             return li;
         }
+
+
         public async Task<List<int>> getArticleList(int gyglId)
         {
             var fa = FindAll(n => n.GyglID == gyglId).OrderBy(o => o.Category.SortID).ThenBy(t => t.ID);
