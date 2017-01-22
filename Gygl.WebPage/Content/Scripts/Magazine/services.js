@@ -95,14 +95,6 @@ fac.factory('ajaxService', ['$q', '$http', function ($q, $http) {
                 d.reject(data);
             });
             return d.promise;
-        }, getArticleList: function (pid) {
-            var d = $q.defer();
-            $http.get('/Magazine/GetArticleList?pid=' + pid).success(function (data) {
-                d.resolve(data);
-            }).error(function (data) {
-                d.reject(data);
-            });
-            return d.promise;
         }, getCategoryList: function (y, p) {
             var d = $q.defer();
             $http({
@@ -199,7 +191,7 @@ fac.factory('navService', function () {
                 return articlelist[0];
         }
         this.down = function () {
-            if (index === articlelist.length - 1)
+            if (index == articlelist.length - 1)
                 return articlelist[index];
             else
                 return articlelist[index + 1];
@@ -209,7 +201,8 @@ fac.factory('navService', function () {
     var service = {
         init: function (data, index) {
             var o = {};
-            var d = eval(data);
+            //var d = eval(data);
+            var d = data;
             o.getNavIndex = function () {
                 return new getIndex(d, index);
             };

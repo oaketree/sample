@@ -50,69 +50,148 @@
         }
     }
 }]);
-app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navService', function ($scope, ajaxService, $routeParams, navService) {
+app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navService', 'searchService','$compile', function ($scope, ajaxService, $routeParams, navService,searchService,$compile) {
     var aid = $routeParams.aid;
     var pid = $routeParams.id;
-    ajaxService.getPeriod(pid)
-    .then(function (data) {
+    ajaxService.getPeriod(pid).then(function (data) {
         $scope.period = data;
-        ajaxService.getCatalog(pid)
-        .then(function (data) {
-            $scope.catalog = data;
-        })
     })
-
-    //ajaxService.getArticleList(pid).then(function (data) {
-    //})
-
-
-
-    if (aid != null) {
-        ajaxService.getPages(aid)
-        .then(function (data) {
-            $scope.pages = data;
-            ajaxService.getArticleList(pid)
-    .then(function (data) {
-        var o = navService.init(data, parseInt(aid));
-        $scope.nav = {
-            up: o.getNavAid().up(),
-            down: o.getNavAid().down()
+    var currentArticleList = [];
+    ajaxService.getCatalog(pid).then(function (data) {
+        $scope.catalog = data;
+        for (var key in data)
+        {
+            for (var key2 in data[key]["Title"])
+            {
+                currentArticleList.push(parseInt(data[key]["Title"][key2]["Url"]));
+            }
         }
+        console.log(currentArticleList);
     })
-        })
-    } else {
-        ajaxService.getFirstPages(pid)
-       .then(function (data) {
-           $scope.pages = data;
-           ajaxService.getArticleList(pid)
-       .then(function (data) {
-           var o = navService.init(data, 0);
-           $scope.nav = {
-               up: o.getNavIndex().up(),
-               down: o.getNavIndex().down()
-           }
-       })
-       });
-    }
+    ajaxService.getIp().then(function (data) {
+        $scope.ip = data;
+    })
 
+    $scope.message = "";
+    $scope.left = function () {
+        return 80 - $scope.message.length;
+    }
     var currentaid = 0;
-    $scope.click = function (aid) {
-        if (currentaid != aid) {
-            ajaxService.getPages(aid)
-            .then(function (data) {
-                $scope.pages = data;
-                $(document).scrollTop(0);
-                ajaxService.getArticleList(pid).then(function (data) {
-                    var o = navService.init(data, parseInt(aid));
+    ajaxService.getArticleList(pid).then(function (data) {
+        if (aid != null) {
+            currentaid = parseInt(aid);
+            //获取页面根据文章id
+            ajaxService.getPages(aid).then(function (dataAid) {
+                $scope.pages = dataAid.ImageViews;
+                $scope.title = dataAid.Title;
+                var o = navService.init(data, parseInt(aid));
+                $scope.nav = {
+                    up: o.getNavAid().up(),
+                    down: o.getNavAid().down()
+                }
+            })
+            //获取评论
+            ajaxService.getComment(currentaid, 1).then(function (dataCom) {
+                $scope.comments = dataCom.Entity;
+                //$scope.title = dataCom.Title;
+                $scope.count = dataCom.Count;
+                var ele = $compile(searchService.getNav(dataCom))($scope)
+                angular.element(document.getElementById('pagingdata')).append(ele);
+            })
+        } else {
+            //获取页面根据期刊id
+            ajaxService.getFirstPages(pid).then(function (dataPid) {
+                $scope.pages = dataPid.ImageViews;
+                $scope.title = dataPid.Title;
+                currentaid = parseInt(dataPid.ArticleID);
+                var o = navService.init(data, 0);
+                $scope.nav = {
+                    up: o.getNavIndex().up(),
+                    down: o.getNavIndex().down()
+                }
+                //获取评论
+                ajaxService.getComment(currentaid, 1).then(function (dataCom) {
+                    $scope.comments = dataCom.Entity;
+                    //$scope.title = dataCom.Title;
+                    $scope.count = dataCom.Count;
+                    var ele = $compile(searchService.getNav(dataCom))($scope)
+                    angular.element(document.getElementById('pagingdata')).append(ele);
+                })
+            })
+        }
+        //var currentaid = 0;
+        $scope.click = function (aid) {
+            var pAid = parseInt(aid);
+            if (currentaid != pAid) {
+                ajaxService.getPages(aid).then(function (dataAid) {
+                    $scope.pages = dataAid.ImageViews;
+                    $scope.title = dataAid.Title;
+                    $(document).scrollTop(0);
+                    var o = navService.init(data, pAid);
                     $scope.nav = {
                         up: o.getNavAid().up(),
                         down: o.getNavAid().down()
                     }
+                    //获取评论
+                    ajaxService.getComment(aid, 1).then(function (dataCom) {
+                        $scope.comments = dataCom.Entity;
+                        //$scope.title = dataCom.Title;
+                        $scope.count = dataCom.Count;
+                        var ele = $compile(searchService.getNav(dataCom))($scope)
+                        document.getElementById('pagingdata').innerHTML = '';
+                        angular.element(document.getElementById('pagingdata')).append(ele);
+                    })
+
                 })
+                currentaid = pAid;
+            }
+        }
+        
+        //评论分页还需修改（全局变量文章id）
+        $scope.pagenum = function (num) {
+            ajaxService.getComment(currentaid, num).then(function (dataCom) {
+                $scope.comments = dataCom.Entity;
+                //$scope.title = dataCom.Title;
+                $scope.count = dataCom.Count;
+                var ele = $compile(searchService.getNav(dataCom))($scope)
+                document.getElementById('pagingdata').innerHTML = '';
+                angular.element(document.getElementById('pagingdata')).append(ele);
             })
         }
-        currentaid = aid;
-    }
+
+        //提交评论
+        $scope.smt = function () {
+            if ($scope.message.length >= 5) {
+                ajaxService.smtComment(currentaid, $scope.message).then(function (data) {
+                    alert("评论提交成功！");
+                    //获取评论
+                    ajaxService.getComment(currentaid, 1).then(function (dataCom) {
+                        $scope.comments = dataCom.Entity;
+                        //$scope.title = dataCom.Title;
+                        $scope.count = dataCom.Count;
+                        var ele = $compile(searchService.getNav(dataCom))($scope)
+                        document.getElementById('pagingdata').innerHTML = '';
+                        angular.element(document.getElementById('pagingdata')).append(ele);
+                    })
+                })
+            } else {
+                alert("请至少输入5个字的评论！");
+            }
+        }
+
+
+        $scope.loc = function (url) {
+            if (url != null && url != "") {
+                var r = confirm("是否打开广告页面？")
+                if (r)
+                    window.open(url);
+                else
+                    return false;
+            } else {
+                return false;
+            }
+        }
+    })
 }]);
 app.controller("yearSearchCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
     var y = $routeParams.year;
@@ -133,8 +212,8 @@ app.controller("yearSearchCtrl", ['$scope', '$routeParams', 'ajaxService', 'sear
         angular.element(document.getElementById('pagingdata')).append(ele);
         //$scope.nav = $sce.trustAsHtml(searchService.getNav(data));
     })
-    $scope.click = function (page) {
-        ajaxService.getSelectYear(y, p, page).then(function (data) {
+    $scope.pagenum = function (num) {
+        ajaxService.getSelectYear(y, p, num).then(function (data) {
             $scope.periods = data.Entity;
             var ele = $compile(searchService.getNav(data))($scope)
             angular.element(document.getElementById('pagingdata')).empty().append(ele);
@@ -153,8 +232,8 @@ app.controller("articleSearchCtrl", ['$scope', '$routeParams', 'ajaxService', 's
         var ele = $compile(searchService.getNav(data))($scope)
         angular.element(document.getElementById('pagingdata')).append(ele);
     })
-    $scope.click = function (page) {
-        ajaxService.getSelectArticle(y, p, c, k, page).then(function (data) {
+    $scope.pagenum = function (num) {
+        ajaxService.getSelectArticle(y, p, c, k, num).then(function (data) {
             $scope.articles = data.Entity;
             var ele = $compile(searchService.getNav(data))($scope)
             angular.element(document.getElementById('pagingdata')).empty().append(ele);

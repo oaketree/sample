@@ -11,7 +11,7 @@ namespace Gygl.BLL.Magazine.Service
     {
         Task<IQueryable<TitleViewBase>> getTitle(int gyglid);
         Task<PageArticleViewModel> getArticleByCategory(int? year, int? period, int? category, string key, int pageSize, int page);
-        Task<List<int>> getArticleList(int gyglId);
+        //Task<List<int>> getArticleList(int gyglId);
         //Task updateHit(int aid);
         Task<object> getFirstPages(int pid);
         Task<object> getPages(int aid);

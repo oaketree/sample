@@ -177,12 +177,13 @@ namespace Gygl.WebPage.Controllers
             var result = await ArticleService.getPages(aid);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        [OutputCache(Duration = 120, VaryByParam = "pid")]
-        public async Task<JsonResult> GetArticleList(int pid)
-        {
-            var result = await ArticleService.getArticleList(pid);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+
+        //[OutputCache(Duration = 120, VaryByParam = "pid")]
+        //public async Task<JsonResult> GetArticleList(int pid)
+        //{
+        //    var result = await ArticleService.getArticleList(pid);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
         [OutputCache(Duration = 120, VaryByParam = "pid")]
         public async Task<JsonResult> GetFirstPages(int pid)

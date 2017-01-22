@@ -56,22 +56,7 @@ app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navServ
     ajaxService.getPeriod(pid).then(function (data) {
         $scope.period = data;
     })
-    ajaxService.getCatalog(pid).then(function (data) {
-        $scope.catalog = data;
-        var url = [];
-        //var obj = JSON.parse(data);
-        for (var key in data)
-        {
-            for (var u in key.Title) {
-                url.push(JSON.stringify(u.Url));
-            }
-        }
-        //for (var i = 0, l = data.length; i < l; i++) {
-        //    for (var j = 0, k = data[i]["Title"].length; j < k; j++) {
-
-        //    }
-        console.log(url);
-    })
+    
     ajaxService.getIp().then(function (data) {
         $scope.ip = data;
     })
@@ -81,14 +66,21 @@ app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navServ
         return 80 - $scope.message.length;
     }
     var currentaid = 0;
-    ajaxService.getArticleList(pid).then(function (data) {
+    ajaxService.getCatalog(pid).then(function (data) {
+        var currentArticleList = [];
+        $scope.catalog = data;
+        for (var key in data) {
+            for (var key2 in data[key]["Title"]) {
+                currentArticleList.push(parseInt(data[key]["Title"][key2]["Url"]));
+            }
+        }
         if (aid != null) {
             currentaid = parseInt(aid);
             //获取页面根据文章id
             ajaxService.getPages(aid).then(function (dataAid) {
                 $scope.pages = dataAid.ImageViews;
                 $scope.title = dataAid.Title;
-                var o = navService.init(data, parseInt(aid));
+                var o = navService.init(currentArticleList, parseInt(aid));
                 $scope.nav = {
                     up: o.getNavAid().up(),
                     down: o.getNavAid().down()
@@ -108,7 +100,7 @@ app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navServ
                 $scope.pages = dataPid.ImageViews;
                 $scope.title = dataPid.Title;
                 currentaid = parseInt(dataPid.ArticleID);
-                var o = navService.init(data, 0);
+                var o = navService.init(currentArticleList, 0);
                 $scope.nav = {
                     up: o.getNavIndex().up(),
                     down: o.getNavIndex().down()
@@ -131,7 +123,7 @@ app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navServ
                     $scope.pages = dataAid.ImageViews;
                     $scope.title = dataAid.Title;
                     $(document).scrollTop(0);
-                    var o = navService.init(data, pAid);
+                    var o = navService.init(currentArticleList, pAid);
                     $scope.nav = {
                         up: o.getNavAid().up(),
                         down: o.getNavAid().down()
@@ -150,7 +142,7 @@ app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navServ
                 currentaid = pAid;
             }
         }
-        
+
         //评论分页还需修改（全局变量文章id）
         $scope.pagenum = function (num) {
             ajaxService.getComment(currentaid, num).then(function (dataCom) {
@@ -195,7 +187,13 @@ app.controller("articleCtrl", ['$scope', 'ajaxService', '$routeParams', 'navServ
                 return false;
             }
         }
+        //console.log(currentArticleList);
     })
+
+
+    //ajaxService.getArticleList(pid).then(function (data) {
+       
+    //})
 }]);
 app.controller("yearSearchCtrl", ['$scope', '$routeParams', 'ajaxService', 'searchService', '$compile', function ($scope, $routeParams, ajaxService, searchService, $compile) {
     var y = $routeParams.year;

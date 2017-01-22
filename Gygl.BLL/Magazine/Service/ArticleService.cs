@@ -44,12 +44,12 @@ namespace Gygl.BLL.Magazine.Service
             return li;
         }
 
-        public async Task<List<int>> getArticleList(int gyglId)
-        {
-            var fa = FindAll(n => n.GyglID == gyglId).OrderBy(o => o.Category.SortID).ThenBy(t => t.ID);
-            var li = await FindAllAsync(fa, s => s.ID);
-            return li.ToList();
-        }
+        //public async Task<List<int>> getArticleList(int gyglId)
+        //{
+        //    var fa = FindAll(n => n.GyglID == gyglId).OrderBy(o => o.Category.SortID).ThenBy(t => t.ID);
+        //    var li = await FindAllAsync(fa, s => s.ID);
+        //    return li.ToList();
+        //}
 
 
         public async Task<PageArticleViewModel> getArticleByCategory(int? year, int? period, int? category,string key, int pageSize, int page)
