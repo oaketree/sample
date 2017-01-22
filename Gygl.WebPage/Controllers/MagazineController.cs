@@ -173,8 +173,7 @@ namespace Gygl.WebPage.Controllers
         [OutputCache(Duration = 120, VaryByParam = "aid")]
         public async Task<JsonResult> GetPages(int aid)
         {
-            await ArticleService.updateHit(aid);
-            //var result = await ImageService.getArticlePages(aid);
+            //await ArticleService.updateHit(aid);//有问题
             var result = await ArticleService.getPages(aid);
             return Json(result, JsonRequestBehavior.AllowGet);
         }

@@ -172,7 +172,7 @@ namespace Gygl.BLL.Magazine.Service
                     Category = s.Category.Name,
                     Author = s.Author,
                     Title = s.Title,
-                    Url = s.ID.ToString(),
+                    Url = s.ID,
                     GyglID = s.GyglID.Value
                 });
                 return a;

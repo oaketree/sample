@@ -18,8 +18,8 @@ namespace Gygl.BLL.Magazine.Service
         public async Task<PageCommentViewModel> getCommentByArticle(int aid, int pageSize, int page)
         {
             var pcv = new PageCommentViewModel();
-            var titleid = await ArticleService.GetAsync(a => a.ID == aid);
-            pcv.Title = titleid.Title;
+            //var titleid = await ArticleService.GetAsync(aid);//有问题有冲突，改为同一地方获取
+            //pcv.Title = titleid.Title;
             var fa = FindAll(n => n.ArticleID == aid).OrderByDescending(o => o.RegDate);
             var c = await Count(fa);
             pcv.Count = c;

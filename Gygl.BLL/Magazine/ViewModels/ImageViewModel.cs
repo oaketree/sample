@@ -17,5 +17,7 @@ namespace Gygl.BLL.Magazine.ViewModels
     {
         public int ArticleID { get; set; }
         public List<ImageViewModel> ImageViews { get; set; }
+        public string Title { get; set; }
+
     }
 }

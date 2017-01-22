@@ -19,13 +19,6 @@ namespace Gygl.BLL.Magazine.Service
         //分布视图不支持异步
         public async Task<List<CatalogViewModel>> getCatalogByID(int gyglid)
         {
-            //var cvm = new List<CatalogViewModel>();
-            //var list = FindAll(n => n.GyglID == gyglid).Select(s => new
-            //{
-            //    Category = s.Category.Name,
-            //    SortID = s.Category.SortID.Value,
-            //    CategoryID = s.CategoryID.Value,
-            //});
             var fa = FindAll(n => n.GyglID == gyglid).OrderBy(o=>o.Category.SortID);
             var cvm = await FindAllAsync(fa, s => new CatalogViewModel
             {
@@ -33,7 +26,6 @@ namespace Gygl.BLL.Magazine.Service
                 Category = s.Category.Name,
                 CategoryID = s.CategoryID.Value,
             });
-            //var sortedList=list.OrderBy(o => o.SortID);
             //循环查询容易出错,所以采用一次查询并组合。
 
             var Title = await ArticleService.getTitle(gyglid);

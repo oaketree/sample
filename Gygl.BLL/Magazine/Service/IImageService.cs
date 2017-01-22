@@ -10,6 +10,6 @@ namespace Gygl.BLL.Magazine.Service
     {
         //Task<object> getArticlePages(int aid);
         //Task<List<ImageViewModel>> getMixedPages(int gyglid, int aid);
-        Task<ArticleImageViewModel> getMixedPages(int gyglid, int aid);
+        Task<ArticleImageViewModel> getMixedPages(int gyglid, int aid,string title);
     }
 }

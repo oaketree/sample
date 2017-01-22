@@ -21,7 +21,7 @@ namespace Gygl.BLL.Magazine.ViewModels
     }
     public class TitleViewBase {
         public string Title { get; set; }
-        public string Url { get; set; }
+        public int Url { get; set; }
         public int CategoryID { get; set; }
     }
     public class PageArticleViewModel : PageInfo<TitleViewModel>

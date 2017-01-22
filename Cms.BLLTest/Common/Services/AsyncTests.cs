@@ -12,13 +12,5 @@ namespace Cms.BLL.Common.Services.Tests
             a.DisplayValue();
             System.Diagnostics.Debug.WriteLine("MyClass() End.");
         }
-
-
-        [TestMethod()]
-        public void ListTest()
-        {
-
-
-        }
     }
 }

@@ -39,11 +39,10 @@ namespace Gygl.BLL.Magazine.Service
             {
                 CategoryID=s.CategoryID.Value,
                 Title=s.Title,
-                Url = s.ID.ToString()
+                Url = s.ID
             });
             return li;
         }
-
 
         public async Task<List<int>> getArticleList(int gyglId)
         {
@@ -96,7 +95,7 @@ namespace Gygl.BLL.Magazine.Service
                 var fbp = FindByPageAsync(qe, pageSize, page, s => new TitleViewModel
                 {
                     Title = s.Title,
-                    Url = s.ID.ToString(),
+                    Url = s.ID,
                     Author = s.Author,
                     Category = s.Category.Name,
                     Year = s.Gygl.Year.Value,
@@ -110,25 +109,29 @@ namespace Gygl.BLL.Magazine.Service
                 return null;
         }
 
-        public async Task updateHit(int aid)
-        {
-            var ar = Get(n => n.ID == aid);
-            ar.Hit = ar.Hit + 1;
-            await UpdateAsync(ar);
-        }
+        //public async Task updateHit(int aid)
+        //{
+        //    var ar = await GetAsync(n => n.ID == aid);
+        //    ar.Hit = ar.Hit + 1;
+        //    await UpdateAsync(ar);
+        //}
 
         public async Task<object> getFirstPages(int pid)
         {
             var aid = await GetAsync(n => n.GyglID == pid);
-            var result = await ImageService.getMixedPages(pid, aid.ID);
+            aid.Hit = aid.Hit + 1;
+            await UpdateAsync(aid);
+            var result = await ImageService.getMixedPages(pid, aid.ID,aid.Title);
             return result;
         }
 
         public async Task<object> getPages(int aid)
         {
-            var pid = await GetAsync(n => n.ID==aid);
-            //var result = await ImageService.getArticlePages(aid);
-            var result = await ImageService.getMixedPages(pid.GyglID.Value, aid);
+            //await updateHit(aid);
+            var pid = await GetAsync(aid);
+            pid.Hit = pid.Hit + 1;
+            await UpdateAsync(pid);
+            var result = await ImageService.getMixedPages(pid.GyglID.Value, aid,pid.Title);
             return result;
         }
 

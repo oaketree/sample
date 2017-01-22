@@ -32,7 +32,7 @@ namespace Gygl.BLL.Magazine.ViewModels
     //评论分页
     public class PageCommentViewModel : PageInfo<CommentViewModel>
     {
-        public string Title { get; set; }
+        //public string Title { get; set; }
         public int Count { get; set; }
     }
 }
