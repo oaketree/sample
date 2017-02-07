@@ -1,4 +1,5 @@
-﻿using Core.DAL;
+﻿using Core.Cache;
+using Core.DAL;
 using Gygl.BLL.News.ViewModels;
 using Gygl.Contract.News;
 using System.Collections.Generic;
@@ -11,14 +12,19 @@ namespace Gygl.BLL.News.Service
     {
         public async Task<IQueryable<NewsViewModel>> getNewsList(int column,int count)
         {
-            var fa = FindAll(n => n.ColumnID == column).OrderByDescending(o => o.RegDate).Take(count);
-            var list = await FindAllAsync(fa, s => new NewsViewModel
-            {
-                ID = s.newsid,
-                Title = s.Title,
-                RegDate = s.RegDate
-            });
-            return list;
+            var newsList = CacheHelper.Get("newsList") as IQueryable<NewsViewModel>;
+            if (newsList == null) {
+                var fa = FindAll(n => n.ColumnID == column).OrderByDescending(o => o.RegDate).Take(count);
+                newsList = await FindAllAsync(fa, s => new NewsViewModel
+                {
+                    ID = s.newsid,
+                    Title = s.Title,
+                    RegDate = s.RegDate
+                });
+                CacheHelper.Set("newsList", newsList);
+            }
+            
+            return newsList;
         }
 
         public async Task<PageNewsViewModel> getPagedNewsList(int pageSize, int page)

@@ -1,4 +1,5 @@
-﻿using Core.DAL;
+﻿using Core.Cache;
+using Core.DAL;
 using Core.Utility;
 using Gygl.BLL.Magazine.ViewModels;
 using Gygl.BLL.Share;
@@ -163,28 +164,33 @@ namespace Gygl.BLL.Magazine.Service
         //首页新闻列表
         public async Task<GyglTitleViewModel> getCurrentPeriod()
         {
-            var fa = FindAll().OrderByDescending(o => o.Year).ThenByDescending(t => t.Period);
-            var period = await GetAsync(fa);
-            var tsk = Task.Run(() =>
-            {
-                var a=period.Article.OrderBy(o => o.ID).Take(10).Select(s => new TitleViewModel
+            var currentPeriod = CacheHelper.Get("currentPeriod") as GyglTitleViewModel;
+            if (currentPeriod == null) {
+                var fa = FindAll().OrderByDescending(o => o.Year).ThenByDescending(t => t.Period);
+                var period = await GetAsync(fa);
+                var tsk = Task.Run(() =>
                 {
-                    Category = s.Category.Name,
-                    Author = s.Author,
-                    Title = s.Title,
-                    Url = s.ID,
-                    GyglID = s.GyglID.Value
+                    var a = period.Article.OrderBy(o => o.ID).Take(10).Select(s => new TitleViewModel
+                    {
+                        Category = s.Category.Name,
+                        Author = s.Author,
+                        Title = s.Title,
+                        Url = s.ID,
+                        GyglID = s.GyglID.Value
+                    });
+                    return a;
                 });
-                return a;
-            });
-            var gtvm = new GyglTitleViewModel
-            {
-                ID = period.ID,
-                Year = period.Year.Value,
-                Period = period.Period.Value,
-                Title=await tsk
-            };
-            return gtvm;
+                currentPeriod = new GyglTitleViewModel
+                {
+                    ID = period.ID,
+                    Year = period.Year.Value,
+                    Period = period.Period.Value,
+                    Title = await tsk
+                };
+                CacheHelper.Set("currentPeriod",currentPeriod);
+            }
+            
+            return currentPeriod;
         }
 
         

@@ -1,4 +1,5 @@
-﻿using Core.DAL;
+﻿using Core.Cache;
+using Core.DAL;
 using Gygl.BLL.Magazine.ViewModels;
 using Gygl.Contract.Magazine;
 using System;
@@ -13,13 +14,19 @@ namespace Gygl.BLL.Magazine.Service
     {
         public async Task<object> getCategoryList()
         {
-            var fa = FindAll().OrderBy(o => o.SortID);
-            var li = await FindAllAsync(fa, s => new
+            var categoryList = CacheHelper.Get("categoryList");
+            if (categoryList == null)
             {
-                Category = s.Name,
-                CategoryID = s.ID
-            });
-            return li;
+                var fa = FindAll().OrderBy(o => o.SortID);
+                categoryList = await FindAllAsync(fa, s => new
+                {
+                    Category = s.Name,
+                    CategoryID = s.ID
+                });
+                CacheHelper.Set("categoryList", categoryList);
+                
+            }
+            return categoryList;
         }
     }
 }
