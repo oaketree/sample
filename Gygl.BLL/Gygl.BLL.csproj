@@ -50,6 +50,14 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
@@ -70,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlHelpers\PagingHelper.cs" />
+    <Compile Include="Log\Service\LogBehavior.cs" />
     <Compile Include="Magazine\Service\ArticleService.cs" />
     <Compile Include="Magazine\Service\CategoryService.cs" />
     <Compile Include="Magazine\Service\CommentService.cs" />
@@ -120,6 +129,10 @@
     <ProjectReference Include="..\Core.DAL\Core.DAL.csproj">
       <Project>{AEC754AD-3AFF-403A-A5F4-287105B838B7}</Project>
       <Name>Core.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Log\Core.Log.csproj">
+      <Project>{CB58C98D-4648-4A19-A7DB-BEE02ADBC753}</Project>
+      <Name>Core.Log</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core.Utility\Core.Utility.csproj">
       <Project>{B80BD478-4D79-4661-A2E3-71EF0DC72544}</Project>

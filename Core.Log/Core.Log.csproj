@@ -69,8 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExceptionLogBehavior.cs" />
-    <Compile Include="LogException.cs" />
+    <Compile Include="LogConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +79,10 @@
     <ProjectReference Include="..\Core.Cache\Core.Cache.csproj">
       <Project>{B8367C5C-B31F-4248-9EE4-9AFF8692DC5F}</Project>
       <Name>Core.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Utility\Core.Utility.csproj">
+      <Project>{B80BD478-4D79-4661-A2E3-71EF0DC72544}</Project>
+      <Name>Core.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,5 @@
 ﻿using Core.DAL;
+using Gygl.BLL.Log.Service;
 using Gygl.BLL.Magazine.ViewModels;
 using Gygl.Contract.Magazine;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Gygl.BLL.Magazine.Service
 {
+    [LogHandler]
     public interface IArticleService : IRepository<Article>
     {
         Task<IQueryable<TitleViewBase>> getTitle(int gyglid);

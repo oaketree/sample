@@ -1,4 +1,5 @@
 ﻿using Core.DAL;
+using Core.Log;
 using Gygl.BLL.Magazine.ViewModels;
 using Gygl.Contract.Magazine;
 using Microsoft.Practices.Unity;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Gygl.BLL.Magazine.Service
 {
+    
     public class ArticleService : RepositoryBase<Article, WebDBContext>, IArticleService
     {
         [Dependency]
